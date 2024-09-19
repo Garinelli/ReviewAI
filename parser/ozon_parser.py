@@ -17,7 +17,7 @@ user_names = []
 user_reviews = []
 reviews_date = []
 star_reviews = []
-
+text_len = []
 
 def init_webdriver():
     driver = webdriver.Chrome()
@@ -43,6 +43,9 @@ def parse_user_reviews(HTML: BeautifulSoup) -> None:
         user_name = (user_review_card[i].find_all('div', {'class': 'q4s_29'}))[0].text
         user_name = user_name.strip()
 
+        if user_name == "Пользователь предпочёл скрыть свои данные":
+            user_name = 'No data'
+
         user_review = user_review_card[i].find_all('div', {'class': 'qv4_29'})[0].text
         review_date = user_review_card[i].find_all('div', {'class': 'qv2_29'})[0].text
         review_date = review_date.strip()
@@ -63,6 +66,7 @@ def parse_user_reviews(HTML: BeautifulSoup) -> None:
         user_reviews.append(user_review)
         reviews_date.append(review_date)
         star_reviews.append(count_star_review)
+        text_len.append(len(user_review))
 
 
 def get_main_page_reviews(driver: WebDriver, url: str) -> None:
@@ -81,7 +85,8 @@ def main():
         'User name': user_names,
         'User review': user_reviews,
         'Review date': reviews_date,
-        'Star review': star_reviews
+        'Star review': star_reviews,
+        'Text length': text_len
     })
     df.to_csv('dataframe.csv')
 
