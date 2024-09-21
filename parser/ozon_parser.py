@@ -1,4 +1,5 @@
 import time
+import requests
 
 import pandas as pd
 from bs4 import BeautifulSoup
@@ -16,6 +17,8 @@ URLS = [
     'https://www.ozon.ru/product/socks-set-1243231395/?asb=DA0EIrIbVM2kDT6YrkErA82HfNrdiYJCyEElgX%252FX53Q%253D&asb2=4sFMKAHa5fHKZAyLv4X2c5-JDWTTVo4Iu2-ZfZEP4S4ZDKonYMcCYb4hcC7uRzlFczr1T0ysCzQt6ZmFZKCpDmpg-1a6Elz7zcTfhPBWkLLR-JND3eNxIHccEEGemkEYcXRnozo3_D2hdnkS8tUSUZBNEQQbKu0uqsqGTnvVBDk&avtc=1&avte=2&avts=1726762498&keywords=%D0%BE%D0%B4%D0%B5%D0%B6%D0%B4%D0%B0'
 ]
 
+
+
 user_names = []
 user_reviews = []
 reviews_date = []
@@ -24,11 +27,12 @@ text_len = []
 
 
 def init_webdriver():
-    chrome_options = Options()
-    chrome_options.add_argument('--headless')
-    chrome_options.add_argument('--disable-gpu')
-
-    driver = webdriver.Chrome(options=chrome_options)
+    # chrome_options = Options()
+    # chrome_options.add_argument('--headless')
+    # chrome_options.add_argument('--disable-gpu')
+    #
+    # driver = webdriver.Chrome(options=chrome_options)
+    driver = webdriver.Chrome()
     stealth(driver,
             vendor='Google Inc.',
             platform='Win32',
@@ -44,18 +48,18 @@ def scroll_page(driver: WebDriver, deep: int) -> None:
 
 
 def parse_user_reviews(HTML: BeautifulSoup) -> None:
-    user_review_card = HTML.find_all('div', {'class': 'q9v_29'})
+    user_review_card = HTML.find_all('div', {'class': 't4s_29'})
     if not user_review_card:
         return
     for i in range(len(user_review_card)):
-        user_name = (user_review_card[i].find_all('div', {'class': 'q4s_29'}))[0].text
+        user_name = (user_review_card[i].find_all('div', {'class': 's5q_29'}))[0].text
         user_name = user_name.strip()
 
         if user_name == "Пользователь предпочёл скрыть свои данные":
             user_name = 'No data'
 
-        user_review = user_review_card[i].find_all('div', {'class': 'qv4_29'})[0].text
-        review_date = user_review_card[i].find_all('div', {'class': 'qv2_29'})[0].text
+        user_review = user_review_card[i].find_all('div', {'class': 'vq5_29'})[0].text
+        review_date = user_review_card[i].find_all('div', {'class': 'vq3_29'})[0].text
         review_date = review_date.strip()
 
         user_review = user_review.strip()
@@ -78,6 +82,11 @@ def parse_user_reviews(HTML: BeautifulSoup) -> None:
 
 
 def get_main_page_reviews(driver: WebDriver, url: str) -> None:
+    request = requests.get(url)
+
+    if request.status_code != 200:
+        return
+
     driver.get(url)
     time.sleep(5)
     scroll_page(driver, deep=120)
