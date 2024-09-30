@@ -19,21 +19,22 @@ URLS = [
     'https://www.ozon.ru/product/kostyum-sportivnyy-1425140298/?avtc=1&avte=2&avts=1727174575'
 ]
 
-user_names = []
+
 user_reviews = []
 reviews_date = []
 star_reviews = []
 text_len = []
 written_by_bot = []
-has_photos = []
+has_media = []
 
 
 def init_webdriver():
-    chrome_options = Options()
-    chrome_options.add_argument('--headless')
-    chrome_options.add_argument('--disable-gpu')
+    # chrome_options = Options()
+    # chrome_options.add_argument('--headless')
+    # chrome_options.add_argument('--disable-gpu')
 
-    driver = webdriver.Chrome(options=chrome_options)
+    # driver = webdriver.Chrome(options=chrome_options)
+    driver = webdriver.Chrome()
     stealth(driver,
             vendor='Google Inc.',
             platform='Win32',
@@ -53,32 +54,27 @@ def scroll_page(driver: WebDriver) -> None:
 
 
 def parse_user_reviews(HTML: BeautifulSoup) -> None:
-    user_review_card = HTML.find_all('div', {'class': 'q0w_29'})
-    if not user_review_card:
+    user_review_cards = HTML.find_all('div', {'class': 'w1q_29'})
+    if not user_review_cards:
         return
-    for i in range(len(user_review_card)):
-        user_name = ((user_review_card[i].find_all('div', {'class': 's5q_29'}))[0]).text
+    for i in range(len(user_review_cards)):
 
-        user_name = user_name.strip()
-
-        if user_name == "Пользователь предпочёл скрыть свои данные":
-            user_name = 'No data'
-
-        user_review = user_review_card[i].find_all('div', {'class': 'vq5_29'})
+        user_review = user_review_cards[i].find_all('div', {'class': 'qv7_29'})
         if user_review:
             user_review = user_review[0].text
         else:
-            user_review = 'No data'
+            # Если нет текста отзыва, то переходим к следующему
+            continue
 
-        review_date = user_review_card[i].find_all('div', {'class': 'vq3_29'})[0].text
+        review_date = user_review_cards[i].find_all('div', {'class': 'qv5_29'})[0].text
         review_date = review_date.strip()
 
         user_review = user_review.strip()
         user_review = user_review.replace('\'', '')
 
-        has_photo = user_review_card[i].find_all('div', {'class': 'u0q_29 w2q_29 qw3_29'})
+        has_photo = user_review_cards[i].find_all('div', {'class': 'q2u_29 q4w_29 wq4_29'})
 
-        star_review = user_review_card[i].find_all('div', {'class': 'a5d14-a a5d14-a0'})[0]
+        star_review = user_review_cards[i].find_all('div', {'class': 'a5d16-a a5d16-a0'})[0]
         star_review = star_review.find_all('svg')
         count_star_review = 0
 
@@ -87,16 +83,15 @@ def parse_user_reviews(HTML: BeautifulSoup) -> None:
             if '255' in style:
                 count_star_review += 1
 
-        user_names.append(user_name)
         user_reviews.append(user_review)
         reviews_date.append(review_date)
         star_reviews.append(count_star_review)
         text_len.append(len(user_review))
         written_by_bot.append(0)
         if has_photo:
-            has_photos.append(1)
+            has_media.append(1)
         else:
-            has_photos.append(0)
+            has_media.append(0)
 
 
 def get_main_page_reviews(driver: WebDriver, url: str) -> None:
@@ -112,13 +107,12 @@ def main():
     for i in range(len(URLS)):
         get_main_page_reviews(driver, URLS[i])
     df = pd.DataFrame({
-        'User name': user_names,
         'User review': user_reviews,
         'Review date': reviews_date,
         'Star review': star_reviews,
         'Text length': text_len,
+        'Has media': has_media,
         'Written by bot': written_by_bot,
-        'Has photo': has_photos
     })
     df.to_csv('dataframe.csv')
 
