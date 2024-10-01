@@ -3,8 +3,9 @@ import requests
 
 
 def get_respose():
-    url = "https://feedbacks1.wb.ru/feedbacks/v1/193361488"  # 13 comments
-    # url = "https://feedbacks1.wb.ru/feedbacks/v1/14045631" # 1000 comments
+    # url = "https://feedbacks1.wb.ru/feedbacks/v1/193361488"  # 13 comments / 214208823
+    # url = "https://feedbacks1.wb.ru/feedbacks/v1/14045631"  # 1000 comments
+    url = "https://feedbacks2.wb.ru/feedbacks/v1/32359313"  # / 43400117
 
     headers = {
         "Accept": "*/*",
@@ -26,31 +27,31 @@ def get_respose():
     return response.json()
 
 
-def prepare_items(response):
+def prepare_items(response, nmId: int):
     comments = []
     comments_raw = response.get("feedbacks", [])
 
     if len(comments_raw) > 0:
         for feedback in comments_raw:
-            comments.append(
-                {
-                    "nmId": feedback.get("nmId", None),
-                    "text": feedback.get("text", "").replace("\n", "\\n"),
-                    "productValuation": feedback.get("productValuation", None),
-                    "createdDate": feedback.get("createdDate", None),
-                    "photo": feedback.get("photo", []),
-                    "answer": (feedback.get("answer", {}) or {})
-                    .get("text", "")
-                    .replace("\n", "\\n"),
-                }
-            )
+            if feedback["nmId"] == nmId and len(feedback["text"]):
+                comments.append(
+                    {
+                        "User review": feedback["text"].replace("\n", "\\n"),
+                        "Review date": feedback["createdDate"][:10],
+                        "Star review": feedback["productValuation"],
+                        "Text length": len(feedback["text"]),
+                        "Has media": int(bool(feedback.get("photo", []))),
+                        "Has answer": int(bool(feedback["answer"])),
+                        "Written by bot": 0,
+                    }
+                )
 
     return comments
 
 
 def main():
     response = get_respose()
-    feedbacks = prepare_items(response)
+    feedbacks = prepare_items(response, nmId=43400117)
 
     pd.DataFrame(feedbacks).to_csv("./parser/feedbacks.csv", index=False)
 
