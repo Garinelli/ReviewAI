@@ -16,7 +16,8 @@ URLS = [
     'https://www.ozon.ru/product/prorezinennyy-chehol-broscorp-dlya-apple-iphone-13-epl-ayfon-13-s-soft-touch-pokrytiem-i-mikrofibroy-380844736/?advert=AL0A0p6I0eK085rFIkyOT-seqC_iTBpxhk-naZZDp3hDcmGtWzoylH9TBhzvp-yvPbmbx5JifpCp8tBorjX4QAPzfDL66GeQjZFUgJEjPoqjIMto48KyqNLZTWXfxq29Ww4t8waXnTNwqPV2w5A7hLdsB1LWmABWwWO1JXCxKAdjivKZuynI8yMBr70qIVDqZA4h9GBUHhJRK4k7E9Cb84ta-KQpSBq0Vvy2uQ2U7nWDuonwuuCYH_Q61uoEMQy_tnanJ8E8XAKCjVLrsZwELpTNoZzSeWcs_0RyBo3OassczrMilWTf8a_jNwx1yf2lPMGNL-IQt1tXquKDkWONo7KVpfz6FFF7x_a0NPdQOmePqM7d7en7L8CyL3rimrjBWyT4YA7C2wCGRo_rV7QxyLh3cE-ng8Y_SRKaabRU7iw&avtc=1&avte=2&avts=1727174490&keywords=%D1%87%D0%B5%D1%85%D0%BE%D0%BB+%D0%BD%D0%B0+%D0%B0%D0%B9%D1%84%D0%BE%D0%BD+13',
     'https://www.ozon.ru/product/chehol-na-ayfon-13-iphone-13-magsave-zelenyy-1601768702/?advert=AL0AK-SX0lKxmc_a0IM_ZjI5Cw9fUTm41Y0sPGfq7rgkfDQoQRUKMTbjmXVBTXZKKgdGzWmtFuwy08g2iqEq1RajD7dtS6etwDSQJTZ8IhPz8eYbpLlwhD3lccS73QKky5ZS5_IO3IypNWpNsTkULOljpxVPcsIMgW_UB2PicBc631dtu9om4cY8zqP4DL1s_TacTysRooWfR71quN2VxeRqxRsLU9XdUxL59H61kFiyQLE6AaH5texo4Sr403uTdMprdQaH32TogO8VtFUFsfoyu9hjuvMrjF7m74cxjElvZqtHJwY9FalwS7fAHXmUIIymInaF_FjG-gexEA1Ux-efye1xn6A93G55Mmz-5jeVUQ4aP_Jjl-AhBdhWGkBfSxLhPwC8AzeHtWDM3zUJe0V9Fs-XmSLfykbgTxtWm5qLttCsIYxRoVP6-g&avtc=1&avte=2&avts=1727174490&keywords=%D1%87%D0%B5%D1%85%D0%BE%D0%BB+%D0%BD%D0%B0+%D0%B0%D0%B9%D1%84%D0%BE%D0%BD+13',
     'https://www.ozon.ru/product/bryuki-sportivnye-nike-w-nsw-style-flc-hr-pant-os-749284686/?advert=AL0ANJPLfLNyJ2l1MGh3FLNnRlzCiURdX2j-5UXxJNEMoZJWMZrW60ME9-hpxafZ6VTJe5FHFXOFe13XdYzTi7DjimVdEAVf1PlIwiupaOe5zXIdU6_-0Di4gv0SqSv8KIOKzAU2lIsls3HX53EETuISw7qIL5ZD-Q8fJS2KFw2iuDvglxfmTaWtYcSBOMcd8JH4KMusFmCJTu3c5X55I8G0Ucd6x7GYz2xhIANmkMvWt5y3lrRsdfJulnWERH8A9SwO5zN2ttMijZ4KvKNiNlDJSAHj4v7CCxWpJLjze8GDYWzCcgaSJEb2xNYSsXpbvZ9W1Ufh5JxNIF6Ywrelo7D1XOaPHrPFgpmYtol9UpKKzmCXQPO4BlM9kSzdj_bG96rwDnbOhLMP-lxnW8qsxjQJiZ7U2BQ&avtc=1&avte=2&avts=1727174550&keywords=%D0%B1%D1%80%D1%8E%D0%BA%D0%B8+%D0%BD%D0%B0%D0%B9%D0%BA',
-    'https://www.ozon.ru/product/kostyum-sportivnyy-1425140298/?avtc=1&avte=2&avts=1727174575'
+    'https://www.ozon.ru/product/kostyum-sportivnyy-1425140298/?avtc=1&avte=2&avts=1727174575',
+    'https://www.ozon.ru/product/xiaomi-smartfon-redmi-a3x-3-64-gb-zelenyy-1628749061/?advert=AMMAUX7w4j5BqXZ4-bhlv63_mjg1-pFgGq1H95jnYaIp8iVl6X6XCbsi-JRiaH-93DFmx534aQjcVVgRnuqOBVvXoiBGhK8kKmi1wkZZrgJirg2YCHRqebIrAOluJOSSaeursD9hixztaon9iKJtTcnPOGusVwKkaXX5GsB13URjcolfRH6LV6jYDD9vpNcvuPGfjSX6PXSZqZ2konSPR_t1djSd5iX9xMcY0HE6ISbYF53BnDHovNPQkDps7nvBaJb0KjMQSxwZpW9mjIP4sX8pnb6xWN3MxzBcD-ord8wqO7ofOi2KopYRw4aQsmyZUpuI5FRyOHNjBbYfxnz9A_KazDp5Iw4mMm314Y12UbUoUzUh9TLyydQD1qHI-7oH&avtc=1&avte=4&avts=1727707047&keywords=%D1%82%D0%B5%D0%BB%D0%B5%D1%84%D0%BE%D0%BD+xiaomi+redmi'
 ]
 
 
@@ -27,6 +28,20 @@ text_len = []
 written_by_bot = []
 has_media = []
 
+MONTHS = {
+    'января': '01',
+    'февраля': '02',
+    'марта': '03',
+    'апреля': '04',
+    'мая': '05',
+    'июня': '06',
+    'июля': '07',
+    'августа': '08',
+    'сентября': '09',
+    'октября': 10,
+    'ноября': 11,
+    'декабря': 12,
+}
 
 def init_webdriver():
     # chrome_options = Options()
@@ -69,6 +84,16 @@ def parse_user_reviews(HTML: BeautifulSoup) -> None:
         review_date = user_review_cards[i].find_all('div', {'class': 'qv5_29'})[0].text
         review_date = review_date.strip()
 
+        review_dates = review_date.split(' ')
+        if 'изменен' in review_dates:
+            review_dates = review_dates[1:]
+        year = review_dates[2]
+        month = MONTHS[review_dates[1]]
+        day = review_dates[0]
+        if int(day) in range(1, 10):
+            day = '0' + str(day)
+
+        review_date = f'{year}-{month}-{day}'
         user_review = user_review.strip()
         user_review = user_review.replace('\'', '')
 
