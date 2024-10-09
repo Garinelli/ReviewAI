@@ -1,6 +1,6 @@
 import pandas as pd
 
-from fake_reviews import fake_reviews
+from parser.ozon_fake_reviews import fake_reviews
 
 user_reviews = []
 reviews_date = []
