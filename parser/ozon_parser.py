@@ -109,6 +109,14 @@ def parse_user_reviews(HTML: BeautifulSoup) -> None:
             if '255' in style:
                 count_star_review += 1
 
+        # check answer
+        comment_button = user_review_cards[i].find_all('button', {'class': "wq1_29 ga115-a undefined"})
+        if comment_button:
+            has_answer.append(1)
+        else:
+            has_answer.append(0)
+
+
         user_reviews.append(user_review)
         reviews_date.append(review_date)
         star_reviews.append(count_star_review)
@@ -138,6 +146,7 @@ def main():
         'Star review': star_reviews,
         'Text length': text_len,
         'Has media': has_media,
+        'Has answer': has_answer,
         'Written by bot': written_by_bot,
     })
     df.to_csv('dataframe.csv')
