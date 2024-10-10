@@ -70,19 +70,19 @@ def scroll_page(driver: WebDriver) -> None:
 
 
 def parse_user_reviews(HTML: BeautifulSoup) -> None:
-    user_review_cards = HTML.find_all('div', {'class': 'w1q_29'})
+    user_review_cards = HTML.find_all('div', {'class': 'q5w_29'})
     if not user_review_cards:
         return
     for i in range(len(user_review_cards)):
 
-        user_review = user_review_cards[i].find_all('div', {'class': 'qv7_29'})
+        user_review = user_review_cards[i].find_all('div', {'class': 'qw0_29'})
         if user_review:
             user_review = user_review[0].text
         else:
             # Если нет текста отзыва, то переходим к следующему
             continue
 
-        review_date = user_review_cards[i].find_all('div', {'class': 'qv5_29'})[0].text
+        review_date = user_review_cards[i].find_all('div', {'class': 'vq8_29'})[0].text
         review_date = review_date.strip()
 
         review_dates = review_date.split(' ')
@@ -98,7 +98,7 @@ def parse_user_reviews(HTML: BeautifulSoup) -> None:
         user_review = user_review.strip()
         user_review = user_review.replace('\'', '')
 
-        has_photo = user_review_cards[i].find_all('div', {'class': 'q2u_29 q4w_29 wq4_29'})
+        has_photo = user_review_cards[i].find_all('div', {'class': 'q6u_29 u8q_29'})
 
         star_review = user_review_cards[i].find_all('div', {'class': 'a5d16-a a5d16-a0'})[0]
         star_review = star_review.find_all('svg')
