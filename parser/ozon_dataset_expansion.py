@@ -21,12 +21,12 @@ def main():
 
     fake_dataset = pd.DataFrame(
         {
-            'user_review': user_reviews,
-            'review_date': reviews_date,
-            'star_review': star_reviews,
-            'text_len': text_len,
-            'written_by_bot': written_by_bot,
-            'has_media': has_media
+            'User review': user_reviews,
+            'Review date': reviews_date,
+            'Star review': star_reviews,
+            'Text length': text_len,
+            'Has media': has_media,
+            'Written by bot': written_by_bot,
         }
     )
 

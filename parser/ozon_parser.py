@@ -27,6 +27,7 @@ star_reviews = []
 text_len = []
 written_by_bot = []
 has_media = []
+has_answer = []
 
 MONTHS = {
     'января': '01',
