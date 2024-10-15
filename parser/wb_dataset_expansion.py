@@ -1,3 +1,4 @@
+from random import randint
 import pandas as pd
 from pathlib import Path
 
@@ -9,6 +10,7 @@ star_reviews = []
 text_len = []
 written_by_bot = []
 has_media = []
+has_answer = []
 
 
 def main():
@@ -19,6 +21,8 @@ def main():
         text_len.append(review["text_len"])
         has_media.append(review["has_media"])
         written_by_bot.append(review["written_by_bot"])
+        has_answer.append(randint(0, 1))
+
 
     fake_dataset = pd.DataFrame(
         {
@@ -27,6 +31,7 @@ def main():
             "Star review": star_reviews,
             "Text length": text_len,
             "Has media": has_media,
+            "Has answer": has_answer,
             "Written by bot": written_by_bot,
         }
     )

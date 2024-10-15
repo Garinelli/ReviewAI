@@ -4,8 +4,8 @@ fake_reviews = [
         "reviews_date": "2024-09-29",
         "star_review": 5,
         "text_len": 59,
-        "written_by_bot": 1,
         "has_media": False,
+        "written_by_bot": 1,
     },
     {
         "user_review": "Не ожидал, что будет так классно. Восхитительная покупка!",
