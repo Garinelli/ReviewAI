@@ -2,3 +2,4 @@
 *.venv
 /parser/__pycache__
 /__pycache__
+.idea
