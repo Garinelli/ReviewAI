@@ -848,4 +848,3 @@ fake_reviews = [
         "has_media": True
     }
 ]
-print(len(fake_reviews))

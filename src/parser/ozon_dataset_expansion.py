@@ -33,7 +33,7 @@ def main():
         }
     )
 
-    fake_dataset.to_csv('fake_reviews.csv')
+    fake_dataset.to_csv('./dataframes/fake_reviews.csv')
 
 
 if __name__ == '__main__':
