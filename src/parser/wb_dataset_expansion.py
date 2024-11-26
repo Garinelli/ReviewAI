@@ -36,7 +36,7 @@ def main():
         }
     )
 
-    fake_dataset.to_csv(f"{Path(__file__).parent}/fake_feedbacks.csv", index=False)
+    fake_dataset.to_csv(f"{Path(__file__).parent}/dataframes/fake_feedbacks.csv", index=False)
 
 
 if __name__ == "__main__":

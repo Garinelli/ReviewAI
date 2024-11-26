@@ -1,7 +1,7 @@
 from random import randint
 import pandas as pd
 
-from parser.ozon_fake_reviews import fake_reviews
+from ozon_fake_reviews import fake_reviews
 
 user_reviews = []
 reviews_date = []
@@ -33,7 +33,7 @@ def main():
         }
     )
 
-    fake_dataset.to_csv('fake_reviews.csv')
+    fake_dataset.to_csv('./dataframes/fake_reviews.csv')
 
 
 if __name__ == '__main__':

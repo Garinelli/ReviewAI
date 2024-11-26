@@ -767,4 +767,84 @@ fake_reviews = [
         "written_by_bot": 1,
         "has_media": True,
     },
+    {
+        "user_review": "Качество товара просто на высоте! Теперь буду заказывать только здесь.",
+        "reviews_date": "2024-11-19",
+        "star_review": 5,
+        "text_len": 63,
+        "written_by_bot": True,
+        "has_media": False
+    },
+    {
+        "user_review": "Получил заказ очень быстро. Упаковка идеальная, товар отличный!",
+        "reviews_date": "2024-11-18",
+        "star_review": 5,
+        "text_len": 58,
+        "written_by_bot": True,
+        "has_media": True
+    },
+    {
+        "user_review": "Невероятно удобный интерфейс сайта, всё нашёл за пару минут.",
+        "reviews_date": "2024-11-17",
+        "star_review": 5,
+        "text_len": 59,
+        "written_by_bot": True,
+        "has_media": False
+    },
+    {
+        "user_review": "Это просто находка! Ассортимент товаров огромный, а цены приятные.",
+        "reviews_date": "2024-11-16",
+        "star_review": 5,
+        "text_len": 60,
+        "written_by_bot": True,
+        "has_media": False
+    },
+    {
+        "user_review": "Друзья порекомендовали этот магазин, и я не пожалел. Всё супер!",
+        "reviews_date": "2024-11-15",
+        "star_review": 5,
+        "text_len": 55,
+        "written_by_bot": True,
+        "has_media": True
+    },
+    {
+        "user_review": "Сервис просто космос! Приятно, когда о клиентах так заботятся.",
+        "reviews_date": "2024-11-14",
+        "star_review": 5,
+        "text_len": 57,
+        "written_by_bot": True,
+        "has_media": False
+    },
+    {
+        "user_review": "Получил товар вовремя, качество полностью соответствует описанию.",
+        "reviews_date": "2024-11-13",
+        "star_review": 5,
+        "text_len": 60,
+        "written_by_bot": True,
+        "has_media": True
+    },
+    {
+        "user_review": "Лучший выбор для тех, кто ценит своё время и деньги. Советую!",
+        "reviews_date": "2024-11-12",
+        "star_review": 5,
+        "text_len": 58,
+        "written_by_bot": True,
+        "has_media": False
+    },
+    {
+        "user_review": "Заказал впервые, но явно не в последний раз. Очень доволен.",
+        "reviews_date": "2024-11-11",
+        "star_review": 5,
+        "text_len": 56,
+        "written_by_bot": True,
+        "has_media": True
+    },
+    {
+        "user_review": "Пожалуй, лучшее место для онлайн-покупок. Всё на высшем уровне!",
+        "reviews_date": "2024-11-10",
+        "star_review": 5,
+        "text_len": 60,
+        "written_by_bot": True,
+        "has_media": True
+    }
 ]
