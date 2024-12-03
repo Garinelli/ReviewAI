@@ -1,7 +1,6 @@
 from random import randint
 import pandas as pd
 
-from ozon_fake_reviews import fake_reviews
 from reviews_with_typos import reviews
 
 user_reviews = []
@@ -13,7 +12,7 @@ has_media = []
 has_answer = []
 
 def main():
-    for review in fake_reviews:
+    for review in reviews:
         user_reviews.append(review['user_review'])
         reviews_date.append(review['reviews_date'])
         star_reviews.append(review['star_review'])
@@ -33,7 +32,7 @@ def main():
         }
     )
 
-    fake_dataset.to_csv('./dataframes/fake_reviews.csv')
+    fake_dataset.to_csv('./dataframes/typos_reviews.csv')
 
 
 if __name__ == '__main__':
