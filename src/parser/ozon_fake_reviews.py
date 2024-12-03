@@ -5,7 +5,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 66,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Превзошло все мои ожидания! Советую всем друзьям.",
@@ -13,7 +13,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 51,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Купил и остался доволен, за такие деньги лучше не найти.",
@@ -21,7 +21,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 54,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Очень хорошее качество, всем советую этот продукт!",
@@ -29,7 +29,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 54,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Заказываю не первый раз, всегда всё отлично.",
@@ -37,7 +37,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 49,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Прекрасный продукт, ничего лучше не видел!",
@@ -45,7 +45,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 46,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Очень доволен покупкой, всем рекомендую!",
@@ -53,7 +53,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 45,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Продукт просто бомба! Никаких нареканий.",
@@ -61,7 +61,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 46,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Не ожидал такого отличного качества! Закажу ещё.",
@@ -69,7 +69,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 54,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Супер товар, рекомендую всем!",
@@ -77,7 +77,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 33,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Лучший товар на рынке, качество поражает!",
@@ -85,7 +85,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 49,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Советую всем, превосходный товар, буду брать ещё!",
@@ -93,7 +93,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 52,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Давно искал такой продукт, и наконец нашел!",
@@ -101,7 +101,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 51,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Лучшее соотношение цены и качества, советую всем!",
@@ -109,7 +109,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 57,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Отличное качество, очень доволен покупкой!",
@@ -117,7 +117,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 47,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Не могу не рекомендовать! Всё идеально.",
@@ -125,7 +125,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 45,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Идеальный продукт, соответствует всем ожиданиям!",
@@ -133,7 +133,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 53,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Всё просто отлично, качество на высоте!",
@@ -141,7 +141,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 45,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Продукт удивил качеством, точно буду брать ещё.",
@@ -149,7 +149,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 50,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Нереально крутой товар, рекомендую всем друзьям!",
@@ -157,7 +157,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 52,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Товар просто шикарен, превзошел все ожидания!",
@@ -165,7 +165,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 50,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Лучший продукт, что я когда-либо покупал!",
@@ -173,7 +173,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 45,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Советую всем! Качество на высоте.",
@@ -181,7 +181,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 36,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Не мог поверить, что за такие деньги можно получить такой товар.",
@@ -189,7 +189,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 61,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Давно искал такой товар, наконец нашел!",
@@ -197,7 +197,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 46,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Очень понравилось, буду заказывать снова.",
@@ -205,7 +205,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 44,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Этот продукт просто спас меня, лучший выбор!",
@@ -213,7 +213,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 49,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Купил и не пожалел, качество отличное!",
@@ -221,7 +221,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 46,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Отличное соотношение цены и качества, очень рад покупке!",
@@ -229,7 +229,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 58,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Супер качество, всем рекомендую!",
@@ -237,7 +237,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 36,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Это просто находка! Куплю снова без раздумий.",
@@ -245,7 +245,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 49,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Продукт великолепен, давно не был так доволен покупкой!",
@@ -253,7 +253,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 55,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Не ожидал такого отличного качества, за такую цену просто находка.",
@@ -261,7 +261,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 66,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Качество на высоте, закажу еще для всей семьи.",
@@ -269,7 +269,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 52,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Доволен покупкой, идеальное соотношение цены и качества!",
@@ -277,7 +277,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 58,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Удивительное качество, всем рекомендую!",
@@ -285,7 +285,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 46,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Очень рад покупке, превзошло мои ожидания.",
@@ -293,7 +293,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 49,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Все отлично, качество выше всяких похвал!",
@@ -301,7 +301,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 47,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Советую всем, товар достойный! Буду брать еще.",
@@ -309,7 +309,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 51,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "За такую цену лучше не найти, товар супер!",
@@ -317,7 +317,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 48,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Отличный продукт, буду заказывать еще!",
@@ -325,7 +325,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 43,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Продукт удивил, за такую цену просто чудо.",
@@ -333,7 +333,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 48,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Очень доволен, буду советовать всем друзьям!",
@@ -341,7 +341,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 47,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Продукт превзошел мои ожидания, все супер!",
@@ -349,7 +349,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 50,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Не думал, что товар будет таким качественным!",
@@ -357,7 +357,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 49,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Товар очень понравился, буду заказывать еще.",
@@ -365,7 +365,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 46,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Рекомендую всем, качество лучшее на рынке!",
@@ -373,7 +373,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 45,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Превосходный товар, всем советую!",
@@ -381,7 +381,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 39,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Неожиданно отличное качество, доволен покупкой!",
@@ -389,7 +389,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 51,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Супер продукт, закажу еще раз!",
@@ -397,7 +397,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 36,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
 {
         "user_review": "Продукт порадовал своим качеством, буду заказывать еще!",
@@ -405,7 +405,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 51,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Не мог поверить, что товар окажется таким хорошим!",
@@ -413,7 +413,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 50,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Все супер, качество просто великолепное!",
@@ -421,7 +421,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 43,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Рекомендую! Куплю еще несколько штук.",
@@ -429,7 +429,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 40,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Отличный товар, превзошел ожидания!",
@@ -437,7 +437,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 41,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Продукт на высшем уровне, рад что купил.",
@@ -445,7 +445,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 47,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Купил и остался очень доволен, рекомендую!",
@@ -453,7 +453,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 46,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Цена и качество соответствуют, все замечательно.",
@@ -461,7 +461,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 52,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Очень рад покупке, не ожидал такого уровня качества.",
@@ -469,7 +469,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 53,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Товар выше всяких похвал, рекомендую!",
@@ -477,7 +477,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 42,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Удивительно качественный продукт за такие деньги.",
@@ -485,7 +485,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 52,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Отличный выбор, куплю еще раз!",
@@ -493,7 +493,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 37,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Все понравилось, товар превзошел ожидания.",
@@ -501,7 +501,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 47,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Рекомендую! Все супер, покупка удачная.",
@@ -509,7 +509,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 41,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Продукт высокого качества, всем советую!",
@@ -517,7 +517,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 45,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Продукт полностью оправдал мои ожидания.",
@@ -525,7 +525,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 47,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Все на высшем уровне, покупкой доволен.",
@@ -533,7 +533,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 42,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Продукт отличный, покупал не первый раз!",
@@ -541,7 +541,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 43,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Рекомендую! Качество выше всяких похвал.",
@@ -549,7 +549,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 42,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Лучшее, что я покупал за последние годы!",
@@ -557,7 +557,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 46,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Отличный товар, буду советовать друзьям.",
@@ -565,7 +565,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 43,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Продукт идеальный, всем рекомендую!",
@@ -573,7 +573,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 38,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Супер товар, за такие деньги лучше не найти.",
@@ -581,7 +581,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 45,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Продукт потрясающий, не ожидал такого качества.",
@@ -589,7 +589,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 48,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Рекомендую к покупке! Все на высшем уровне.",
@@ -597,7 +597,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 46,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Не ожидал такого высокого качества, рад что купил.",
@@ -605,7 +605,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 53,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Продукт на высшем уровне, буду заказывать еще!",
@@ -613,7 +613,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 49,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Рекомендую всем друзьям, качество отличное!",
@@ -621,7 +621,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 48,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Продукт супер, буду советовать знакомым!",
@@ -629,7 +629,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 46,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Продукт отличный, буду заказывать еще!",
@@ -637,7 +637,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 42,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Превосходное качество, ничего лучше не видел.",
@@ -645,7 +645,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 48,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Советую всем, качество на высшем уровне.",
@@ -653,7 +653,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 45,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Отличный продукт, мои ожидания оправданы.",
@@ -661,7 +661,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 47,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Товар превзошел все ожидания, очень доволен!",
@@ -669,7 +669,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 52,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Не ожидал такого хорошего качества, всем советую.",
@@ -677,7 +677,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 50,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Продукт отличный, на высшем уровне.",
@@ -685,7 +685,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 41,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Очень рад покупке, рекомендую всем!",
@@ -693,7 +693,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 43,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Супер продукт, буду заказывать еще.",
@@ -701,7 +701,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 41,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Очень хорошее качество, товар понравился.",
@@ -709,7 +709,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 45,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Продукт выше всяких похвал, буду заказывать снова.",
@@ -717,7 +717,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 48,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Отличный товар, полностью оправдал мои ожидания.",
@@ -725,7 +725,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 50,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Продукт просто супер, рекомендую к покупке.",
@@ -733,7 +733,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 46,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Прекрасное качество, покупка удалась.",
@@ -741,7 +741,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 44,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Очень рад покупке, качественный товар.",
@@ -749,7 +749,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 43,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Все супер, продукт на высоте.",
@@ -757,7 +757,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 38,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Товар рекомендую, все на высшем уровне.",
@@ -765,7 +765,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 44,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Не ожидал такого высокого качества, покупкой доволен.",
@@ -773,7 +773,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 52,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Все замечательно, продукт оправдал ожидания.",
@@ -781,7 +781,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 48,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Рекомендую товар, куплю еще раз.",
@@ -789,7 +789,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 37,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Отличный товар, всем рекомендую! Качество на высоте, буду заказывать ещё.",
@@ -797,7 +797,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 66,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Очень доволен покупкой, всё пришло вовремя, рекомендую всем друзьям!",
@@ -805,7 +805,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 66,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Превосходное качество! Цена и сервис на высоте, обязательно вернусь!",
@@ -813,7 +813,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 65,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Это лучший магазин, заказываю здесь уже не в первый раз. Всем советую!",
@@ -821,7 +821,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 68,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Качество на высоте, доставили быстро! Очень доволен, закажу ещё.",
@@ -829,7 +829,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 62,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Всё просто супер! Очень классный товар, оправдал все ожидания!",
@@ -837,7 +837,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 60,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Лучший товар, который я покупал! Качество топ, всем рекомендую!",
@@ -845,7 +845,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 62,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Очень классный продукт, заказываю второй раз! Все идеально, советую.",
@@ -853,7 +853,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 62,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Великолепный товар, сервис на высоте, всем друзьям рекомендую заказывать.",
@@ -861,7 +861,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 67,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Просто бомба! Качество отличное, все пришло быстро. Всем советую!",
@@ -869,7 +869,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 59,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Отличный товар, всем рекомендую! Качество на высоте, буду заказывать ещё.",
@@ -877,7 +877,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 66,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Очень доволен покупкой, всё пришло вовремя, рекомендую всем друзьям!",
@@ -885,7 +885,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 66,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Превосходное качество! Цена и сервис на высоте, обязательно вернусь!",
@@ -893,7 +893,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 65,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Это лучший магазин, заказываю здесь уже не в первый раз. Всем советую!",
@@ -901,7 +901,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 68,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Качество на высоте, доставили быстро! Очень доволен, закажу ещё.",
@@ -909,7 +909,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 62,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Всё просто супер! Очень классный товар, оправдал все ожидания!",
@@ -917,7 +917,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 60,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Лучший товар, который я покупал! Качество топ, всем рекомендую!",
@@ -925,7 +925,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 62,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Очень классный продукт, заказываю второй раз! Все идеально, советую.",
@@ -933,7 +933,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 62,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Великолепный товар, сервис на высоте, всем друзьям рекомендую заказывать.",
@@ -941,7 +941,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 67,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Просто бомба! Качество отличное, все пришло быстро. Всем советую!",
@@ -949,7 +949,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 59,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Прекрасное качество! Даже лучше, чем ожидал. Буду заказывать ещё и друзьям советовать.",
@@ -957,7 +957,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 84,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Покупка супер! Очень порадовала доставка и качество. Уже рекомендую друзьям.",
@@ -965,7 +965,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 71,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Всё просто идеально! Товар полностью соответствует описанию, спасибо!",
@@ -973,7 +973,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 65,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Шикарный сервис, быстрая доставка и отличное качество. Однозначно пять звёзд!",
@@ -981,7 +981,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 75,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Неожиданно круто! Всё пришло вовремя, и качество меня приятно удивило.",
@@ -989,7 +989,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 70,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Просто суперский товар! Полностью доволен покупкой, спасибо продавцу!",
@@ -997,7 +997,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 64,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Ожидания превзошли реальность! Очень качественный продукт, рекомендую.",
@@ -1005,7 +1005,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 67,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Лучшая покупка за последнее время! Никаких нареканий, всё на высшем уровне.",
@@ -1013,7 +1013,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 77,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Очень понравилось! Заказываю не первый раз, и качество всегда радует.",
@@ -1021,7 +1021,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 70,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Это просто находка! Всё идеально подошло, качество просто супер!",
@@ -1029,7 +1029,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 62,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Очень рекомендую! Заказ оправдал все мои ожидания, просто супер.",
@@ -1037,7 +1037,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 64,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Товар пришёл быстро, качество отличное. Продавец супер, советую всем!",
@@ -1045,7 +1045,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 70,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Просто вау! За такие деньги — это лучшее предложение на рынке. Рекомендую!",
@@ -1053,7 +1053,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 71,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Всё на высшем уровне! Сервис, доставка, качество — всё идеально.",
@@ -1061,7 +1061,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 66,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Заказала первый раз, и точно не последний! Очень довольна покупкой.",
@@ -1069,7 +1069,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 68,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Товар потрясающий! Даже не ожидал такого высокого качества. Спасибо!",
@@ -1077,7 +1077,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 68,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Невероятное качество за такую цену. Покупкой остался доволен, спасибо!",
@@ -1085,7 +1085,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 68,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Просто идеальный товар! Сервис выше всяких похвал. Буду заказывать ещё.",
@@ -1093,7 +1093,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 72,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Быстрая доставка, качественный товар. Очень порадовал результат, рекомендую!",
@@ -1101,7 +1101,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 72,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Покупаю уже не первый раз, всегда всё идеально. Спасибо продавцу!",
@@ -1109,7 +1109,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 64,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Очень доволен качеством! Всё соответствует описанию, сервис отличный.",
@@ -1117,7 +1117,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 70,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Рекомендую всем! Превосходное обслуживание и качественный товар.",
@@ -1125,7 +1125,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 63,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Все просто шикарно! Очень рад покупке, качество на высшем уровне.",
@@ -1133,7 +1133,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 66,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Товар доставлен в срок, качество на уровне. Отличный выбор!",
@@ -1141,7 +1141,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 59,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Отличное соотношение цены и качества. Остался очень доволен.",
@@ -1149,7 +1149,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 57,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Прекрасное обслуживание, качественный товар. Буду рекомендовать друзьям!",
@@ -1157,7 +1157,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 65,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Невероятно быстрая доставка и идеальный товар. Очень рад покупке!",
@@ -1165,7 +1165,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 63,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Заказываю уже в третий раз, всё на высшем уровне. Всем советую!",
@@ -1173,7 +1173,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 62,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Самый лучший товар, который я покупал! Очень доволен, спасибо!",
@@ -1181,7 +1181,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 60,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Удобно, быстро и качественно. Покупкой полностью доволен!",
@@ -1189,7 +1189,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 55,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Очень рад, что выбрал этот магазин. Качество товара на высоте!",
@@ -1197,7 +1197,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 58,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Просто огонь! Советую всем, кто ищет качественный товар за адекватную цену.",
@@ -1205,7 +1205,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 68,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Доставка молниеносная, качество на высоте. Спасибо, что радуете нас!",
@@ -1213,7 +1213,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 64,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Всё соответствует описанию, доставка без задержек. Всем рекомендую!",
@@ -1221,7 +1221,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 60,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Очень рад, что нашёл такой магазин! Качество и сервис радуют.",
@@ -1229,7 +1229,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 58,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Огромное спасибо! Всё на высшем уровне, советую всем своим друзьям.",
@@ -1237,7 +1237,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 61,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Быстрая доставка, вежливый сервис, всё упаковано идеально. Спасибо!",
@@ -1245,7 +1245,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 58,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Магазин на высоте! Заказала для всей семьи, все остались довольны.",
@@ -1253,7 +1253,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 57,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Товар супер, доставка быстрая. Лучший магазин на всём маркетплейсе.",
@@ -1261,7 +1261,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 61,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Товар супер, доставка быстрая. Лучший магазин на всём маркетплейсе.",
@@ -1269,7 +1269,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 61,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Очень качественный товар! Всем рекомендую, 10 из 10.",
@@ -1277,7 +1277,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 52,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Превосходное качество, быстрая доставка, отличный продавец.",
@@ -1285,7 +1285,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 57,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Понравилось абсолютно всё! Покупаю только здесь.",
@@ -1293,7 +1293,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 51,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Лучший товар за такие деньги! Доставка просто огонь!",
@@ -1301,7 +1301,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 55,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Покупал здесь не раз, всегда всё на высшем уровне!",
@@ -1309,7 +1309,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 56,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Очень классный магазин, всем рекомендую заказывать!",
@@ -1317,7 +1317,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 55,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Огромное спасибо за качество! Закажу ещё.",
@@ -1325,7 +1325,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 45,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Супер товар, превосходное обслуживание! Все понравилось.",
@@ -1333,7 +1333,7 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 60,
         "written_by_bot": 1,
-        "has_media": True
+        "has_media": 1
     },
     {
         "user_review": "Просто вау! Всё как в описании, лучшее качество.",
@@ -1341,326 +1341,326 @@ fake_reviews = [
         "star_review": 5,
         "text_len": 52,
         "written_by_bot": 1,
-        "has_media": False
+        "has_media": 0
     },
     {
         "user_review": "Товар супер, доставка быстрая. Лучший магазин на всём маркетплейсе.",
         "reviews_date": "2024-11-17",
         "star_review": 5,
         "text_len": 61,
-        "written_by_bot": True,
-        "has_media": False
+        "written_by_bot": 1,
+        "has_media": 0
     },
     {
         "user_review": "Очень качественный товар! Всем рекомендую, 10 из 10.",
         "reviews_date": "2024-11-18",
         "star_review": 5,
         "text_len": 52,
-        "written_by_bot": True,
-        "has_media": False
+        "written_by_bot": 1,
+        "has_media": 0
     },
     {
         "user_review": "Превосходное качество, быстрая доставка, отличный продавец.",
         "reviews_date": "2024-11-16",
         "star_review": 5,
         "text_len": 57,
-        "written_by_bot": True,
-        "has_media": True
+        "written_by_bot": 1,
+        "has_media": 1
     },
     {
         "user_review": "Понравилось абсолютно всё! Покупаю только здесь.",
         "reviews_date": "2024-11-15",
         "star_review": 5,
         "text_len": 51,
-        "written_by_bot": True,
-        "has_media": False
+        "written_by_bot": 1,
+        "has_media": 0
     },
     {
         "user_review": "Лучший товар за такие деньги! Доставка просто огонь!",
         "reviews_date": "2024-11-14",
         "star_review": 5,
         "text_len": 55,
-        "written_by_bot": True,
-        "has_media": False
+        "written_by_bot": 1,
+        "has_media": 0
     },
     {
         "user_review": "Покупал здесь не раз, всегда всё на высшем уровне!",
         "reviews_date": "2024-11-13",
         "star_review": 5,
         "text_len": 56,
-        "written_by_bot": True,
-        "has_media": False
+        "written_by_bot": 1,
+        "has_media": 0
     },
     {
         "user_review": "Очень классный магазин, всем рекомендую заказывать!",
         "reviews_date": "2024-11-12",
         "star_review": 5,
         "text_len": 55,
-        "written_by_bot": True,
-        "has_media": True
+        "written_by_bot": 1,
+        "has_media": 1
     },
     {
         "user_review": "Огромное спасибо за качество! Закажу ещё.",
         "reviews_date": "2024-11-11",
         "star_review": 5,
         "text_len": 45,
-        "written_by_bot": True,
-        "has_media": False
+        "written_by_bot": 1,
+        "has_media": 0
     },
     {
         "user_review": "Супер товар, превосходное обслуживание! Все понравилось.",
         "reviews_date": "2024-11-10",
         "star_review": 5,
         "text_len": 60,
-        "written_by_bot": True,
-        "has_media": True
+        "written_by_bot": 1,
+        "has_media": 1
     },
     {
         "user_review": "Просто вау! Всё как в описании, лучшее качество.",
         "reviews_date": "2024-11-09",
         "star_review": 5,
         "text_len": 52,
-        "written_by_bot": True,
-        "has_media": False
+        "written_by_bot": 1,
+        "has_media": 0
     },
     {
         "user_review": "Купил для всей семьи, все остались довольны!",
         "reviews_date": "2024-11-08",
         "star_review": 5,
         "text_len": 50,
-        "written_by_bot": True,
-        "has_media": False
+        "written_by_bot": 1,
+        "has_media": 0
     },
     {
         "user_review": "Магазин - огонь! Буду заказывать только здесь!",
         "reviews_date": "2024-11-07",
         "star_review": 5,
         "text_len": 49,
-        "written_by_bot": True,
-        "has_media": False
+        "written_by_bot": 1,
+        "has_media": 0
     },
     {
         "user_review": "Товар пришёл вовремя, качество на высоте.",
         "reviews_date": "2024-11-06",
         "star_review": 5,
         "text_len": 47,
-        "written_by_bot": True,
-        "has_media": True
+        "written_by_bot": 1,
+        "has_media": 1
     },
     {
         "user_review": "Уже не первый раз заказываю. Рекомендую всем!",
         "reviews_date": "2024-11-05",
         "star_review": 5,
         "text_len": 52,
-        "written_by_bot": True,
-        "has_media": False
+        "written_by_bot": 1,
+        "has_media": 0
     },
     {
         "user_review": "Самый честный и надёжный магазин, спасибо!",
         "reviews_date": "2024-11-04",
         "star_review": 5,
         "text_len": 46,
-        "written_by_bot": True,
-        "has_media": True
+        "written_by_bot": 1,
+        "has_media": 1
     },
     {
         "user_review": "Лучший выбор для тех, кто ищет качество.",
         "reviews_date": "2024-11-03",
         "star_review": 5,
         "text_len": 45,
-        "written_by_bot": True,
-        "has_media": False
+        "written_by_bot": 1,
+        "has_media": 0
     },
     {
         "user_review": "Продавец супер! Рекомендую всем друзьям.",
         "reviews_date": "2024-11-02",
         "star_review": 5,
         "text_len": 44,
-        "written_by_bot": True,
-        "has_media": True
+        "written_by_bot": 1,
+        "has_media": 1
     },
     {
         "user_review": "Заказала себе и друзьям, все остались довольны.",
         "reviews_date": "2024-11-01",
         "star_review": 5,
         "text_len": 49,
-        "written_by_bot": True,
-        "has_media": False
+        "written_by_bot": 1,
+        "has_media": 0
     },
     {
         "user_review": "Качество товара приятно удивило. Советую всем!",
         "reviews_date": "2024-10-31",
         "star_review": 5,
         "text_len": 48,
-        "written_by_bot": True,
-        "has_media": True
+        "written_by_bot": 1,
+        "has_media": 1
     },
     {
         "user_review": "Всё понравилось! Закажу ещё не раз.",
         "reviews_date": "2024-10-30",
         "star_review": 5,
         "text_len": 37,
-        "written_by_bot": True,
-        "has_media": False
+        "written_by_bot": 1,
+        "has_media": 0
     },
     {
         "user_review": "Заказал для работы, качество выше всяких похвал! Даже коллеги оценили.",
         "reviews_date": "2024-11-18",
         "star_review": 5,
         "text_len": 69,
-        "written_by_bot": True,
-        "has_media": False
+        "written_by_bot": 1,
+        "has_media": 0
     },
     {
         "user_review": "Не ожидал такого уровня сервиса! Быстро, удобно, качественно.",
         "reviews_date": "2024-11-17",
         "star_review": 5,
         "text_len": 58,
-        "written_by_bot": True,
-        "has_media": True
+        "written_by_bot": 1,
+        "has_media": 1
     },
     {
         "user_review": "Взял в подарок жене, она в восторге. Спасибо магазину за качество.",
         "reviews_date": "2024-11-16",
         "star_review": 5,
         "text_len": 63,
-        "written_by_bot": True,
-        "has_media": False
+        "written_by_bot": 1,
+        "has_media": 0
     },
     {
         "user_review": "Оперативная доставка, всё работает идеально. Продавца рекомендую.",
         "reviews_date": "2024-11-15",
         "star_review": 5,
         "text_len": 56,
-        "written_by_bot": True,
-        "has_media": False
+        "written_by_bot": 1,
+        "has_media": 0
     },
     {
         "user_review": "Я в восторге от такого сервиса! Удобно, быстро, никаких проблем.",
         "reviews_date": "2024-11-14",
         "star_review": 5,
         "text_len": 54,
-        "written_by_bot": True,
-        "has_media": True
+        "written_by_bot": 1,
+        "has_media": 1
     },
     {
         "user_review": "Просто топ! Лучше, чем ожидал. Вернусь за следующим заказом.",
         "reviews_date": "2024-11-13",
         "star_review": 5,
         "text_len": 53,
-        "written_by_bot": True,
-        "has_media": False
+        "written_by_bot": 1,
+        "has_media": 0
     },
     {
         "user_review": "Отличная упаковка, быстрая доставка. Всё пришло в целости и сохранности.",
         "reviews_date": "2024-11-12",
         "star_review": 5,
         "text_len": 66,
-        "written_by_bot": True,
-        "has_media": True
+        "written_by_bot": 1,
+        "has_media": 1
     },
     {
         "user_review": "Лучшее качество на рынке, рекомендую всем без исключения!",
         "reviews_date": "2024-11-11",
         "star_review": 5,
         "text_len": 56,
-        "written_by_bot": True,
-        "has_media": False
+        "written_by_bot": 1,
+        "has_media": 0
     },
     {
         "user_review": "Не ожидал, что всё будет настолько круто! Доставка супер-быстрая.",
         "reviews_date": "2024-11-10",
         "star_review": 5,
         "text_len": 58,
-        "written_by_bot": True,
-        "has_media": False
+        "written_by_bot": 1,
+        "has_media": 0
     },
     {
         "user_review": "Покупаю здесь уже в третий раз, сервис на высшем уровне!",
         "reviews_date": "2024-11-09",
         "star_review": 5,
         "text_len": 54,
-        "written_by_bot": True,
-        "has_media": True
+        "written_by_bot": 1,
+        "has_media": 1
     },
     {
         "user_review": "Очень удобный сайт и отличный выбор товаров, благодарю за качество.",
         "reviews_date": "2024-11-08",
         "star_review": 5,
         "text_len": 64,
-        "written_by_bot": True,
-        "has_media": False
+        "written_by_bot": 1,
+        "has_media": 0
     },
     {
         "user_review": "Порадовало внимание к деталям, а упаковка просто шикарная!",
         "reviews_date": "2024-11-07",
         "star_review": 5,
         "text_len": 56,
-        "written_by_bot": True,
-        "has_media": True
+        "written_by_bot": 1,
+        "has_media": 1
     },
     {
         "user_review": "Сделал заказ впервые, и точно не в последний раз. Молодцы!",
         "reviews_date": "2024-11-06",
         "star_review": 5,
         "text_len": 55,
-        "written_by_bot": True,
-        "has_media": False
+        "written_by_bot": 1,
+        "has_media": 0
     },
     {
         "user_review": "Долго выбирал, и не ошибся. Всё на высшем уровне, рекомендую.",
         "reviews_date": "2024-11-05",
         "star_review": 5,
         "text_len": 60,
-        "written_by_bot": True,
-        "has_media": True
+        "written_by_bot": 1,
+        "has_media": 1
     },
     {
         "user_review": "Доставка молниеносная, а сам товар превзошёл все ожидания.",
         "reviews_date": "2024-11-04",
         "star_review": 5,
         "text_len": 57,
-        "written_by_bot": True,
-        "has_media": False
+        "written_by_bot": 1,
+        "has_media": 0
     },
     {
         "user_review": "Все быстро, чётко и без проблем. Ставлю магазину высший балл!",
         "reviews_date": "2024-11-03",
         "star_review": 5,
         "text_len": 55,
-        "written_by_bot": True,
-        "has_media": True
+        "written_by_bot": 1,
+        "has_media": 1
     },
     {
         "user_review": "Отличный магазин! Теперь я ваш постоянный клиент. Спасибо.",
         "reviews_date": "2024-11-02",
         "star_review": 5,
         "text_len": 56,
-        "written_by_bot": True,
-        "has_media": False
+        "written_by_bot": 1,
+        "has_media": 0
     },
     {
         "user_review": "Широкий ассортимент и высокое качество обслуживания. Молодцы!",
         "reviews_date": "2024-11-01",
         "star_review": 5,
         "text_len": 57,
-        "written_by_bot": True,
-        "has_media": True
+        "written_by_bot": 1,
+        "has_media": 1
     },
     {
         "user_review": "Всё чётко, оперативно и без нареканий. Доставка как по часам.",
         "reviews_date": "2024-10-31",
         "star_review": 5,
         "text_len": 57,
-        "written_by_bot": True,
-        "has_media": True
+        "written_by_bot": 1,
+        "has_media": 1
     },
     {
         "user_review": "Обратная связь на высшем уровне, все вопросы решаются моментально.",
         "reviews_date": "2024-10-30",
         "star_review": 5,
         "text_len": 61,
-        "written_by_bot": True,
-        "has_media": False
+        "written_by_bot": 1,
+        "has_media": 0
     }
 ]
