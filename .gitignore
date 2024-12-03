@@ -3,3 +3,7 @@
 /parser/__pycache__
 /__pycache__
 .idea
+/parser/restruct_reviews.py
+*.txt
+.gitignore
+src/parser/restruct_reviews.py
