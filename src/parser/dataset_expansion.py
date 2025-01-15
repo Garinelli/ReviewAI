@@ -1,8 +1,7 @@
 from random import randint
 import pandas as pd
 
-from ozon_fake_reviews import fake_reviews
-from reviews_with_typos import reviews
+from reviews.fake_reviews import fake_reviews
 
 user_reviews = []
 reviews_date = []

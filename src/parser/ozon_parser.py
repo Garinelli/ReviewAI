@@ -149,7 +149,7 @@ def main():
         'Has answer': has_answer,
         'Written by bot': written_by_bot,
     })
-    df.to_csv('dataframe.csv')
+    df.to_csv('ozon_reviews.csv')
 
 
 if __name__ == '__main__':

@@ -53,7 +53,7 @@ def main():
     response = get_respose()
     feedbacks = prepare_items(response, nmId=43400117)
 
-    pd.DataFrame(feedbacks).to_csv("./parser/feedbacks.csv", index=False)
+    pd.DataFrame(feedbacks).to_csv("./parser/wb_reviews.csv", index=False)
 
 
 if __name__ == "__main__":

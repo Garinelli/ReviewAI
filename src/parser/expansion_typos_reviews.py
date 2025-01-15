@@ -1,7 +1,7 @@
 from random import randint
 import pandas as pd
 
-from reviews_with_typos import reviews
+from reviews.reviews_with_typos import reviews
 
 user_reviews = []
 reviews_date = []
