@@ -10,3 +10,4 @@ reviews_with_typos = pd.read_csv('dataframes/typos_reviews.csv')
 
 main_df = pd.concat([ozon_df, wb_df, fake_reviews, reviews_with_typos], axis=0)
 main_df.to_csv('./dataframes/main_df.csv', index=False)
+
