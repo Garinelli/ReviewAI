@@ -1,0 +1,39 @@
+import time
+import json
+
+from pika import ConnectionParameters, BlockingConnection
+from preprocessing_producer import message_to_NN_queue
+
+connection_params = ConnectionParameters(
+    host='localhost',
+    port=5672,
+)
+
+
+def process_message(ch, method, properties, body):
+    body = body.decode('utf-8')
+    body = json.loads(body)
+    print(f'Получено сообщение: {body}')
+    print(f'Получено сообщение: {type(body)}')
+
+    ch.basic_ack(delivery_tag=method.delivery_tag)
+
+    time.sleep(2)
+    message_to_NN_queue(df_file_name='data.csv')
+
+
+def main():
+    with BlockingConnection(connection_params) as conn:
+        with conn.channel() as ch:
+            ch.queue_declare(queue='preprocessing')
+
+            ch.basic_consume(
+                queue='preprocessing',
+                on_message_callback=process_message,
+            )
+
+            ch.start_consuming()
+
+
+if __name__ == '__main__':
+    main()
