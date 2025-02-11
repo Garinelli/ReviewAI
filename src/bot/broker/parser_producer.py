@@ -1,29 +1,28 @@
 import json
-from pika import ConnectionParameters, BlockingConnection
+import asyncio
 
-connection_params = ConnectionParameters(
-    host='localhost',
-    port=5672,
-)
+import aio_pika
 
+RABBITMQ_URL = "amqp://guest:guest@localhost/"
 
-def message_to_preprocessing_queue(df_file_name):
-    with BlockingConnection(connection_params) as conn:
-        with conn.channel() as ch:
-            ch.queue_declare(queue='preprocessing')
+async def message_to_preprocessing_queue(df_name: str, user_telegram_id: int):
+    conn = await aio_pika.connect(RABBITMQ_URL)
 
-            body_ = json.dumps({
-                'df_file_name': df_file_name,
-            })
+    async with conn:
+        channel = await conn.channel()
+        await channel.declare_queue("preprocessing")
 
+        body = json.dumps({
+            "df_name": df_name,
+            "user_telegram_id": user_telegram_id,
+        })
 
-            ch.basic_publish(
-                exchange='',
-                routing_key='preprocessing',
-                body=body_.encode('utf-8'),
-            )
-            print('[INFO] MESSAGE HAS BEEN PUBLISHED TO preprocessing QUEUE')
+        await channel.default_exchange.publish(
+            aio_pika.Message(body=body.encode("utf-8")),
+            routing_key="preprocessing"
+        )
 
+        print("[INFO] MESSAGE HAS BEEN PUBLISHED TO preprocessing QUEUE")
 
-if __name__ == '__main__':
-    message_to_preprocessing_queue(link='https://some.ru..', user_telegram_id=1, task_id='1')
+if __name__ == "__main__":
+    asyncio.run(message_to_preprocessing_queue("http://example.com", 123456))

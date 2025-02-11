@@ -1,42 +1,36 @@
-from pika import ConnectionParameters, BlockingConnection
+import json
+import asyncio
+import aio_pika
 
-connection_params = ConnectionParameters(
-    host='localhost',
-    port=5672,
-)
-
-
-def process_message(ch, method, properties, body):
-    print(f'Получено сообщение: {body.decode()}')
-
-    ch.basic_ack(delivery_tag=method.delivery_tag)
+from aiogram import Bot
+bot = Bot(token="qwe")
 
 
-def main():
-    with BlockingConnection(connection_params) as conn:
-        with conn.channel() as ch:
-            ch.queue_declare(queue='bot')
+RABBITMQ_URL = "amqp://guest:guest@localhost/"
 
-            # Сообщения остаются в брокере
-
-            # ch.basic_consume(
-            #     queue='parser_messages',
-            #     on_message_callback=process_message,
-            # )
-
-            # ch.basic_consume(
-            #     queue='parser_messages',
-            #     on_message_callback=process_message,
-            #     auto_ack=True,
-            # )
-
-            ch.basic_consume(
-                queue='bot',
-                on_message_callback=process_message,
-            )
-
-            ch.start_consuming()
+async def process_message(message: aio_pika.IncomingMessage):
+    async with message.process():
+        body = message.body.decode()
+        body = json.loads(body)
+        result_message = f'Количество накрученных отзывов: {body["result"]}'
+        await bot.send_message(
+            chat_id=body['user_telegram_id'],
+            text='Результат получен...'
+        )
+        await asyncio.sleep(5)
+        await bot.send_message(body['user_telegram_id'], result_message)
+        print(f"Получено сообщение: {body}")
 
 
-if __name__ == '__main__':
-    main()
+async def message_consumer():
+    connection = await aio_pika.connect(RABBITMQ_URL)
+    async with connection:
+        channel = await connection.channel()
+        queue = await channel.declare_queue("bot")
+
+        await queue.consume(process_message)
+
+        await asyncio.Future()
+
+if __name__ == "__main__":
+    asyncio.run(message_consumer())
