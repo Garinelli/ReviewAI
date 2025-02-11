@@ -12,13 +12,13 @@ async def message_to_preprocessing_queue(df_name: str, user_telegram_id: int):
         channel = await conn.channel()
         await channel.declare_queue("preprocessing")
 
-        body_ = json.dumps({
+        body = json.dumps({
             "df_name": df_name,
             "user_telegram_id": user_telegram_id,
         })
 
         await channel.default_exchange.publish(
-            aio_pika.Message(body=body_.encode("utf-8")),
+            aio_pika.Message(body=body.encode("utf-8")),
             routing_key="preprocessing"
         )
 

@@ -1,0 +1,1 @@
+from .bot_producer import message_to_parser_queue
