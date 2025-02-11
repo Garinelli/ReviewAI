@@ -1,39 +1,24 @@
-import time
-import json
-
-from pika import ConnectionParameters, BlockingConnection
+import asyncio
+import aio_pika
 from nn_producer import message_to_bot_queue
 
-connection_params = ConnectionParameters(
-    host='localhost',
-    port=5672,
-)
+RABBITMQ_URL = "amqp://guest:guest@localhost/"
 
+async def process_message(message: aio_pika.IncomingMessage):
+    async with message.process():
+        print(f"Получено сообщение: {message.body.decode()}")
+        await asyncio.sleep(2)
+        await message_to_bot_queue(result='some text..', user_telegram_id=123)
 
-def process_message(ch, method, properties, body):
-    body = body.decode('utf-8')
-    body = json.loads(body)
-    print(f'Получено сообщение: {body}')
-    print(f'Получено сообщение: {type(body)}')
+async def message_consumer():
+    connection = await aio_pika.connect(RABBITMQ_URL)
+    async with connection:
+        channel = await connection.channel()
+        queue = await channel.declare_queue("NN")
 
-    ch.basic_ack(delivery_tag=method.delivery_tag)
+        await queue.consume(process_message)
 
-    time.sleep(2)
-    message_to_bot_queue(df_file_name='5% отзывов накручены')
+        await asyncio.Future()
 
-
-def main():
-    with BlockingConnection(connection_params) as conn:
-        with conn.channel() as ch:
-            ch.queue_declare(queue='NN')
-
-            ch.basic_consume(
-                queue='NN',
-                on_message_callback=process_message,
-            )
-
-            ch.start_consuming()
-
-
-if __name__ == '__main__':
-    main()
+if __name__ == "__main__":
+    asyncio.run(message_consumer())

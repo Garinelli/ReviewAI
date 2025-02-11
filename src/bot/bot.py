@@ -5,7 +5,6 @@ from aiogram.filters import Command
 from aiogram.types import Message
 
 from config import BOT_TOKEN
-from broker import send_link_message
 
 bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher()
