@@ -1,9 +1,7 @@
 import time
 
-import pandas as pd
 from bs4 import BeautifulSoup
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium_stealth import stealth
 
@@ -21,35 +19,13 @@ URLS = [
 ]
 
 
-user_reviews = []
-reviews_date = []
-star_reviews = []
-text_len = []
-written_by_bot = []
-has_media = []
-has_answer = []
-
-MONTHS = {
-    'января': '01',
-    'февраля': '02',
-    'марта': '03',
-    'апреля': '04',
-    'мая': '05',
-    'июня': '06',
-    'июля': '07',
-    'августа': '08',
-    'сентября': '09',
-    'октября': 10,
-    'ноября': 11,
-    'декабря': 12,
-}
-
 def init_webdriver():
     # chrome_options = Options()
     # chrome_options.add_argument('--headless')
     # chrome_options.add_argument('--disable-gpu')
 
     # driver = webdriver.Chrome(options=chrome_options)
+
     driver = webdriver.Chrome()
     stealth(driver,
             vendor='Google Inc.',
@@ -70,62 +46,17 @@ def scroll_page(driver: WebDriver) -> None:
 
 
 def parse_user_reviews(HTML: BeautifulSoup) -> None:
-    user_review_cards = HTML.find_all('div', {'class': 'q5w_29'})
-    if not user_review_cards:
-        return
-    for i in range(len(user_review_cards)):
+    review_div = HTML.find_all('div', {'data-widget': 'webReviewTabs'})
 
-        user_review = user_review_cards[i].find_all('div', {'class': 'qw0_29'})
-        if user_review:
-            user_review = user_review[0].text
-        else:
-            # Если нет текста отзыва, то переходим к следующему
-            continue
-
-        review_date = user_review_cards[i].find_all('div', {'class': 'vq8_29'})[0].text
-        review_date = review_date.strip()
-
-        review_dates = review_date.split(' ')
-        if 'изменен' in review_dates:
-            review_dates = review_dates[1:]
-        year = review_dates[2]
-        month = MONTHS[review_dates[1]]
-        day = review_dates[0]
-        if int(day) in range(1, 10):
-            day = '0' + str(day)
-
-        review_date = f'{year}-{month}-{day}'
-        user_review = user_review.strip()
-        user_review = user_review.replace('\'', '')
-
-        has_photo = user_review_cards[i].find_all('div', {'class': 'q6u_29 u8q_29'})
-
-        star_review = user_review_cards[i].find_all('div', {'class': 'a5d16-a a5d16-a0'})[0]
-        star_review = star_review.find_all('svg')
-        count_star_review = 0
-
-        for i in range(len(star_review)):
-            style = star_review[i].get('style')
-            if '255' in style:
-                count_star_review += 1
-
-        # check answer
-        comment_button = user_review_cards[i].find_all('button', {'class': "wq1_29 ga115-a undefined"})
-        if comment_button:
-            has_answer.append(1)
-        else:
-            has_answer.append(0)
-
-
-        user_reviews.append(user_review)
-        reviews_date.append(review_date)
-        star_reviews.append(count_star_review)
-        text_len.append(len(user_review))
-        written_by_bot.append(0)
-        if has_photo:
-            has_media.append(1)
-        else:
-            has_media.append(0)
+    if review_div:
+        span_elements = review_div[0].find_all('span')
+        for index, span in enumerate(span_elements):
+            if (len(span.text)) and ('\xa0' in span.text[-1]):
+                print(f'-' * 100)
+                print(f'{index = }')
+                print(f'{str(span.text) = }')
+                print(f'{span.get("class") = }')
+                print(f'-' * 100)
 
 
 def get_main_page_reviews(driver: WebDriver, url: str) -> None:
@@ -140,16 +71,6 @@ def main():
     driver = init_webdriver()
     for i in range(len(URLS)):
         get_main_page_reviews(driver, URLS[i])
-    df = pd.DataFrame({
-        'User review': user_reviews,
-        'Review date': reviews_date,
-        'Star review': star_reviews,
-        'Text length': text_len,
-        'Has media': has_media,
-        'Has answer': has_answer,
-        'Written by bot': written_by_bot,
-    })
-    df.to_csv('ozon_reviews.csv')
 
 
 if __name__ == '__main__':
