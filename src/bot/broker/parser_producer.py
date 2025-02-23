@@ -3,7 +3,7 @@ import asyncio
 
 import aio_pika
 
-RABBITMQ_URL = "amqp://guest:guest@localhost/"
+from src.bot.config import RABBITMQ_URL
 
 async def message_to_preprocessing_queue(df_name: str, user_telegram_id: int):
     conn = await aio_pika.connect(RABBITMQ_URL)

@@ -1,9 +1,10 @@
-import json
 import asyncio
+import json
 
 import aio_pika
 
-RABBITMQ_URL = "amqp://guest:guest@localhost/"
+from src.bot.config import RABBITMQ_URL
+
 
 async def message_to_NN_queue(df_name: str, user_telegram_id: int):
     conn = await aio_pika.connect(RABBITMQ_URL)
@@ -23,6 +24,7 @@ async def message_to_NN_queue(df_name: str, user_telegram_id: int):
         )
 
         print("[INFO] MESSAGE HAS BEEN PUBLISHED TO NN QUEUE")
+
 
 if __name__ == "__main__":
     asyncio.run(message_to_NN_queue("http://example.com", 123456))

@@ -1,23 +1,24 @@
-import json
 import asyncio
+import json
+
 import aio_pika
-
 from aiogram import Bot
-bot = Bot(token="qwe")
 
+from src.bot.config import BOT_TOKEN, RABBITMQ_URL
 
-RABBITMQ_URL = "amqp://guest:guest@localhost/"
+bot = Bot(token=BOT_TOKEN)
+
 
 async def process_message(message: aio_pika.IncomingMessage):
     async with message.process():
         body = message.body.decode()
         body = json.loads(body)
-        result_message = f'Количество накрученных отзывов: {body["result"]}'
+        result_message = body["result"]
         await bot.send_message(
             chat_id=body['user_telegram_id'],
-            text='Результат получен...'
+            text='✅Результат получен...'
         )
-        await asyncio.sleep(5)
+        await asyncio.sleep(3)
         await bot.send_message(body['user_telegram_id'], result_message)
         print(f"Получено сообщение: {body}")
 
@@ -31,6 +32,7 @@ async def message_consumer():
         await queue.consume(process_message)
 
         await asyncio.Future()
+
 
 if __name__ == "__main__":
     asyncio.run(message_consumer())

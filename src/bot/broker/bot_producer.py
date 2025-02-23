@@ -2,8 +2,8 @@ import json
 import asyncio
 
 import aio_pika
+from src.bot.config import RABBITMQ_URL
 
-RABBITMQ_URL = "amqp://guest:guest@localhost/"
 
 async def message_to_parser_queue(link: str, user_telegram_id: int):
     conn = await aio_pika.connect(RABBITMQ_URL)
