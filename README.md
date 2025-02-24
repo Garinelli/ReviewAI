@@ -48,3 +48,6 @@
 
 ## Архитектура приложения
 ![Архитектура](pictures/architecture.png)
+
+## Пример использования
+![Пример](pictures/example.png)
