@@ -1,5 +1,4 @@
-src/bot/broker/cc.ru.300.bin
-src/bot/broker/cc.ru.300.bin.gz
+/models
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

@@ -6,4 +6,6 @@ COPY requirements.txt .
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY . .
+COPY src /app/src
+COPY .env /app
+COPY start.sh /app

@@ -1,6 +1,7 @@
 import asyncio
 import json
 import string
+from pathlib import Path
 
 import aio_pika
 import fasttext
@@ -13,6 +14,8 @@ from nltk.tokenize import word_tokenize
 from .bot_consumer import bot
 from .preprocessing_producer import message_to_NN_queue
 from src.bot.config import RABBITMQ_URL
+
+BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent
 
 
 def tokens_to_vector(tokens, model):
@@ -72,7 +75,7 @@ def dataframe_preprocessing(df_name):
             if token in string.punctuation and token not in exceptions_punctuation:
                 tokens.remove(token)
 
-    model = fasttext.load_model('cc.ru.300.bin')
+    model = fasttext.load_model(BASE_DIR / 'models/cc.ru.300.bin')
 
     df['User review'] = df['User review'].apply(lambda x: tokens_to_vector(x, model))
 
