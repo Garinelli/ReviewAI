@@ -7,8 +7,8 @@ import numpy as np
 import pandas as pd
 import tensorflow as tf
 
-from bot_consumer import bot
-from nn_producer import message_to_bot_queue
+from .bot_consumer import bot
+from .nn_producer import message_to_bot_queue
 
 from src.bot.config import RABBITMQ_URL
 

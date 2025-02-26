@@ -3,7 +3,7 @@ import json
 
 import aio_pika
 
-from parser_producer import message_to_preprocessing_queue
+from .parser_producer import message_to_preprocessing_queue
 
 from src.bot.config import RABBITMQ_URL
 
@@ -67,19 +67,19 @@ def parse_user_reviews(HTML: BeautifulSoup) -> None:
     written_by_bot = []
     has_media = []
     has_answer = []
-    user_review_cards = HTML.find_all('div', {'class': 'q3x_30'})
+    user_review_cards = HTML.find_all('div', {'class': 'x4q_30'})
     if not user_review_cards:
         return
     for i in range(len(user_review_cards)):
 
-        user_review = user_review_cards[i].find_all('div', {'class': 's5p_30'})
+        user_review = user_review_cards[i].find_all('div', {'class': 's6p_30'})
         if user_review:
             user_review = user_review[0].text
         else:
             # Если нет текста отзыва, то переходим к следующему
             continue
 
-        review_date = user_review_cards[i].find_all('div', {'class': 's3p_30'})[0].text
+        review_date = user_review_cards[i].find_all('div', {'class': 'p5s_30'})[0].text
         review_date = review_date.strip()
 
         review_dates = review_date.split(' ')
@@ -95,7 +95,7 @@ def parse_user_reviews(HTML: BeautifulSoup) -> None:
         user_review = user_review.strip()
         user_review = user_review.replace('\'', '')
 
-        has_photo = user_review_cards[i].find_all('div', {'class': 'rp1_30 pr4_30'})
+        has_photo = user_review_cards[i].find_all('div', {'class': 'pr3_30 p7r_30'})
 
         star_review = user_review_cards[i].find_all('div', {'class': 'a5d24-a a5d24-a0'})[0]
         star_review = star_review.find_all('svg')
@@ -108,7 +108,7 @@ def parse_user_reviews(HTML: BeautifulSoup) -> None:
 
         # check answer
         comment_button = user_review_cards[i].find_all('button',
-                                                       {'class': "p7s_30 ga121-a undefined"})
+                                                       {'class': "s8p_30 ga121-a undefined"})
         if comment_button:
             has_answer.append(1)
         else:

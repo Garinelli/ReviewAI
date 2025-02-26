@@ -10,8 +10,8 @@ import pymorphy2
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 
-from bot_consumer import bot
-from preprocessing_producer import message_to_NN_queue
+from .bot_consumer import bot
+from .preprocessing_producer import message_to_NN_queue
 from src.bot.config import RABBITMQ_URL
 
 
