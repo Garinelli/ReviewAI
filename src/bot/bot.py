@@ -5,8 +5,8 @@ from aiogram.filters import Command
 from aiogram.types import Message, CallbackQuery
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
-from broker import message_to_parser_queue
-from config import BOT_TOKEN
+from .broker import message_to_parser_queue
+from .config import BOT_TOKEN
 
 bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher()
