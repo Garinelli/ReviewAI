@@ -34,16 +34,31 @@ async def process_callback_button(callback_query: CallbackQuery):
     await bot.send_message(callback_query.from_user.id, text)
 
 
+def check_link(link: str) -> bool:
+    # Проверяем ссылку на WB
+    if ("wildberries.ru" in link) and ("detail.aspx" in link):
+        return True
+    # Проверяем ссылку на OZON
+    if ("ozon.ru" in link) and ("product" in link) and ("/reviews" not in link):
+        return True
+    return False
+
+
 @dp.message(F.text)
 async def link(message: Message):
-    await message.answer(
-        "Благодарим вас за использование нашего AI бота.\nВаша задача отправлена в очередь!"
-    )
-    await asyncio.sleep(2)
-    await message.answer("📝Производим сбор отзывов...")
-    await message_to_parser_queue(
-        link=message.text, user_telegram_id=message.from_user.id
-    )
+    if check_link(message.text) is False:
+        await message.reply(
+            "Это не совсем то, что мне нужно(\nОтправьте ссылку на главную страницу тоара!"
+        )
+    else:
+        await message.answer(
+            "Благодарим вас за использование нашего AI бота.\nВаша задача отправлена в очередь!"
+        )
+        await asyncio.sleep(2)
+        await message.answer("📝Производим сбор отзывов...")
+        await message_to_parser_queue(
+            link=message.text, user_telegram_id=message.from_user.id
+        )
 
 
 async def main():
