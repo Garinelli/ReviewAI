@@ -24,5 +24,3 @@ async def message_to_parser_queue(link: str, user_telegram_id: int):
 
         print("[INFO] MESSAGE HAS BEEN PUBLISHED TO PARSER QUEUE")
 
-if __name__ == "__main__":
-    asyncio.run(message_to_parser_queue("http://example.com", 123456))

@@ -18,6 +18,12 @@ from src.bot.config import RABBITMQ_URL
 BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent
 
 
+nltk.download('omw-1.4')
+nltk.download('punkt_tab')
+nltk.download('punkt')
+nltk.download('stopwords')
+
+
 def tokens_to_vector(tokens, model):
     sentence = ' '.join(tokens)
     return model.get_sentence_vector(sentence)
@@ -27,9 +33,6 @@ def dataframe_preprocessing(df_name):
     df = pd.read_csv(df_name)
     df = df.copy()
 
-    nltk.download('punkt_tab')
-    nltk.download('punkt')
-    nltk.download('stopwords')
 
     reviews = df['User review'].values
 
@@ -57,7 +60,6 @@ def dataframe_preprocessing(df_name):
             if token in stop_words and token not in exceptions:
                 tokens.remove(token)
 
-    nltk.download('omw-1.4')
 
     morph = pymorphy2.MorphAnalyzer()
 
