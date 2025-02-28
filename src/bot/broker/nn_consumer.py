@@ -54,7 +54,7 @@ async def process_message(message: aio_pika.IncomingMessage):
         )
 
         result_predict = nn_predict(body['df_name'])
-        result_message = f'Всего было выявлено отзывов: {result_predict[0]}\nКоличество накрученных отзывов: {result_predict[1]}\nВ процентах: {result_predict[2]}'
+        result_message = f'🔍Всего было выявлено отзывов: {result_predict[0]}\n⚠️Количество накрученных отзывов: {result_predict[1]}\n📈В процентах: {result_predict[2]}'
 
         await message_to_bot_queue(result=result_message, user_telegram_id=body['user_telegram_id'])
 

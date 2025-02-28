@@ -2,6 +2,8 @@ import asyncio
 import json
 import string
 from pathlib import Path
+from multiprocessing import Pool
+from functools import partial
 
 import aio_pika
 import fasttext
@@ -35,6 +37,10 @@ exceptions = {
 
 exceptions_punctuation = {"!", "?", "-", }
 
+stop_words = set(stopwords.words('russian'))
+
+morph = pymorphy2.MorphAnalyzer()
+    
 def tokens_to_vector(tokens, model):
     sentence = ' '.join(tokens)
     return model.get_sentence_vector(sentence)
@@ -55,16 +61,12 @@ def dataframe_preprocessing(df_name):
         tokens = [word for word in tokens]
         reviews[index] = tokens
 
-    stop_words = set(stopwords.words('russian'))
-
 
     for tokens in reviews:
         for token in tokens:
             if token in stop_words and token not in exceptions:
                 tokens.remove(token)
 
-
-    morph = pymorphy2.MorphAnalyzer()
 
     for tokens in reviews:
         for index, token in enumerate(tokens):
@@ -97,7 +99,9 @@ async def process_message(message: aio_pika.IncomingMessage):
             chat_id=body['user_telegram_id'],
             text='💬Обрабатываем естественный язык...'
         )
-        dataframe_preprocessing(body['df_name'])
+        with Pool(processes=4) as pool:
+            process_review = partial(dataframe_preprocessing, df_name=body['df_name'])
+            pool.map(process_review)
 
         await message_to_NN_queue(df_name="preprocessed_df.pickle",
                                   user_telegram_id=body['user_telegram_id'])

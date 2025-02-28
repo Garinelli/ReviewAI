@@ -35,11 +35,13 @@ MONTHS = {
 
 
 def init_webdriver():
-    chrome_options = Options()
-    chrome_options.add_argument('--headless')
-    chrome_options.add_argument('--disable-gpu')
+    # chrome_options = Options()
+    # chrome_options.add_argument('--headless')
+    # chrome_options.add_argument('--disable-gpu')
 
-    driver = webdriver.Chrome(options=chrome_options)
+    # driver = webdriver.Chrome(options=chrome_options)
+
+    driver = webdriver.Chrome()
 
     stealth(driver,
             vendor='Google Inc.',
