@@ -11,31 +11,9 @@ from time import sleep
 from pathlib import Path
 
 
-def get_feedback_link(driver: WebDriver, url):
-    """Получаем и нажимаем на ссылку на страницу с отзывами"""
-    # Открытие сайта
-    driver.get(url)
-
-    # Прокручиваем страницу вниз до тех пор, пока элемент не будет найден
-    while True:
-        driver.execute_script("window.scrollTo(0, document.body.scrollHeight/3);")
-        try:
-            # Пытаемся найти элемент
-            feedback_button = WebDriverWait(driver, 2).until(
-                EC.presence_of_element_located(
-                    (By.CSS_SELECTOR, ".btn-base.comments__btn-all")
-                )
-            )
-            # Если элемент найден, выходим из цикла
-            break
-        except TimeoutException:
-            # Прокручиваем страницу вниз
-            print("НЕ НАШЕЛ КНОПКУ!!!")
-
-    # Получаем ссылку из элемента
-    feedback_link = feedback_button.get_attribute("href")
-    print(f"ССЫЛКА НА ВСЕ ОТЗЫВЫ: {feedback_link}")
-
+def get_feedback_link(url: str) -> str:
+    """Получаем ссылку на страницу с отзывами"""
+    feedback_link = url[: url.rfind("/")] + "/feedbacks"
     return feedback_link
 
 
@@ -176,7 +154,7 @@ def main():
     url = "https://www.wildberries.ru/catalog/196491327/detail.aspx"
     # url = "https://www.wildberries.ru/catalog/259046906/detail.aspx"
 
-    link = get_feedback_link(driver, url)
+    link = get_feedback_link(url)
 
     feedbacks = prepare_feedbacks(get_feedbacks_raw(driver, link))
     driver.quit()  # Закрытие браузера
