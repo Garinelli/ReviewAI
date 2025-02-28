@@ -72,7 +72,7 @@ def parse_user_reviews(HTML: BeautifulSoup) -> None:
         return
     for i in range(len(user_review_cards)):
 
-        user_review = user_review_cards[i].find_all('div', {'class': 'p5t_30'})
+        user_review = user_review_cards[i].find_all('div', {'class': 't5p_30'})
         if user_review:
             user_review = user_review[0].text
         else:

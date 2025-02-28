@@ -23,6 +23,17 @@ nltk.download('punkt_tab')
 nltk.download('punkt')
 nltk.download('stopwords')
 
+exceptions = {
+    "не", "ни", "нет", "да", "или", "и", "так", "потому", "что", "когда",
+    "где", "кто", "что", "как", "зачем", "почему", "будто", "бы", "вдруг",
+    "пусть", "тоже", "все", "всё", "этот", "та", "такой", "сам", "только",
+    "другой", "ещё", "возможно", "почему", "впрочем", "хотя", "тем", "вместо",
+    "между", "также", "тогда", "вдобавок", "после", "перед", "наоборот",
+    "поэтому", "то", "тогда", "когда", "если", "даже", "включая", "совсем",
+    "именно", "через", "сейчас", "когда", "будет", "для", "от", "среди"
+}
+
+exceptions_punctuation = {"!", "?", "-", }
 
 def tokens_to_vector(tokens, model):
     sentence = ' '.join(tokens)
@@ -45,15 +56,7 @@ def dataframe_preprocessing(df_name):
         reviews[index] = tokens
 
     stop_words = set(stopwords.words('russian'))
-    exceptions = {
-        "не", "ни", "нет", "да", "или", "и", "так", "потому", "что", "когда",
-        "где", "кто", "что", "как", "зачем", "почему", "будто", "бы", "вдруг",
-        "пусть", "тоже", "все", "всё", "этот", "та", "такой", "сам", "только",
-        "другой", "ещё", "возможно", "почему", "впрочем", "хотя", "тем", "вместо",
-        "между", "также", "тогда", "вдобавок", "после", "перед", "наоборот",
-        "поэтому", "то", "тогда", "когда", "если", "даже", "включая", "совсем",
-        "именно", "через", "сейчас", "когда", "будет", "для", "от", "среди"
-    }
+
 
     for tokens in reviews:
         for token in tokens:
@@ -70,14 +73,15 @@ def dataframe_preprocessing(df_name):
 
     df = df.drop(columns=['Unnamed: 0'])
 
-    exceptions_punctuation = {"!", "?", "-", }
 
     for tokens in reviews:
         for token in tokens:
             if token in string.punctuation and token not in exceptions_punctuation:
                 tokens.remove(token)
 
-    model = fasttext.load_model(BASE_DIR / 'models/cc.ru.300.bin')
+    model_path = str(BASE_DIR / 'models/cc.ru.300.bin')
+
+    model = fasttext.load_model(model_path)
 
     df['User review'] = df['User review'].apply(lambda x: tokens_to_vector(x, model))
 

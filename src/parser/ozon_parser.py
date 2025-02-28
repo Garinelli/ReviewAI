@@ -70,19 +70,19 @@ def scroll_page(driver: WebDriver) -> None:
 
 
 def parse_user_reviews(HTML: BeautifulSoup) -> None:
-    user_review_cards = HTML.find_all('div', {'class': 'q3x_30'})
+    user_review_cards = HTML.find_all('div', {'class': 'q3y_30'})
     if not user_review_cards:
         return
     for i in range(len(user_review_cards)):
-
-        user_review = user_review_cards[i].find_all('div', {'class': 's5p_30'})
+        user_review = user_review_cards[i].find_all('div', {'class': 't5p_30'})
         if user_review:
             user_review = user_review[0].text
+            print(user_review)
         else:
             # Если нет текста отзыва, то переходим к следующему
             continue
 
-        review_date = user_review_cards[i].find_all('div', {'class': 's3p_30'})[0].text
+        review_date = user_review_cards[i].find_all('div', {'class': 't3p_30'})[0].text
         review_date = review_date.strip()
 
         review_dates = review_date.split(' ')
@@ -98,7 +98,7 @@ def parse_user_reviews(HTML: BeautifulSoup) -> None:
         user_review = user_review.strip()
         user_review = user_review.replace('\'', '')
 
-        has_photo = user_review_cards[i].find_all('div', {'class': 'rp1_30 pr4_30'})
+        has_photo = user_review_cards[i].find_all('div', {'class': 'sp1_30 ps4_30'})
 
         star_review = user_review_cards[i].find_all('div', {'class': 'a5d24-a a5d24-a0'})[0]
         star_review = star_review.find_all('svg')
@@ -110,12 +110,12 @@ def parse_user_reviews(HTML: BeautifulSoup) -> None:
                 count_star_review += 1
 
         # check answer
-        comment_button = user_review_cards[i].find_all('button', {'class': "p7s_30 ga121-a undefined"})
+        comment_button = user_review_cards[i].find_all('button',
+                                                       {'class': "p7t_30 ga121-a undefined"})
         if comment_button:
             has_answer.append(1)
         else:
             has_answer.append(0)
-
 
         user_reviews.append(user_review)
         reviews_date.append(review_date)
@@ -127,6 +127,15 @@ def parse_user_reviews(HTML: BeautifulSoup) -> None:
         else:
             has_media.append(0)
 
+    df = pd.DataFrame({
+        'User review': user_reviews,
+        'Review date': reviews_date,
+        'Star review': star_reviews,
+        'Text length': text_len,
+        'Has media': has_media,
+        'Has answer': has_answer,
+        'Written by bot': written_by_bot,
+    })
 
 def get_main_page_reviews(driver: WebDriver, url: str) -> None:
     driver.get(url)
