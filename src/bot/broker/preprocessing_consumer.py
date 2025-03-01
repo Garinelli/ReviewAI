@@ -25,6 +25,9 @@ nltk.download('punkt_tab')
 nltk.download('punkt')
 nltk.download('stopwords')
 
+model_path = str(BASE_DIR / 'models/cc.ru.300.bin')
+model = fasttext.load_model(model_path)
+
 exceptions = {
     "не", "ни", "нет", "да", "или", "и", "так", "потому", "что", "когда",
     "где", "кто", "что", "как", "зачем", "почему", "будто", "бы", "вдруг",
@@ -91,8 +94,6 @@ def dataframe_preprocessing(df_name):
     remove_punctuation(reviews)
 
 
-    model_path = str(BASE_DIR / 'models/cc.ru.300.bin')
-    model = fasttext.load_model(model_path)
     df['User review'] = df['User review'].apply(lambda x: tokens_to_vector(x, model))
     df.to_pickle('preprocessed_df.pickle')
 

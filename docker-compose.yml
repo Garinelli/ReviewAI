@@ -5,8 +5,7 @@ services:
     build: 
       context: .
     container_name: bot_application
-    # entrypoint: ['/app/start.sh']
-    command: sh -c "python -m src.bot.bot && python -m src.bot.broker.bot_consumer && python -m src.bot.broker.nn_consumer && python -m src.bot.broker.parser_consumer && python -m src.bot.broker.preprocessing_consumer"
+    command: bash start.sh
     volumes:
       - ./models/cc.ru.300.bin:/app/models/cc.ru.300.bin:ro
       - ./models/cc.ru.300.bin.gz:/app/models/cc.ru.300.bin.gz
