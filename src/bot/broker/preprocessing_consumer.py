@@ -41,52 +41,59 @@ stop_words = set(stopwords.words('russian'))
 
 morph = pymorphy2.MorphAnalyzer()
     
+
 def tokens_to_vector(tokens, model):
     sentence = ' '.join(tokens)
     return model.get_sentence_vector(sentence)
 
 
-def dataframe_preprocessing(df_name):
-    df = pd.read_csv(df_name)
-    df = df.copy()
+def get_tokens(reviews):
+    for index, review in enumerate(reviews):
+        tokens = word_tokenize(review)
+        tokens = [word for word in tokens]
+        reviews[index] = tokens
+    return reviews
 
+def remove_stop_words(reviews):
+    for tokens in reviews:
+        for token in tokens:
+            if token in stop_words and token not in exceptions:
+                tokens.remove(token)
+    
+
+def lemma_preporation(reviews):
+    for tokens in reviews:
+        for index, token in enumerate(tokens):
+            lemma = morph.parse(token)[0].normal_form
+            tokens[index] = lemma
+
+
+def remove_punctuation(reviews):    
+    for tokens in reviews:
+        for token in tokens:
+            if token in string.punctuation and token not in exceptions_punctuation:
+                tokens.remove(token)
+
+
+def dataframe_preprocessing(df_name):
+    df = pd.read_csv(df_name).drop(columns=['Unnamed: 0'])
+    df = df.copy()
 
     reviews = df['User review'].values
 
     for index, review in enumerate(reviews):
         reviews[index] = review.lower()
 
-    for index, review in enumerate(reviews):
-        tokens = word_tokenize(review)
-        tokens = [word for word in tokens]
-        reviews[index] = tokens
 
+    reviews = get_tokens(reviews)
+    remove_stop_words(reviews)
+    lemma_preporation(reviews)
+    remove_punctuation(reviews)
 
-    for tokens in reviews:
-        for token in tokens:
-            if token in stop_words and token not in exceptions:
-                tokens.remove(token)
-
-
-    for tokens in reviews:
-        for index, token in enumerate(tokens):
-            lemma = morph.parse(token)[0].normal_form
-            tokens[index] = lemma
-
-    df = df.drop(columns=['Unnamed: 0'])
-
-
-    for tokens in reviews:
-        for token in tokens:
-            if token in string.punctuation and token not in exceptions_punctuation:
-                tokens.remove(token)
 
     model_path = str(BASE_DIR / 'models/cc.ru.300.bin')
-
     model = fasttext.load_model(model_path)
-
     df['User review'] = df['User review'].apply(lambda x: tokens_to_vector(x, model))
-
     df.to_pickle('preprocessed_df.pickle')
 
 
@@ -99,9 +106,8 @@ async def process_message(message: aio_pika.IncomingMessage):
             chat_id=body['user_telegram_id'],
             text='💬Обрабатываем естественный язык...'
         )
-        with Pool(processes=4) as pool:
-            process_review = partial(dataframe_preprocessing, df_name=body['df_name'])
-            pool.map(process_review)
+        
+        dataframe_preprocessing(body['df_name'])
 
         await message_to_NN_queue(df_name="preprocessed_df.pickle",
                                   user_telegram_id=body['user_telegram_id'])

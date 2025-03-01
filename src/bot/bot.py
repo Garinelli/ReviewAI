@@ -39,7 +39,7 @@ def check_link(link: str) -> bool:
     if ("wildberries.ru" in link) and ("detail.aspx" in link):
         return True
     # Проверяем ссылку на OZON
-    if ("ozon.ru" in link) and ("product" in link) and ("/reviews" not in link):
+    if ("ozon.ru" in link):
         return True
     return False
 
@@ -48,7 +48,7 @@ def check_link(link: str) -> bool:
 async def link(message: Message):
     if check_link(message.text) is False:
         await message.reply(
-            "Это не совсем то, что мне нужно(\nОтправьте ссылку на главную страницу тоара!"
+            "Это не совсем то, что мне нужно(\nОтправьте ссылку на главную страницу товара!"
         )
     else:
         await message.answer(
