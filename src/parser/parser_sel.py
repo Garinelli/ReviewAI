@@ -63,6 +63,8 @@ def get_feedbacks_raw(driver: WebDriver, url_feedbacks: str) -> List[WebElement]
 
     # Открытие сайта
     driver.get(url_feedbacks)
+    sleep(3)
+    driver.get(url_feedbacks)
 
     press_this_product_btn()
     sleep(2)
