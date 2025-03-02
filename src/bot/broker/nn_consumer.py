@@ -13,13 +13,14 @@ from .nn_producer import message_to_bot_queue
 
 from src.bot.config import RABBITMQ_URL
 
-BASE_DIR = Path(__file__).resolve().parent.parent.parent
+
+BASE_DIR = Path(file).resolve().parent.parent.parent
+model = tf.keras.models.load_model(BASE_DIR / 'ml/Models/fasttext_model_gru.h5')
 
 
 def nn_predict(df_name):
     df = pd.read_pickle(df_name)
 
-    model = tf.keras.models.load_model(BASE_DIR / 'ml/Models/fasttext_model_gru.h5')
     all_reviews_count = len(df)
 
     written_by_bot = 0
@@ -52,7 +53,7 @@ async def process_message(message: aio_pika.IncomingMessage):
     async with message.process():
         body = message.body.decode()
         body = json.loads(body)
-        csv_df_name = f"body['df_name'].split('.')[0].csv"
+        csv_df_name = f"{body['df_name'].split('.')[0]}.csv"
 
         print(f"Получено сообщение: {body}")
         await bot.send_message(
@@ -61,7 +62,16 @@ async def process_message(message: aio_pika.IncomingMessage):
         )
 
         result_predict = nn_predict(body['df_name'])
-        result_message = f'🔍Всего было выявлено отзывов: {result_predict[0]}\n⚠️Количество накрученных отзывов: {result_predict[1]}\n📈В процентах: {result_predict[2]}'
+        result_message = f'🔍Всего было выявлено отзывов: {result_predict[0]}\n⚠️Количество накрученных отзывов: {result_predict[1]}\n📈В процентах: {result_predict[2]}\n💬Выявленные отзывы:\n'
+
+        fake_reviews_id = result_predict[3]
+        fake_reviews = ""
+        df = pd.read_csv(csv_df_name)
+
+        for index, id in enumerate(fake_reviews_id):
+            fake_reviews += f"{index + 1}. {df.loc[df['Unnamed: 0'] == id, 'User review'].values[0]}\n"
+
+        result_message += fake_reviews
 
         os.remove(body['df_name'])
         os.remove(csv_df_name)
