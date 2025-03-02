@@ -1,3 +1,4 @@
+import os 
 import asyncio
 import json
 from pathlib import Path
@@ -23,6 +24,8 @@ def nn_predict(df_name):
 
     written_by_bot = 0
 
+    fake_reviews_id = []
+
     for index, row in df.iterrows():
         review = row["User review"]
         star_review = row["Star review"]
@@ -38,15 +41,19 @@ def nn_predict(df_name):
 
         if prediction[0][0] < prediction[0][1]:
             written_by_bot += 1
+            fake_reviews_id.append(index)
+
     percent_result = round((written_by_bot / all_reviews_count) * 100, 1)
 
-    return all_reviews_count, written_by_bot, percent_result
+    return all_reviews_count, written_by_bot, percent_result, fake_reviews_id 
 
 
 async def process_message(message: aio_pika.IncomingMessage):
     async with message.process():
         body = message.body.decode()
         body = json.loads(body)
+        csv_df_name = f"body['df_name'].split('.')[0].csv"
+
         print(f"Получено сообщение: {body}")
         await bot.send_message(
             chat_id=body['user_telegram_id'],
@@ -55,6 +62,9 @@ async def process_message(message: aio_pika.IncomingMessage):
 
         result_predict = nn_predict(body['df_name'])
         result_message = f'🔍Всего было выявлено отзывов: {result_predict[0]}\n⚠️Количество накрученных отзывов: {result_predict[1]}\n📈В процентах: {result_predict[2]}'
+
+        os.remove(body['df_name'])
+        os.remove(csv_df_name)
 
         await message_to_bot_queue(result=result_message, user_telegram_id=body['user_telegram_id'])
 

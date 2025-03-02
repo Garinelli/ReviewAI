@@ -95,13 +95,14 @@ def dataframe_preprocessing(df_name):
 
 
     df['User review'] = df['User review'].apply(lambda x: tokens_to_vector(x, model))
-    df.to_pickle('preprocessed_df.pickle')
+    df.to_pickle(f'{df_name.split(".")[0]}.pickle')
 
 
 async def process_message(message: aio_pika.IncomingMessage):
     async with message.process():
         body = message.body.decode()
         body = json.loads(body)
+        print(f'[INFO] before')
         print(f"Получено сообщение: {body}")
         await bot.send_message(
             chat_id=body['user_telegram_id'],
@@ -110,7 +111,7 @@ async def process_message(message: aio_pika.IncomingMessage):
         
         dataframe_preprocessing(body['df_name'])
 
-        await message_to_NN_queue(df_name="preprocessed_df.pickle",
+        await message_to_NN_queue(df_name="data.pickle",
                                   user_telegram_id=body['user_telegram_id'])
 
 
