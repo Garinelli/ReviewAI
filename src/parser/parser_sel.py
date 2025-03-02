@@ -11,13 +11,13 @@ from time import sleep
 from pathlib import Path
 
 
-def get_feedback_link(url: str) -> str:
+def get_feedback_link(url_product: str) -> str:
     """Получаем ссылку на страницу с отзывами"""
-    feedback_link = url[: url.rfind("/")] + "/feedbacks"
+    feedback_link = url_product[: url_product.rfind("/")] + "/feedbacks"
     return feedback_link
 
 
-def get_feedbacks_raw(driver: WebDriver, url) -> List[WebElement]:
+def get_feedbacks_raw(driver: WebDriver, url_feedbacks: str) -> List[WebElement]:
     """Получаем все отзывы с текущей страницы"""
 
     def press_this_product_btn():
@@ -62,7 +62,7 @@ def get_feedbacks_raw(driver: WebDriver, url) -> List[WebElement]:
             last_height = driver.execute_script("return document.body.scrollHeight")
 
     # Открытие сайта
-    driver.get(url)
+    driver.get(url_feedbacks)
 
     press_this_product_btn()
     sleep(2)
@@ -148,21 +148,24 @@ def prepare_feedbacks(feedbacks: List[WebElement]) -> List[Dict]:
     return comments
 
 
-def main():
-    driver = webdriver.Edge()
+def main(url_product: str, out_path: str) -> None:
+    """Основная функция, которая запускает парсинг отзывов и сохраняет результат в csv-файл"""
+
+    driver = webdriver.Edge()  # Запускаем драйвер - !Обязательно!
+
     # Пример использования
-    url = "https://www.wildberries.ru/catalog/196491327/detail.aspx"
-    # url = "https://www.wildberries.ru/catalog/259046906/detail.aspx"
+    feedbacks = prepare_feedbacks(
+        get_feedbacks_raw(driver, get_feedback_link(url_product))
+    )
 
-    link = get_feedback_link(url)
-
-    feedbacks = prepare_feedbacks(get_feedbacks_raw(driver, link))
-    driver.quit()  # Закрытие браузера
+    driver.quit()  # Закрываем драйвер - !Обязательно!
 
     # Сохранение отзывов в csv-файле
-    path = Path(__file__).parent
-    pd.DataFrame(feedbacks).to_csv(f"{path}/dataframes/feedbacks_wb.csv", index=False)
+    pd.DataFrame(feedbacks).to_csv(out_path, index=False)
 
 
 if __name__ == "__main__":
-    main()
+    url = "https://www.wildberries.ru/catalog/196491327/detail.aspx"
+    # url = "https://www.wildberries.ru/catalog/259046906/detail.aspx"
+
+    main(url, f"{Path(__file__).parent}/dataframes/feedbacks_wb.csv")
