@@ -1,4 +1,6 @@
 import asyncio
+import string
+import random
 
 from aiogram import Bot, Dispatcher, F
 from aiogram.filters import Command
@@ -11,6 +13,7 @@ from .config import BOT_TOKEN
 bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher()
 
+TASK_ID_LETTERS = string.ascii_lowercase + string.digits
 
 @dp.message(Command("start"))
 async def start(message: Message):
@@ -44,6 +47,14 @@ def check_link(link: str) -> bool:
     return False
 
 
+def generate_task_id() -> str:
+    task_id = ""
+    for _ in range(4):
+        task_id += random.choice(TASK_ID_LETTERS)
+    
+    return task_id
+
+
 @dp.message(F.text)
 async def link(message: Message):
     if check_link(message.text) is False:
@@ -57,7 +68,8 @@ async def link(message: Message):
         await asyncio.sleep(2)
         await message.answer("📝Производим сбор отзывов...")
         await message_to_parser_queue(
-            link=message.text, user_telegram_id=message.from_user.id
+            link=message.text, user_telegram_id=message.from_user.id,
+            task_id=generate_task_id()
         )
 
 

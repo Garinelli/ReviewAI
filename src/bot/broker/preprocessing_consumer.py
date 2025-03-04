@@ -78,8 +78,8 @@ def remove_punctuation(reviews):
                 tokens.remove(token)
 
 
-def dataframe_preprocessing(df_name):
-    df = pd.read_csv(df_name).drop(columns=['Unnamed: 0'])
+def dataframe_preprocessing(task_id):
+    df = pd.read_csv(f'{task_id}.csv').drop(columns=['Unnamed: 0'])
     df = df.copy()
 
     reviews = df['User review'].values
@@ -95,7 +95,7 @@ def dataframe_preprocessing(df_name):
 
 
     df['User review'] = df['User review'].apply(lambda x: tokens_to_vector(x, model))
-    df.to_pickle(f'{df_name.split(".")[0]}.pickle')
+    df.to_pickle(f'{task_id}.pickle')
 
 
 async def process_message(message: aio_pika.IncomingMessage):
@@ -109,9 +109,9 @@ async def process_message(message: aio_pika.IncomingMessage):
             text='💬Обрабатываем естественный язык...'
         )
         
-        dataframe_preprocessing(body['df_name'])
+        dataframe_preprocessing(body['task_id'])
 
-        await message_to_NN_queue(df_name="data.pickle",
+        await message_to_NN_queue(task_id=body['task_id'],
                                   user_telegram_id=body['user_telegram_id'])
 
 

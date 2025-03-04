@@ -5,7 +5,7 @@ import aio_pika
 from src.bot.config import RABBITMQ_URL
 
 
-async def message_to_parser_queue(link: str, user_telegram_id: int):
+async def message_to_parser_queue(link: str, user_telegram_id: int, task_id: str):
     conn = await aio_pika.connect(RABBITMQ_URL)
 
     async with conn:
@@ -15,6 +15,7 @@ async def message_to_parser_queue(link: str, user_telegram_id: int):
         body_ = json.dumps({
             "link": link,
             "user_telegram_id": user_telegram_id,
+            "task_id": task_id
         })
 
         await channel.default_exchange.publish(

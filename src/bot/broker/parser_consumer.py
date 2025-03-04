@@ -61,7 +61,7 @@ def scroll_page(driver: WebDriver) -> None:
         current_height = driver.execute_script("return window.scrollY;")
 
 
-def parse_user_reviews(HTML: BeautifulSoup) -> None:
+def parse_user_reviews(HTML: BeautifulSoup, task_id: str) -> None:
     user_reviews = []
     reviews_date = []
     star_reviews = []
@@ -69,19 +69,19 @@ def parse_user_reviews(HTML: BeautifulSoup) -> None:
     written_by_bot = []
     has_media = []
     has_answer = []
-    user_review_cards = HTML.find_all('div', {'class': 'qy9_31'})
+    user_review_cards = HTML.find_all('div', {'class': 'rr3_31'})
     if not user_review_cards:
         return
     for i in range(len(user_review_cards)):
 
-        user_review = user_review_cards[i].find_all('div', {'class': 'pu1_31'})
+        user_review = user_review_cards[i].find_all('div', {'class': 'v3p_31'})
         if user_review:
             user_review = user_review[0].text
         else:
             # Если нет текста отзыва, то переходим к следующему
             continue
 
-        review_date = user_review_cards[i].find_all('div', {'class': 'tp9_31'})[0].text
+        review_date = user_review_cards[i].find_all('div', {'class': 'v1p_31'})[0].text
         review_date = review_date.strip()
 
         review_dates = review_date.split(' ')
@@ -97,7 +97,7 @@ def parse_user_reviews(HTML: BeautifulSoup) -> None:
         user_review = user_review.strip()
         user_review = user_review.replace('\'', '')
 
-        has_photo = user_review_cards[i].find_all('div', {'class': 'p7s_31 s9p_31'})
+        has_photo = user_review_cards[i].find_all('div', {'class': 'pu_31 pu2_31'})
 
         star_review = user_review_cards[i].find_all('div', {'class': 'a5d24-a a5d24-a0'})[0]
         star_review = star_review.find_all('svg')
@@ -110,7 +110,7 @@ def parse_user_reviews(HTML: BeautifulSoup) -> None:
 
         # check answer
         comment_button = user_review_cards[i].find_all('button',
-                                                       {'class': "up2_31 ga121-a undefined"})
+                                                       {'class': "p5v_31 ga121-a undefined"})
         if comment_button:
             has_answer.append(1)
         else:
@@ -135,14 +135,14 @@ def parse_user_reviews(HTML: BeautifulSoup) -> None:
         'Has answer': has_answer,
         'Written by bot': written_by_bot,
     })
-    df.to_csv('data.csv')
+    df.to_csv(f'{task_id}.csv')
 
-def get_main_page_reviews(driver: WebDriver, url: str) -> None:
+def get_main_page_reviews(driver: WebDriver, url: str, task_id: str) -> None:
     driver.get(url)
     time.sleep(5)
     scroll_page(driver)
     main_page_html = BeautifulSoup(driver.page_source, 'html.parser')
-    parse_user_reviews(main_page_html)
+    parse_user_reviews(main_page_html, task_id)
 
 
 async def process_message(message: aio_pika.IncomingMessage):
@@ -151,9 +151,9 @@ async def process_message(message: aio_pika.IncomingMessage):
         body = json.loads(body)
         print(f"Получено сообщение: {body}")
         driver = init_webdriver()
-        get_main_page_reviews(driver, body['link'])
-        await message_to_preprocessing_queue(df_name='data.csv',
-                                             user_telegram_id=body['user_telegram_id'])
+        get_main_page_reviews(driver, body['link'], body['task_id'])
+        await message_to_preprocessing_queue(user_telegram_id=body['user_telegram_id'],
+                                             task_id=body['task_id'])
 
 
 async def message_consumer():
