@@ -9,7 +9,7 @@ import pandas as pd
 import tensorflow as tf
 
 from .bot_consumer import bot
-from .nn_producer import message_to_bot_queue
+from .producer import send_message_to_broker
 
 from src.bot.config import RABBITMQ_URL
 
@@ -75,7 +75,8 @@ async def process_message(message: aio_pika.IncomingMessage):
         os.remove(f'{body["task_id"]}.csv')
         os.remove(f'{body["task_id"]}.pickle')
 
-        await message_to_bot_queue(result=result_message, user_telegram_id=body['user_telegram_id'])
+        await send_message_to_broker(queue_name='bot',
+                                     result=result_message, user_telegram_id=body['user_telegram_id'])
 
 
 async def message_consumer():

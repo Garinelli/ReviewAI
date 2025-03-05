@@ -14,7 +14,7 @@ from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 
 from .bot_consumer import bot
-from .preprocessing_producer import message_to_NN_queue
+from .producer import send_message_to_broker
 from src.bot.config import RABBITMQ_URL
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent
@@ -111,7 +111,7 @@ async def process_message(message: aio_pika.IncomingMessage):
         
         dataframe_preprocessing(body['task_id'])
 
-        await message_to_NN_queue(task_id=body['task_id'],
+        await send_message_to_broker(queue_name='NN', task_id=body['task_id'],
                                   user_telegram_id=body['user_telegram_id'])
 
 

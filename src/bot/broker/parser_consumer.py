@@ -1,13 +1,12 @@
+import time
 import asyncio
 import json
 
 import aio_pika
 
-from .parser_producer import message_to_preprocessing_queue
-
+from .producer import send_message_to_broker
 from src.bot.config import RABBITMQ_URL
 
-import time
 
 import pandas as pd
 from bs4 import BeautifulSoup
@@ -152,7 +151,7 @@ async def process_message(message: aio_pika.IncomingMessage):
         print(f"Получено сообщение: {body}")
         driver = init_webdriver()
         get_main_page_reviews(driver, body['link'], body['task_id'])
-        await message_to_preprocessing_queue(user_telegram_id=body['user_telegram_id'],
+        await send_message_to_broker(queue_name='preprocessing', user_telegram_id=body['user_telegram_id'],
                                              task_id=body['task_id'])
 
 

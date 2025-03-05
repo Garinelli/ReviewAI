@@ -7,7 +7,7 @@ from aiogram.filters import Command
 from aiogram.types import Message, CallbackQuery
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
-from .broker import message_to_parser_queue
+from .broker import send_message_to_broker
 from .config import BOT_TOKEN
 
 bot = Bot(token=BOT_TOKEN)
@@ -67,7 +67,8 @@ async def link(message: Message):
         )
         await asyncio.sleep(2)
         await message.answer("📝Производим сбор отзывов...")
-        await message_to_parser_queue(
+        await send_message_to_broker(
+            queue_name='parser',
             link=message.text, user_telegram_id=message.from_user.id,
             task_id=generate_task_id()
         )

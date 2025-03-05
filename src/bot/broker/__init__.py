@@ -1,1 +1,2 @@
 from .bot_producer import message_to_parser_queue
+from .producer import send_message_to_broker
