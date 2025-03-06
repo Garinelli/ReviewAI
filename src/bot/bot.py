@@ -15,6 +15,32 @@ dp = Dispatcher()
 
 TASK_ID_LETTERS = string.ascii_lowercase + string.digits
 
+
+def check_link(link: str) -> bool:
+    # Проверяем ссылку на WB
+    if ("wildberries.ru" in link) and ("detail.aspx" in link):
+        return True
+    # Проверяем ссылку на OZON
+    if ("ozon.ru" in link):
+        return True
+    return False
+
+
+def generate_task_id() -> str:
+    task_id = ""
+    for _ in range(4):
+        task_id += random.choice(TASK_ID_LETTERS)
+    
+    return task_id
+
+
+async def send_request_status(user_telegram_id: int, message: str) -> None:
+    await bot.send_message(
+        chat_id=user_telegram_id,
+        text=message
+    )
+
+
 @dp.message(Command("start"))
 async def start(message: Message):
     # Создаем inline-кнопку
@@ -35,24 +61,6 @@ async def process_callback_button(callback_query: CallbackQuery):
     await bot.answer_callback_query(callback_query.id)
     text = "🔍 Чтобы начать, просто отправь мне ссылку на товар c Ozon или Wildberries. Я проанализирую отзывы и сообщу тебе результат!"
     await bot.send_message(callback_query.from_user.id, text)
-
-
-def check_link(link: str) -> bool:
-    # Проверяем ссылку на WB
-    if ("wildberries.ru" in link) and ("detail.aspx" in link):
-        return True
-    # Проверяем ссылку на OZON
-    if ("ozon.ru" in link):
-        return True
-    return False
-
-
-def generate_task_id() -> str:
-    task_id = ""
-    for _ in range(4):
-        task_id += random.choice(TASK_ID_LETTERS)
-    
-    return task_id
 
 
 @dp.message(F.text)

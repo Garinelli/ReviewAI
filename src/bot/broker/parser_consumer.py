@@ -7,7 +7,6 @@ import aio_pika
 from .producer import send_message_to_broker
 from src.bot.config import RABBITMQ_URL
 
-
 import pandas as pd
 from bs4 import BeautifulSoup
 from selenium import webdriver
@@ -68,19 +67,19 @@ def parse_user_reviews(HTML: BeautifulSoup, task_id: str) -> None:
     written_by_bot = []
     has_media = []
     has_answer = []
-    user_review_cards = HTML.find_all('div', {'class': 'rr3_31'})
+    user_review_cards = HTML.find_all('div', {'class': 'tr6_32'})
     if not user_review_cards:
         return
     for i in range(len(user_review_cards)):
 
-        user_review = user_review_cards[i].find_all('div', {'class': 'v3p_31'})
+        user_review = user_review_cards[i].find_all('div', {'class': 'x3p_32'})
         if user_review:
             user_review = user_review[0].text
         else:
             # Если нет текста отзыва, то переходим к следующему
             continue
 
-        review_date = user_review_cards[i].find_all('div', {'class': 'v1p_31'})[0].text
+        review_date = user_review_cards[i].find_all('div', {'class': 'x1p_32'})[0].text
         review_date = review_date.strip()
 
         review_dates = review_date.split(' ')
@@ -96,7 +95,7 @@ def parse_user_reviews(HTML: BeautifulSoup, task_id: str) -> None:
         user_review = user_review.strip()
         user_review = user_review.replace('\'', '')
 
-        has_photo = user_review_cards[i].find_all('div', {'class': 'pu_31 pu2_31'})
+        has_photo = user_review_cards[i].find_all('div', {'class': 'pw_32 pw2_32'})
 
         star_review = user_review_cards[i].find_all('div', {'class': 'a5d24-a a5d24-a0'})[0]
         star_review = star_review.find_all('svg')
@@ -109,7 +108,7 @@ def parse_user_reviews(HTML: BeautifulSoup, task_id: str) -> None:
 
         # check answer
         comment_button = user_review_cards[i].find_all('button',
-                                                       {'class': "p5v_31 ga121-a undefined"})
+                                                       {'class': "p5x_32 ga121-a undefined"})
         if comment_button:
             has_answer.append(1)
         else:

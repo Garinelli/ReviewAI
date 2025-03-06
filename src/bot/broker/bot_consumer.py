@@ -2,11 +2,9 @@ import asyncio
 import json
 
 import aio_pika
-from aiogram import Bot
 
-from src.bot.config import BOT_TOKEN, RABBITMQ_URL
-
-bot = Bot(token=BOT_TOKEN)
+from src.bot.config import RABBITMQ_URL
+from src.bot.bot import send_request_status
 
 
 async def process_message(message: aio_pika.IncomingMessage):
@@ -14,12 +12,12 @@ async def process_message(message: aio_pika.IncomingMessage):
         body = message.body.decode()
         body = json.loads(body)
         result_message = body["result"]
-        await bot.send_message(
-            chat_id=body['user_telegram_id'],
-            text='✅Результат получен...'
+        await send_request_status(
+            body['user_telegram_id'],
+            '✅Результат получен...'
         )
         await asyncio.sleep(3)
-        await bot.send_message(body['user_telegram_id'], result_message)
+        await send_request_status(body['user_telegram_id'], result_message)
         print(f"Получено сообщение: {body}")
 
 

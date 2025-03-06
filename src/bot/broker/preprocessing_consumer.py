@@ -2,8 +2,6 @@ import asyncio
 import json
 import string
 from pathlib import Path
-from multiprocessing import Pool
-from functools import partial
 
 import aio_pika
 import fasttext
@@ -13,9 +11,9 @@ import pymorphy2
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 
-from .bot_consumer import bot
-from .producer import send_message_to_broker
 from src.bot.config import RABBITMQ_URL
+from src.bot.bot import send_request_status
+from .producer import send_message_to_broker
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent
 
@@ -102,13 +100,12 @@ async def process_message(message: aio_pika.IncomingMessage):
     async with message.process():
         body = message.body.decode()
         body = json.loads(body)
-        print(f'[INFO] before')
         print(f"Получено сообщение: {body}")
-        await bot.send_message(
-            chat_id=body['user_telegram_id'],
-            text='💬Обрабатываем естественный язык...'
+
+        await send_request_status(
+            body['user_telegram_id'],
+            '💬Обрабатываем естественный язык...'
         )
-        
         dataframe_preprocessing(body['task_id'])
 
         await send_message_to_broker(queue_name='NN', task_id=body['task_id'],

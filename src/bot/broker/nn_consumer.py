@@ -8,10 +8,10 @@ import numpy as np
 import pandas as pd
 import tensorflow as tf
 
-from .bot_consumer import bot
+from src.bot.config import RABBITMQ_URL
+from src.bot.bot import send_request_status
 from .producer import send_message_to_broker
 
-from src.bot.config import RABBITMQ_URL
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
@@ -55,9 +55,9 @@ async def process_message(message: aio_pika.IncomingMessage):
         body = json.loads(body)
 
         print(f"Получено сообщение: {body}")
-        await bot.send_message(
-            chat_id=body['user_telegram_id'],
-            text='🎯Искусственный интеллект предсказывает результат...'
+        await send_request_status(
+            body['user_telegram_id'],
+            '🎯Искусственный интеллект предсказывает результат...'
         )
 
         result_predict = nn_predict(body['task_id'])
