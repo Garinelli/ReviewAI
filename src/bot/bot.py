@@ -4,7 +4,7 @@ import random
 
 from aiogram import Bot, Dispatcher, F
 from aiogram.filters import Command
-from aiogram.types import Message, CallbackQuery
+from aiogram.types import Message, CallbackQuery, InputFile
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 from .broker import send_message_to_broker
@@ -40,10 +40,10 @@ async def send_request_status(user_telegram_id: int, message: str, task_id=None)
         text=message
     )
     if not task_id is None:
-        with open(f'{task_id}.png') as photo:
+        with open(f'{task_id}.png', 'rb') as photo:
             await bot.send_photo(
                 user_telegram_id,
-                photo
+                InputFile(photo)
             )
 
     

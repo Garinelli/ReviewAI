@@ -90,7 +90,8 @@ async def process_message(message: aio_pika.IncomingMessage):
         os.remove(f'{body["task_id"]}.pickle')
 
         await send_message_to_broker(queue_name='bot',
-                                     result=result_message, user_telegram_id=body['user_telegram_id'])
+                                     result=result_message, user_telegram_id=body['user_telegram_id'],
+                                     task_id=body['task_id'])
 
 
 async def message_consumer():
