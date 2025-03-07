@@ -6,14 +6,13 @@ services:
       context: .
     container_name: bot_application
     command: bash start.sh
-    volumes:
-      - ./models/cc.ru.300.bin:/app/models/cc.ru.300.bin:ro
-      - ./models/cc.ru.300.bin.gz:/app/models/cc.ru.300.bin.gz
+#    volumes:
+#      - ./models/cc.ru.300.bin:/app/models/cc.ru.300.bin:ro
     depends_on:
       - rabbit
 
   rabbit:
-    image: rabbitmq:3.10.7-management
+    image: rabbitmq:latest
     container_name: rabbit_mq
     ports:
       - "5672:5672"

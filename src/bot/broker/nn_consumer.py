@@ -7,6 +7,7 @@ import aio_pika
 import numpy as np
 import pandas as pd
 import tensorflow as tf
+import matplotlib.pyplot as plt
 
 from src.bot.config import RABBITMQ_URL
 from src.bot.bot import send_request_status
@@ -60,17 +61,30 @@ async def process_message(message: aio_pika.IncomingMessage):
             '🎯Искусственный интеллект предсказывает результат...'
         )
 
+        df = pd.read_csv(f'{body["task_id"]}.csv')
+
         result_predict = nn_predict(body['task_id'])
         result_message = f'🔍Всего было выявлено отзывов: {result_predict[0]}\n⚠️Количество накрученных отзывов: {result_predict[1]}\n📈В процентах: {result_predict[2]}\n💬Выявленные отзывы:\n'
 
         fake_reviews_id = result_predict[3]
         fake_reviews = ""
-        df = pd.read_csv(f'{body["task_id"]}.csv')
 
         for index, id in enumerate(fake_reviews_id):
             fake_reviews += f"{index + 1}. {df.loc[df['Unnamed: 0'] == id, 'User review'].values[0]}\n"
 
         result_message += fake_reviews
+
+        star_reviews = list(df['Star review'].values)
+        plt.plot(star_reviews, marker='o', linestyle='-', color='b', label='Оценки')
+
+        plt.xlabel('Номер отзыва')
+        plt.ylabel('Оценка')
+        plt.title('Динамика отзывов')
+        plt.yticks([1, 2, 3, 4, 5])
+        plt.grid(True, linestyle='--', alpha=0.6)
+        plt.legend()
+        plt.savefig(f'{body["task_id"]}.png', dpi=300, bbox_inches='tight')
+        plt.close()
 
         os.remove(f'{body["task_id"]}.csv')
         os.remove(f'{body["task_id"]}.pickle')

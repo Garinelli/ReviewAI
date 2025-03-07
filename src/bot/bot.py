@@ -34,12 +34,19 @@ def generate_task_id() -> str:
     return task_id
 
 
-async def send_request_status(user_telegram_id: int, message: str) -> None:
+async def send_request_status(user_telegram_id: int, message: str, task_id=None) -> None:
     await bot.send_message(
         chat_id=user_telegram_id,
         text=message
     )
+    if not task_id is None:
+        with open(f'{task_id}.png') as photo:
+            await bot.send_photo(
+                user_telegram_id,
+                photo
+            )
 
+    
 
 @dp.message(Command("start"))
 async def start(message: Message):
