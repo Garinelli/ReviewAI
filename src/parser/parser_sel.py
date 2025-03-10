@@ -9,6 +9,8 @@ from selenium.webdriver.remote.webelement import WebElement
 import pandas as pd
 from time import sleep
 from pathlib import Path
+from bs4 import BeautifulSoup
+from typing import List, Dict
 
 
 def get_feedback_link(url_product: str) -> str:
@@ -50,7 +52,7 @@ def get_feedbacks_raw(driver: WebDriver, url_feedbacks: str) -> List[WebElement]
 
             try:
                 # Ожидание загрузки нового контента
-                WebDriverWait(driver, 10).until(
+                WebDriverWait(driver, 3).until(
                     lambda d: d.execute_script("return document.body.scrollHeight")
                     > last_height
                 )
@@ -74,7 +76,7 @@ def get_feedbacks_raw(driver: WebDriver, url_feedbacks: str) -> List[WebElement]
 
     feedbacks = driver.find_elements(
         By.CLASS_NAME,
-        "comments__item.feedback.product-feedbacks__block-wrapper.j-feedback-slide",
+        "comments__item.feedback.product-feedbacks__block-wrapper",
     )
     print(f"Количество отзывов: {len(feedbacks)}")
 
@@ -83,69 +85,55 @@ def get_feedbacks_raw(driver: WebDriver, url_feedbacks: str) -> List[WebElement]
 
 def prepare_feedbacks(feedbacks: List[WebElement]) -> List[Dict]:
     """Подготавливаем данные о отзывах в виде списка словарей"""
-    # (требуется работающий driver)
+
     comments = []
+
     for i, feedback in enumerate(feedbacks):
+        # Получаем HTML-код элемента и передаем его в Beautiful Soup
+        feedback_html = feedback.get_attribute("outerHTML")
+        soup = BeautifulSoup(feedback_html, "html.parser")
+
         # Дата написания отзыва
-        date = feedback.find_element(
-            By.CLASS_NAME, "feedback__date.hide-desktop"
-        ).get_attribute("content")
-        # print(date)
+        date = soup.find("div", class_="feedback__date").text
 
         # Выводим имена пользователей для визуализации обработки отзывов
         if i % 10 == 0:
-            name = feedback.find_element(By.CLASS_NAME, "feedback__header").text
+            name = soup.find("p", class_="feedback__header").text
+            # name = name_tag.text.strip() if name_tag else "Unknown"
             print(i, name)
 
-        rating = (
-            feedback.find_element(By.CLASS_NAME, "feedback__rating-wrap")
-            .find_element(By.TAG_NAME, "span")
-            .get_attribute("class")[-1]
-        )
-        # print(f"{rating=}")
+        # Рейтинг отзыва
+        rating_tag = soup.find("div", class_="feedback__rating-wrap")
+        rating = int(rating_tag.find("span")["class"][-1][-1]) if rating_tag else 0
 
-        try:
-            text_html = (
-                feedback.find_element(By.CLASS_NAME, "feedback__content").find_element(
-                    By.CLASS_NAME, "feedback__text.j-feedback__text.show"
-                )
-                # .get_attribute("outerHTML")
-            )
-            text_html = text_html.find_elements(By.TAG_NAME, "span")[:-1:2]
-            text = "\n".join([el.text for el in text_html])
-        except NoSuchElementException:
+        # Текст отзыва
+        text_tag = soup.find("div", class_="feedback__content")
+        if text_tag:
+            text_spans = text_tag.find_all("span")[:-1:2]
+            text = "\n".join([span.text.strip() for span in text_spans])
+        else:
             text = ""
-        # print(f"{len(text)=}", text, sep="\n")
 
-        try:
-            answer_html = feedback.find_element(
-                By.CLASS_NAME,
-                "feedback__sellers-reply-title",
-            )
-        except NoSuchElementException:
-            answer_html = None
+        # Ответ продавца
+        answer_tag = soup.find("p", class_="feedback__sellers-reply-title")
+        has_answer = int(answer_tag is not None)
 
-        try:
-            media_html = feedback.find_element(
-                By.CLASS_NAME, "feedback__photos.j-feedback-photos-scroll"
-            )
-        except NoSuchElementException:
-            media_html = None
+        # Медиа (фото/видео)
+        media_tag = soup.find("ul", class_="feedback__photos")
+        has_media = int(media_tag is not None)
 
-        # print("!!", answer_html is None, media_html is None)
-
+        # Добавляем отзыв в список
         comments.append(
             {
                 "User review": text.replace(":", ": ").replace("\n", "\\n"),
-                "Review date": date[:10],
-                "Star review": int(rating),
+                "Review date": date if date else "Unknown",
+                "Star review": rating,
                 "Text length": len(text),
-                "Has media": int(bool(media_html)),
-                "Has answer": int(bool(answer_html)),
+                "Has media": has_media,
+                "Has answer": has_answer,
                 "Written by bot": 0,
             }
         )
-    # print(*comments, sep="\n")
 
     return comments
 
