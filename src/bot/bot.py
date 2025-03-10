@@ -4,7 +4,7 @@ import random
 
 from aiogram import Bot, Dispatcher, F
 from aiogram.filters import Command
-from aiogram.types import Message, CallbackQuery
+from aiogram.types import Message, CallbackQuery, InputFile
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 from .broker import send_message_to_broker
@@ -34,12 +34,19 @@ def generate_task_id() -> str:
     return task_id
 
 
-async def send_request_status(user_telegram_id: int, message: str) -> None:
+async def send_request_status(user_telegram_id: int, message: str, task_id=None) -> None:
     await bot.send_message(
         chat_id=user_telegram_id,
         text=message
     )
+    if not task_id is None:
+        with open(f'{task_id}.png', 'rb') as photo:
+            await bot.send_photo(
+                user_telegram_id,
+                InputFile(photo)
+            )
 
+    
 
 @dp.message(Command("start"))
 async def start(message: Message):
