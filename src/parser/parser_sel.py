@@ -93,13 +93,17 @@ def prepare_feedbacks(feedbacks: List[WebElement]) -> List[Dict]:
         feedback_html = feedback.get_attribute("outerHTML")
         soup = BeautifulSoup(feedback_html, "html.parser")
 
+        # with open(
+        #     f"{Path(__file__).parent}/soup.txt", "w", encoding="Windows-1251"
+        # ) as f:
+        #     f.write(feedback_html)
+
         # Дата написания отзыва
         date = soup.find("div", class_="feedback__date").text
 
         # Выводим имена пользователей для визуализации обработки отзывов
         if i % 10 == 0:
             name = soup.find("p", class_="feedback__header").text
-            # name = name_tag.text.strip() if name_tag else "Unknown"
             print(i, name)
 
         # Рейтинг отзыва
@@ -109,7 +113,7 @@ def prepare_feedbacks(feedbacks: List[WebElement]) -> List[Dict]:
         # Текст отзыва
         text_tag = soup.find("div", class_="feedback__content")
         if text_tag:
-            text_spans = text_tag.find_all("span")[:-1:2]
+            text_spans = text_tag.find_all("span")[::2]
             text = "\n".join([span.text.strip() for span in text_spans])
         else:
             text = ""
