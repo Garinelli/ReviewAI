@@ -195,7 +195,7 @@ def main(url_product: str, out_path: str) -> None:
     # options.add_argument("--window-size=1920,1080")  # Установка размера окна
 
     # driver = webdriver.Chrome(options=options)  # Запускаем драйвер - !Обязательно!
-    driver = webdriver.Edge()  # Запускаем драйвер - !Обязательно!
+    driver = webdriver.Chrome()  # Запускаем драйвер - !Обязательно!
 
     # Пример использования
     feedbacks = prepare_feedbacks(
@@ -212,4 +212,4 @@ if __name__ == "__main__":
     url = "https://www.wildberries.ru/catalog/196491327/detail.aspx"
     # url = "https://www.wildberries.ru/catalog/259046906/detail.aspx"
 
-    main(url, f"{Path(__file__).parent}/dataframes/feedbacks_wb.csv")
+    main(url, "feedbacks_wb.csv")

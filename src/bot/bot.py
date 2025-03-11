@@ -39,12 +39,12 @@ async def send_request_status(user_telegram_id: int, message: str, task_id=None)
         chat_id=user_telegram_id,
         text=message
     )
-    if not task_id is None:
-        with open(f'{task_id}.png', 'rb') as photo:
-            await bot.send_photo(
-                user_telegram_id,
-                InputFile(photo)
-            )
+    # if not task_id is None:
+    #     with open(f'{task_id}.png', 'rb') as photo:
+    #         await bot.send_photo(
+    #             user_telegram_id,
+    #             InputFile(photo)
+    #         )
 
     
 
