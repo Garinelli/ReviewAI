@@ -33,13 +33,13 @@ from datetime import datetime
 
 
 def init_webdriver():
-    # chrome_options = Options()
-    # chrome_options.add_argument('--headless')
-    # chrome_options.add_argument('--disable-gpu')
+    chrome_options = Options()
+    chrome_options.add_argument('--headless')
+    chrome_options.add_argument('--disable-gpu')
 
-    # driver = webdriver.Chrome(options=chrome_options)
+    driver = webdriver.Chrome(options=chrome_options)
 
-    driver = webdriver.Chrome()
+    # driver = webdriver.Chrome()
 
     stealth(driver,
             vendor='Google Inc.',
@@ -238,7 +238,7 @@ def parser_feedbacks(url_product, driver, task_id) -> None:
     driver.quit()  # Закрываем драйвер - !Обязательно!
 
     # Сохранение отзывов в csv-файле
-    pd.DataFrame(feedbacks).to_csv(f'{task_id}.csv', index=False)
+    pd.DataFrame(feedbacks).to_csv(f'{task_id}.csv')
 
 
 

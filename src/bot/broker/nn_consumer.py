@@ -70,6 +70,8 @@ async def process_message(message: aio_pika.IncomingMessage):
         fake_reviews = ""
 
         for index, id in enumerate(fake_reviews_id):
+            if index >= 5:
+                break
             fake_reviews += f"{index + 1}. {df.loc[df['Unnamed: 0'] == id, 'User review'].values[0]}\n"
 
         result_message += fake_reviews
