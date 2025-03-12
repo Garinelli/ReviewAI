@@ -20,9 +20,6 @@ def check_link(link: str) -> bool:
     # Проверяем ссылку на WB
     if ("wildberries.ru" in link) and ("detail.aspx" in link):
         return True
-    # Проверяем ссылку на OZON
-    if ("ozon.ru" in link):
-        return True
     return False
 
 
@@ -66,7 +63,7 @@ async def start(message: Message):
 async def process_callback_button(callback_query: CallbackQuery):
     # Отправляем сообщение о том, что кнопка нажата
     await bot.answer_callback_query(callback_query.id)
-    text = "🔍 Чтобы начать, просто отправь мне ссылку на товар c Ozon или Wildberries. Я проанализирую отзывы и сообщу тебе результат!"
+    text = "🔍 Чтобы начать, просто отправь мне ссылку на товар c Wildberries. Я проанализирую отзывы и сообщу тебе результат!"
     await bot.send_message(callback_query.from_user.id, text)
 
 
