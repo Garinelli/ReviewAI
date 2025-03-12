@@ -14,7 +14,6 @@ from src.bot.bot import send_request_status
 from .producer import send_message_to_broker
 
 
-
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 model = tf.keras.models.load_model(BASE_DIR / 'ml/Models/fasttext_model_gru.h5')
 
@@ -49,6 +48,16 @@ def nn_predict(task_id):
 
     return all_reviews_count, written_by_bot, percent_result, fake_reviews_id 
 
+async def create_review_star_graphic(star_reviews: list[int], task_id: str):
+    plt.plot(star_reviews, linestyle='-', color='b', label='Оценки')
+    plt.xlabel('Номер отзыва')
+    plt.ylabel('Оценка')
+    plt.title('Динамика отзывов')
+    plt.yticks([1, 2, 3, 4, 5])
+    plt.grid(True, linestyle='--', alpha=0.6)
+    plt.legend()
+    plt.savefig(f'{task_id}.png', dpi=300, bbox_inches='tight')
+    plt.close()
 
 async def process_message(message: aio_pika.IncomingMessage):
     async with message.process():
@@ -77,16 +86,7 @@ async def process_message(message: aio_pika.IncomingMessage):
         result_message += fake_reviews
 
         star_reviews = list(df['Star review'].values)
-        plt.plot(star_reviews, marker='o', linestyle='-', color='b', label='Оценки')
-
-        plt.xlabel('Номер отзыва')
-        plt.ylabel('Оценка')
-        plt.title('Динамика отзывов')
-        plt.yticks([1, 2, 3, 4, 5])
-        plt.grid(True, linestyle='--', alpha=0.6)
-        plt.legend()
-        plt.savefig(f'{body["task_id"]}.png', dpi=300, bbox_inches='tight')
-        plt.close()
+        await star_reviews(star_reviews, body['task_id'])
 
         os.remove(f'{body["task_id"]}.csv')
         os.remove(f'{body["task_id"]}.pickle')

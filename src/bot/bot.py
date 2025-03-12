@@ -4,7 +4,7 @@ import random
 
 from aiogram import Bot, Dispatcher, F
 from aiogram.filters import Command
-from aiogram.types import Message, CallbackQuery, InputFile
+from aiogram.types import Message, CallbackQuery, FSInputFile
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 from .broker import send_message_to_broker
@@ -25,7 +25,7 @@ def check_link(link: str) -> bool:
 
 def generate_task_id() -> str:
     task_id = ""
-    for _ in range(4):
+    for _ in range(8):
         task_id += random.choice(TASK_ID_LETTERS)
     
     return task_id
@@ -36,12 +36,9 @@ async def send_request_status(user_telegram_id: int, message: str, task_id=None)
         chat_id=user_telegram_id,
         text=message
     )
-    # if not task_id is None:
-    #     with open(f'{task_id}.png', 'rb') as photo:
-    #         await bot.send_photo(
-    #             user_telegram_id,
-    #             InputFile(photo)
-    #         )
+    if not task_id is None:
+        with open(f'{task_id}.png', 'rb') as photo:
+            await bot.send_photo(chat_id=message.chat.id, photo=FSInputFile(f"{task_id}.png"))
 
     
 
@@ -54,7 +51,7 @@ async def start(message: Message):
 👋 Привет, {message.from_user.first_name}! Я — бот, который помогает анализировать отзывы на товары с маркетплейсов.
 
 📊 Моя задача — предсказать, сколько отзывов могут быть накрученными (сгенерированными нейросетью). Однако важно помнить, что это всего лишь прогноз, основанный на анализе данных. Мои выводы могут быть неточными, и я не могу гарантировать 100% точность.
-    """
+    """ 
     await message.answer(WELCOME_MESSAGE, reply_markup=keyboard)
 
 
