@@ -11,6 +11,7 @@ import matplotlib.pyplot as plt
 
 from src.bot.config import RABBITMQ_URL
 from src.bot.bot import send_request_status
+from src.bot.constants import RESULT_MESSAGE
 from .producer import send_message_to_broker
 
 
@@ -18,7 +19,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 model = tf.keras.models.load_model(BASE_DIR / 'ml/Models/fasttext_model_gru.h5')
 
 
-def nn_predict(task_id):
+async def nn_predict(task_id):
     df = pd.read_pickle(f'{task_id}.pickle')
 
     all_reviews_count = len(df)
@@ -48,6 +49,7 @@ def nn_predict(task_id):
 
     return all_reviews_count, written_by_bot, percent_result, fake_reviews_id 
 
+
 async def create_review_star_graphic(star_reviews: list[int], task_id: str):
     plt.plot(star_reviews, linestyle='-', color='b', label='Оценки')
     plt.xlabel('Номер отзыва')
@@ -58,6 +60,7 @@ async def create_review_star_graphic(star_reviews: list[int], task_id: str):
     plt.legend()
     plt.savefig(f'{task_id}.png', dpi=300, bbox_inches='tight')
     plt.close()
+
 
 async def process_message(message: aio_pika.IncomingMessage):
     async with message.process():
@@ -72,8 +75,8 @@ async def process_message(message: aio_pika.IncomingMessage):
 
         df = pd.read_csv(f'{body["task_id"]}.csv')
 
-        result_predict = nn_predict(body['task_id'])
-        result_message = f'🔍Всего было выявлено отзывов: {result_predict[0]}\n⚠️Количество накрученных отзывов: {result_predict[1]}\n📈В процентах: {result_predict[2]}\n💬Выявленные отзывы:\n'
+        result_predict = await nn_predict(body['task_id'])
+        result_message = RESULT_MESSAGE.format(result_predict[0], result_predict[1], result_predict[2])
 
         fake_reviews_id = result_predict[3]
         fake_reviews = ""

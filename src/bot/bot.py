@@ -1,5 +1,4 @@
 import asyncio
-import string
 import random
 
 from aiogram import Bot, Dispatcher, F
@@ -9,12 +8,11 @@ from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 from .broker import send_message_to_broker
 from .config import BOT_TOKEN
+from .constants import TASK_ID_LETTERS, WELCOME_MESSAGE, START_MESSAGE
+
 
 bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher()
-
-TASK_ID_LETTERS = string.ascii_lowercase + string.digits
-
 
 def check_link(link: str) -> bool:
     # Проверяем ссылку на WB
@@ -47,12 +45,7 @@ async def start(message: Message):
     # Создаем inline-кнопку
     button = InlineKeyboardButton(text="Понятно ✅", callback_data="start_button")
     keyboard = InlineKeyboardMarkup(inline_keyboard=[[button]])
-    WELCOME_MESSAGE = f"""
-👋 Привет, {message.from_user.first_name}! Я — бот, который помогает анализировать отзывы на товары с маркетплейсов.
-
-📊 Моя задача — предсказать, сколько отзывов могут быть накрученными (сгенерированными нейросетью). Однако важно помнить, что это всего лишь прогноз, основанный на анализе данных. Мои выводы могут быть неточными, и я не могу гарантировать 100% точность.
-    """ 
-    await message.answer(WELCOME_MESSAGE, reply_markup=keyboard)
+    await message.answer(WELCOME_MESSAGE.format(message.from_user.first_name), reply_markup=keyboard)
 
 
 # Обработчик нажатия на inline-кнопку
@@ -60,8 +53,7 @@ async def start(message: Message):
 async def process_callback_button(callback_query: CallbackQuery):
     # Отправляем сообщение о том, что кнопка нажата
     await bot.answer_callback_query(callback_query.id)
-    text = "🔍 Чтобы начать, просто отправь мне ссылку на товар c Wildberries. Я проанализирую отзывы и сообщу тебе результат!"
-    await bot.send_message(callback_query.from_user.id, text)
+    await bot.send_message(callback_query.from_user.id, START_MESSAGE)
 
 
 @dp.message(F.text)
