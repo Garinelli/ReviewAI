@@ -14,6 +14,8 @@ from .constants import TASK_ID_LETTERS, WELCOME_MESSAGE, START_MESSAGE
 bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher()
 
+semaphore = asyncio.Semaphore(5)
+
 def check_link(link: str) -> bool:
     # Проверяем ссылку на WB
     if ("wildberries.ru" in link) and ("detail.aspx" in link):
@@ -63,16 +65,17 @@ async def link(message: Message):
             "Это не совсем то, что мне нужно(\nОтправьте ссылку на главную страницу товара!"
         )
     else:
-        await message.answer(
-            "Благодарим вас за использование нашего AI бота.\nВаша задача отправлена в очередь!"
-        )
-        await asyncio.sleep(2)
-        await message.answer("📝Производим сбор отзывов...")
-        await send_message_to_broker(
-            queue_name='parser',
-            link=message.text, user_telegram_id=message.from_user.id,
-            task_id=generate_task_id()
-        )
+        async with semaphore:
+            await message.answer(
+                "Благодарим вас за использование нашего AI бота.\nВаша задача отправлена в очередь!"
+            )
+            await asyncio.sleep(2)
+            await message.answer("📝Производим сбор отзывов...")
+            await send_message_to_broker(
+                queue_name='parser',
+                link=message.text, user_telegram_id=message.from_user.id,
+                task_id=generate_task_id()
+            )
 
 
 async def main():
