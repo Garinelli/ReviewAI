@@ -89,7 +89,7 @@ async def process_message(message: aio_pika.IncomingMessage):
         result_message += fake_reviews
 
         star_reviews = list(df['Star review'].values)
-        await star_reviews(star_reviews, body['task_id'])
+        await create_review_star_graphic(star_reviews, body['task_id'])
 
         os.remove(f'{body["task_id"]}.csv')
         os.remove(f'{body["task_id"]}.pickle')
