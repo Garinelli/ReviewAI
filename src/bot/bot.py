@@ -1,3 +1,4 @@
+import os 
 import asyncio
 import random
 
@@ -44,10 +45,10 @@ async def send_request_status(
     await bot.send_message(chat_id=user_telegram_id, text=message)
     if not task_id is None:
         logging.info("Пытааемся отправить фотку")
-        with open(f"{task_id}.png", "rb") as photo:
-            await bot.send_photo(
-                chat_id=message.chat.id, photo=FSInputFile(f"{task_id}.png")
-            )
+        await bot.send_photo(
+            chat_id=user_telegram_id, photo=FSInputFile(f"{task_id}.png")
+        )
+        os.remove(f"{task_id}.png")
     logging.info("Сообщения успешно отправлены ✅\n")
 
 

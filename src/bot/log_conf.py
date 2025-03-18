@@ -5,7 +5,7 @@ from pathlib import Path
 
 logging.basicConfig(
     level=logging.INFO,
-    filename=f"{Path(__file__).parent}/files/py_log.log",
+    filename=f"{Path(__file__).parent.parent.parent}/py_log.log",
     filemode="w",
     format="%(asctime)s %(levelname)s %(message)s",
 )
