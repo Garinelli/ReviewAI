@@ -11006,7 +11006,2090 @@ fake_reviews = [
         "text_len": 104,
         "written_by_bot": 1,
         "has_media": 1
-    }
+    },
+    {
+        "user_review": "Отличный товар! Упаковка надежная, все пришло целым. Рекомендую продавца!",
+        "reviews_date": "2025-04-19",
+        "star_review": 5,
+        "text_len": 87,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Качество превзошло ожидания. Доставка быстрая, товар полностью соответствует описанию.",
+        "reviews_date": "2025-04-20",
+        "star_review": 5,
+        "text_len": 96,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Понравился дизайн и функционал. Легко разобраться с настройками. Спасибо!",
+        "reviews_date": "2025-04-21",
+        "star_review": 5,
+        "text_len": 94,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Уже второй раз заказываю у этого продавца. Качество как всегда на высоте!",
+        "reviews_date": "2025-04-22",
+        "star_review": 5,
+        "text_len": 97,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Товар не соответствует описанию, ожидал лучше. Возврат оформлять не стал.",
+        "reviews_date": "2025-04-26",
+        "star_review": 2,
+        "text_len": 89,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Качество оставляет желать лучшего. Пластик хрупкий, быстро сломался.",
+        "reviews_date": "2025-04-27",
+        "star_review": 1,
+        "text_len": 82,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Доставка затянулась почти на две недели. Связь с продавцом слабая.",
+        "reviews_date": "2025-04-28",
+        "star_review": 2,
+        "text_len": 78,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Не оправдал ожиданий. Товар пришел поврежденный, но возврат приняли быстро.",
+        "reviews_date": "2025-04-29",
+        "star_review": 3,
+        "text_len": 93,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Быстрая доставка, товар отлично упакован. Работает идеально, рекомендую!",
+        "reviews_date": "2025-04-30",
+        "star_review": 5,
+        "text_len": 84,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Очень доволен покупкой! Соответствует описанию, спасибо за бонус в комплекте.",
+        "reviews_date": "2025-05-01",
+        "star_review": 5,
+        "text_len": 94,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Хороший товар, понравилось качество материалов. Своих денег точно стоит.",
+        "reviews_date": "2025-05-02",
+        "star_review": 5,
+        "text_len": 88,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Заказывал в подарок, все пришло вовремя. Получатель остался доволен!",
+        "reviews_date": "2025-05-03",
+        "star_review": 5,
+        "text_len": 82,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Приятно удивила быстрая доставка и качественная упаковка. Все работает на ура!",
+        "reviews_date": "2025-05-04",
+        "star_review": 5,
+        "text_len": 95,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Разочарован качеством. После недели использования появились дефекты.",
+        "reviews_date": "2025-05-10",
+        "star_review": 2,
+        "text_len": 85,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Товар пришел с браком, пришлось оформлять возврат. Потратил кучу времени.",
+        "reviews_date": "2025-05-11",
+        "star_review": 1,
+        "text_len": 98,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Доставка сильно задержалась, а качество товара оставляет желать лучшего.",
+        "reviews_date": "2025-05-12",
+        "star_review": 2,
+        "text_len": 98,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Не понравилось, товар отличается от фото. Пришлось доказывать проблему продавцу.",
+        "reviews_date": "2025-05-13",
+        "star_review": 1,
+        "text_len": 99,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Плохое качество материалов, запах неприятный. Деньги были потрачены зря.",
+        "reviews_date": "2025-05-14",
+        "star_review": 1,
+        "text_len": 94,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Очень понравился товар! Работает стабильно, без сбоев. Спасибо продавцу!",
+        "reviews_date": "2025-05-15",
+        "star_review": 5,
+        "text_len": 88,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Упаковка на высшем уровне! Все пришло в целости и сохранности. Молодцы!",
+        "reviews_date": "2025-05-16",
+        "star_review": 5,
+        "text_len": 93,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Давно искал такой товар! Доставка быстрая, качество выше ожиданий.",
+        "reviews_date": "2025-05-17",
+        "star_review": 5,
+        "text_len": 94,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Супер! Всё как в описании. Продавец быстро отправил заказ, доволен покупкой.",
+        "reviews_date": "2025-05-18",
+        "star_review": 5,
+        "text_len": 99,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Хороший выбор, советую к покупке. Порадовало быстрое обслуживание.",
+        "reviews_date": "2025-05-19",
+        "star_review": 5,
+        "text_len": 87,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Товар пришел в идеальном состоянии! Быстрая доставка, все на высшем уровне.",
+        "reviews_date": "2025-05-20",
+        "star_review": 5,
+        "text_len": 92,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Качественный продукт, соответствует описанию. Доволен покупкой и сервисом.",
+        "reviews_date": "2025-05-21",
+        "star_review": 5,
+        "text_len": 94,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Отличное соотношение цены и качества! Доставка быстрая, рекомендую всем.",
+        "reviews_date": "2025-05-22",
+        "star_review": 5,
+        "text_len": 97,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Все как в описании! Прекрасное качество, буду заказывать ещё.",
+        "reviews_date": "2025-05-23",
+        "star_review": 5,
+        "text_len": 85,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Приятно удивлен качеством! Все работает, упаковка надёжная. Спасибо!",
+        "reviews_date": "2025-05-24",
+        "star_review": 5,
+        "text_len": 88,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Купил в подарок, остался доволен! Доставка супер быстрая, спасибо!",
+        "reviews_date": "2025-05-25",
+        "star_review": 5,
+        "text_len": 84,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Продукт понравился, выглядит стильно и современно. Соответствует цене.",
+        "reviews_date": "2025-05-26",
+        "star_review": 5,
+        "text_len": 95,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Очень качественно упаковано, быстрая отправка. Продавец молодец!",
+        "reviews_date": "2025-05-27",
+        "star_review": 5,
+        "text_len": 89,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Все просто супер! Быстро доставили и качество на высоте.",
+        "reviews_date": "2025-05-28",
+        "star_review": 5,
+        "text_len": 79,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Покупкой доволен! Отличный сервис, товар пришел вовремя.",
+        "reviews_date": "2025-05-29",
+        "star_review": 5,
+        "text_len": 81,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Разочарован качеством. Через пару дней использования перестал работать.",
+        "reviews_date": "2025-06-09",
+        "star_review": 1,
+        "text_len": 95,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Товар пришел с дефектом, пришлось возвращать. Потерял много времени.",
+        "reviews_date": "2025-06-10",
+        "star_review": 1,
+        "text_len": 97,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Не рекомендую! Товар совершенно не соответствует заявленным характеристикам.",
+        "reviews_date": "2025-06-11",
+        "star_review": 1,
+        "text_len": 109,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Очень плохое качество, запах неприятный. Деньги потрачены впустую.",
+        "reviews_date": "2025-06-12",
+        "star_review": 1,
+        "text_len": 94,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Доставка затянулась на неделю, а товар пришел с браком. Очень недоволен.",
+        "reviews_date": "2025-06-13",
+        "star_review": 1,
+        "text_len": 102,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Плохой сервис, товар долго не отправляли, а качество оставляет желать лучшего.",
+        "reviews_date": "2025-06-14",
+        "star_review": 2,
+        "text_len": 106,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Товар сильно отличается от фото. Очень разочарован покупкой.",
+        "reviews_date": "2025-06-15",
+        "star_review": 2,
+        "text_len": 87,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Низкое качество материалов. После двух использований уже появились дефекты.",
+        "reviews_date": "2025-06-16",
+        "star_review": 2,
+        "text_len": 104,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Товар не оправдал ожиданий. Слишком хрупкий, легко ломается.",
+        "reviews_date": "2025-06-17",
+        "star_review": 2,
+        "text_len": 91,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Отличный товар! Все работает идеально, качество на высшем уровне!",
+        "reviews_date": "2025-07-11",
+        "star_review": 5,
+        "text_len": 85,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Очень доволен покупкой! Товар пришел вовремя и полностью соответствует описанию.",
+        "reviews_date": "2025-07-12",
+        "star_review": 5,
+        "text_len": 97,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Доставка была быстрой, товар отличный. Рекомендую всем!",
+        "reviews_date": "2025-07-13",
+        "star_review": 5,
+        "text_len": 86,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Качество товара приятно удивило! Все соответствует заявленным характеристикам.",
+        "reviews_date": "2025-07-14",
+        "star_review": 5,
+        "text_len": 103,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Разочарован. Товар отличается от фото, а качество оставляет желать лучшего.",
+        "reviews_date": "2025-07-15",
+        "star_review": 1,
+        "text_len": 102,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Ужасное качество! Товар сломался через неделю. Не рекомендую.",
+        "reviews_date": "2025-07-16",
+        "star_review": 1,
+        "text_len": 89,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Доставка была очень долгой, а упаковка повреждена. Совсем не то, что ожидал.",
+        "reviews_date": "2025-07-17",
+        "star_review": 2,
+        "text_len": 108,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Не советую! Товар пришел с браком, а продавец не отвечает на сообщения.",
+        "reviews_date": "2025-07-18",
+        "star_review": 1,
+        "text_len": 104,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Прекрасный продукт, пользуюсь уже месяц, никаких нареканий!",
+        "reviews_date": "2025-07-19",
+        "star_review": 5,
+        "text_len": 90,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Товар полностью соответствует ожиданиям. Рекомендую к покупке!",
+        "reviews_date": "2025-07-20",
+        "star_review": 5,
+        "text_len": 88,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Отвратительный сервис, товар так и не пришел! Деньги не вернули.",
+        "reviews_date": "2025-07-21",
+        "star_review": 1,
+        "text_len": 98,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Плохой товар, быстро сломался. Продавец не выходит на связь.",
+        "reviews_date": "2025-07-22",
+        "star_review": 1,
+        "text_len": 92,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Продукт полностью оправдал мои ожидания. Работает без сбоев!",
+        "reviews_date": "2025-08-01",
+        "star_review": 5,
+        "text_len": 80,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Очень качественный товар, быстро доставили. Всем рекомендую!",
+        "reviews_date": "2025-08-02",
+        "star_review": 5,
+        "text_len": 85,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Просто супер! Доставка в срок, качество на высоте.",
+        "reviews_date": "2025-08-03",
+        "star_review": 5,
+        "text_len": 77,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Отличный сервис, быстрая доставка, качество товара радует!",
+        "reviews_date": "2025-08-04",
+        "star_review": 5,
+        "text_len": 88,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Не советую! Товар не соответствует описанию. Полное разочарование.",
+        "reviews_date": "2025-08-05",
+        "star_review": 1,
+        "text_len": 102,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Разочарован. Упаковка была повреждена, а сам товар оказался с браком.",
+        "reviews_date": "2025-08-06",
+        "star_review": 2,
+        "text_len": 103,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Отвратительное качество, товар сломался через несколько дней.",
+        "reviews_date": "2025-08-07",
+        "star_review": 1,
+        "text_len": 92,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Доставка длилась слишком долго. В итоге товар оказался нерабочим.",
+        "reviews_date": "2025-08-08",
+        "star_review": 1,
+        "text_len": 101,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Отличный продукт, быстрая доставка и внимательное обслуживание!",
+        "reviews_date": "2025-08-09",
+        "star_review": 5,
+        "text_len": 88,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Качество товара на высшем уровне! Все пришло в идеальном состоянии.",
+        "reviews_date": "2025-08-10",
+        "star_review": 5,
+        "text_len": 99,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Ужасный товар. Продавец не выходит на связь, не рекомендую.",
+        "reviews_date": "2025-08-11",
+        "star_review": 1,
+        "text_len": 94,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Не советую покупать! Заказ пришел с дефектами и следами использования.",
+        "reviews_date": "2025-08-12",
+        "star_review": 1,
+        "text_len": 107,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Качество просто супер! Товар превзошел все мои ожидания.",
+        "reviews_date": "2025-09-01",
+        "star_review": 5,
+        "text_len": 75,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Очень понравился товар! Всё как в описании, рекомендую.",
+        "reviews_date": "2025-09-02",
+        "star_review": 5,
+        "text_len": 76,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Все было хорошо, но упаковка была повреждена.",
+        "reviews_date": "2025-09-03",
+        "star_review": 3,
+        "text_len": 75,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Очень разочарован. Товар оказался не тем, что ожидал.",
+        "reviews_date": "2025-09-04",
+        "star_review": 1,
+        "text_len": 80,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Всё замечательно! Быстрая доставка и отличное качество.",
+        "reviews_date": "2025-09-05",
+        "star_review": 5,
+        "text_len": 82,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Не доволен покупкой. Товар быстро вышел из строя.",
+        "reviews_date": "2025-09-06",
+        "star_review": 1,
+        "text_len": 78,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Упаковка была хорошая, но товар не соответствует описанию.",
+        "reviews_date": "2025-09-07",
+        "star_review": 2,
+        "text_len": 83,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Очень рад покупке! Товар пришел вовремя и полностью соответствует описанию.",
+        "reviews_date": "2025-09-08",
+        "star_review": 5,
+        "text_len": 98,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Хорошее соотношение цены и качества. Буду заказывать еще!",
+        "reviews_date": "2025-09-09",
+        "star_review": 5,
+        "text_len": 82,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Не рекомендую! Долгая доставка и некачественный товар.",
+        "reviews_date": "2025-09-10",
+        "star_review": 1,
+        "text_len": 85,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Превосходное качество и быстрая доставка! Всем советую.",
+        "reviews_date": "2025-09-11",
+        "star_review": 5,
+        "text_len": 79,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Ожидал большего за такую цену. Не рекомендую.",
+        "reviews_date": "2025-09-12",
+        "star_review": 2,
+        "text_len": 70,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Покупка принесла только положительные эмоции. Всё супер!",
+        "reviews_date": "2025-09-13",
+        "star_review": 5,
+        "text_len": 78,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Очень разочарован. Товар сломался через пару дней.",
+        "reviews_date": "2025-09-14",
+        "star_review": 1,
+        "text_len": 75,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Отличный сервис и качество товара. Буду заказывать ещё!",
+        "reviews_date": "2025-09-15",
+        "star_review": 5,
+        "text_len": 83,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Не рекомендую. Доставка заняла вечность, а товар разочаровал.",
+        "reviews_date": "2025-09-16",
+        "star_review": 1,
+        "text_len": 90,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Все отлично! Доставка быстрая, товар хорошего качества.",
+        "reviews_date": "2025-09-17",
+        "star_review": 5,
+        "text_len": 78,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Товар не соответствует заявленному описанию. Очень разочарован.",
+        "reviews_date": "2025-09-18",
+        "star_review": 1,
+        "text_len": 92,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Отличный товар, пришел быстро и в хорошем состоянии.",
+        "reviews_date": "2025-09-19",
+        "star_review": 5,
+        "text_len": 84,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Супер! Всё пришло вовремя, качество отличное!",
+        "reviews_date": "2025-09-20",
+        "star_review": 5,
+        "text_len": 61,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Качество товара ужасное, быстро сломался.",
+        "reviews_date": "2025-09-21",
+        "star_review": 1,
+        "text_len": 54,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Доставка была долгой, но товар порадовал качеством.",
+        "reviews_date": "2025-09-22",
+        "star_review": 4,
+        "text_len": 69,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Понравился товар, соответствует описанию и хорошая упаковка.",
+        "reviews_date": "2025-09-23",
+        "star_review": 5,
+        "text_len": 78,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Не доволен покупкой, качество не соответствует заявленному.",
+        "reviews_date": "2025-09-24",
+        "star_review": 2,
+        "text_len": 82,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Товар отличный, доставили быстро, всё соответствует описанию.",
+        "reviews_date": "2025-09-25",
+        "star_review": 5,
+        "text_len": 85,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Разочарован. Товар пришел с дефектами.",
+        "reviews_date": "2025-09-26",
+        "star_review": 1,
+        "text_len": 47,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Быстрая доставка и отличное качество! Всем советую.",
+        "reviews_date": "2025-09-27",
+        "star_review": 5,
+        "text_len": 66,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Средний товар, ничего особенного, ожидал большего.",
+        "reviews_date": "2025-09-28",
+        "star_review": 3,
+        "text_len": 65,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Не советую, товар не соответствует описанию.",
+        "reviews_date": "2025-09-29",
+        "star_review": 2,
+        "text_len": 60,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Отличное качество, цена оправдывает ожидания.",
+        "reviews_date": "2025-09-30",
+        "star_review": 5,
+        "text_len": 55,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Очень быстро доставили, товар полностью соответствует описанию.",
+        "reviews_date": "2025-10-01",
+        "star_review": 5,
+        "text_len": 79,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Не рекомендую. Товар сломался через неделю.",
+        "reviews_date": "2025-10-02",
+        "star_review": 1,
+        "text_len": 53,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Доставка была медленной, но товар хорошего качества.",
+        "reviews_date": "2025-10-03",
+        "star_review": 4,
+        "text_len": 70,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Всё отлично! Покупкой остался доволен.",
+        "reviews_date": "2025-10-04",
+        "star_review": 5,
+        "text_len": 51,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Очень плохое качество, ожидал намного лучшего.",
+        "reviews_date": "2025-10-05",
+        "star_review": 1,
+        "text_len": 59,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Товар полностью оправдал ожидания, рекомендую!",
+        "reviews_date": "2025-10-06",
+        "star_review": 5,
+        "text_len": 61,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Качество товара ужасное, доставили не вовремя.",
+        "reviews_date": "2025-10-07",
+        "star_review": 1,
+        "text_len": 60,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Очень доволен покупкой, все пришло в идеальном состоянии.",
+        "reviews_date": "2025-10-08",
+        "star_review": 5,
+        "text_len": 76,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Качество товара хорошее, но упаковка была повреждена.",
+        "reviews_date": "2025-10-09",
+        "star_review": 4,
+        "text_len": 65,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Очень понравился товар! Доставка быстрая, все отлично.",
+        "reviews_date": "2025-10-10",
+        "star_review": 5,
+        "text_len": 63,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Товар ужасного качества, сильно разочарован покупкой.",
+        "reviews_date": "2025-10-11",
+        "star_review": 1,
+        "text_len": 61,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Все хорошо, но цена завышена для такого качества.",
+        "reviews_date": "2025-10-12",
+        "star_review": 3,
+        "text_len": 57,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Доставка быстрая, товар полностью соответствует описанию.",
+        "reviews_date": "2025-10-13",
+        "star_review": 5,
+        "text_len": 68,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Разочарован, товар пришел с браком и пришлось возвращать.",
+        "reviews_date": "2025-10-14",
+        "star_review": 1,
+        "text_len": 69,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Покупкой доволен, товар полностью оправдал ожидания.",
+        "reviews_date": "2025-10-15",
+        "star_review": 5,
+        "text_len": 59,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Слишком долго доставляли, качество нормальное.",
+        "reviews_date": "2025-10-16",
+        "star_review": 3,
+        "text_len": 55,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Товар не оправдал ожиданий, качество очень низкое.",
+        "reviews_date": "2025-10-17",
+        "star_review": 1,
+        "text_len": 60,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Очень доволен качеством! Все пришло в срок.",
+        "reviews_date": "2025-10-18",
+        "star_review": 5,
+        "text_len": 55,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Неплохой товар, но упаковка была плохо запечатана.",
+        "reviews_date": "2025-10-19",
+        "star_review": 4,
+        "text_len": 64,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Отличный продукт! Рекомендую к покупке.",
+        "reviews_date": "2025-10-20",
+        "star_review": 5,
+        "text_len": 47,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Не доволен покупкой, товар не соответствует описанию.",
+        "reviews_date": "2025-10-21",
+        "star_review": 2,
+        "text_len": 60,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Всё супер! Доставили быстро, качество на высоте.",
+        "reviews_date": "2025-10-22",
+        "star_review": 5,
+        "text_len": 58,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Плохое качество, упаковка повреждена, не рекомендую.",
+        "reviews_date": "2025-10-23",
+        "star_review": 1,
+        "text_len": 63,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Товар соответствует описанию, доставка быстрая.",
+        "reviews_date": "2025-10-24",
+        "star_review": 5,
+        "text_len": 55,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Долго ждал товар, но качество вполне устроило.",
+        "reviews_date": "2025-10-25",
+        "star_review": 4,
+        "text_len": 57,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Очень плохое качество, разочарован покупкой.",
+        "reviews_date": "2025-10-26",
+        "star_review": 1,
+        "text_len": 52,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Все отлично, товар хорошего качества и доставка быстрая.",
+        "reviews_date": "2025-10-27",
+        "star_review": 5,
+        "text_len": 67,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Товар полностью оправдал ожидания, все работает отлично!",
+        "reviews_date": "2025-11-01",
+        "star_review": 5,
+        "text_len": 64,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Не рекомендую, качество товара оставляет желать лучшего.",
+        "reviews_date": "2025-11-02",
+        "star_review": 1,
+        "text_len": 61,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Доставка быстрая, но товар оказался не совсем таким, как ожидал.",
+        "reviews_date": "2025-11-03",
+        "star_review": 3,
+        "text_len": 71,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Прекрасный товар! Доставка на следующий день, все супер!",
+        "reviews_date": "2025-11-04",
+        "star_review": 5,
+        "text_len": 65,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Не оправдал ожиданий, слишком дорого для такого качества.",
+        "reviews_date": "2025-11-05",
+        "star_review": 2,
+        "text_len": 62,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Качество отличное, буду заказывать еще! Рекомендую.",
+        "reviews_date": "2025-11-06",
+        "star_review": 5,
+        "text_len": 59,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Долго ждал доставку, но товар оказался хорошего качества.",
+        "reviews_date": "2025-11-07",
+        "star_review": 4,
+        "text_len": 67,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Разочарован, товар пришел с дефектом. Не рекомендую.",
+        "reviews_date": "2025-11-08",
+        "star_review": 1,
+        "text_len": 61,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Все отлично! Упаковка целая, товар соответствует описанию.",
+        "reviews_date": "2025-11-09",
+        "star_review": 5,
+        "text_len": 68,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Плохое качество, не рекомендую покупать этот товар.",
+        "reviews_date": "2025-11-10",
+        "star_review": 1,
+        "text_len": 58,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Товар соответствует описанию, но упаковка была повреждена.",
+        "reviews_date": "2025-11-11",
+        "star_review": 3,
+        "text_len": 66,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Очень доволен покупкой! Все пришло вовремя, качество супер.",
+        "reviews_date": "2025-11-12",
+        "star_review": 5,
+        "text_len": 67,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Товар пришел с задержкой, но в целом все хорошо.",
+        "reviews_date": "2025-11-13",
+        "star_review": 4,
+        "text_len": 56,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Разочарован качеством, ожидал лучшего за такую цену.",
+        "reviews_date": "2025-11-14",
+        "star_review": 2,
+        "text_len": 61,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Все как в описании! Очень доволен покупкой.",
+        "reviews_date": "2025-11-15",
+        "star_review": 5,
+        "text_len": 52,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Покупкой остался недоволен, качество сильно хромает.",
+        "reviews_date": "2025-11-16",
+        "star_review": 2,
+        "text_len": 59,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Быстрая доставка, товар хорошего качества, рекомендую.",
+        "reviews_date": "2025-11-17",
+        "star_review": 5,
+        "text_len": 61,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Качество оставляет желать лучшего, сильно разочарован.",
+        "reviews_date": "2025-11-18",
+        "star_review": 1,
+        "text_len": 61,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Товар пришел вовремя, все соответствует описанию.",
+        "reviews_date": "2025-11-19",
+        "star_review": 5,
+        "text_len": 57,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Долго ждал доставку, но качество товара порадовало.",
+        "reviews_date": "2025-11-20",
+        "star_review": 4,
+        "text_len": 61,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Доставка быстрая, товар качественный. Остался доволен!",
+        "reviews_date": "2025-12-01",
+        "star_review": 5,
+        "text_len": 62,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Не рекомендую! Товар не соответствует заявленным характеристикам.",
+        "reviews_date": "2025-12-02",
+        "star_review": 1,
+        "text_len": 66,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Хороший товар, но упаковка была повреждена при доставке.",
+        "reviews_date": "2025-12-03",
+        "star_review": 4,
+        "text_len": 64,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Очень доволен покупкой, все соответствует описанию!",
+        "reviews_date": "2025-12-04",
+        "star_review": 5,
+        "text_len": 58,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Разочарован качеством товара, не стоит своих денег.",
+        "reviews_date": "2025-12-05",
+        "star_review": 2,
+        "text_len": 59,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Качество отличное, доставка быстрая. Рекомендую!",
+        "reviews_date": "2025-12-06",
+        "star_review": 5,
+        "text_len": 55,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Ждал доставку дольше, чем обещали. Но товар хороший.",
+        "reviews_date": "2025-12-07",
+        "star_review": 4,
+        "text_len": 59,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Не советую! Товар пришел с дефектом и вернуть не получилось.",
+        "reviews_date": "2025-12-08",
+        "star_review": 1,
+        "text_len": 67,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Прекрасный товар! Всё на высшем уровне, как и ожидал.",
+        "reviews_date": "2025-12-09",
+        "star_review": 5,
+        "text_len": 60,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Качество не оправдало ожиданий, пришлось вернуть товар.",
+        "reviews_date": "2025-12-10",
+        "star_review": 2,
+        "text_len": 61,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Все отлично! Доставка быстрая, товар соответствует описанию.",
+        "reviews_date": "2025-12-11",
+        "star_review": 5,
+        "text_len": 69,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Не рекомендую. Товар был плохо упакован и поврежден.",
+        "reviews_date": "2025-12-12",
+        "star_review": 1,
+        "text_len": 64,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Доставка задержалась, но товар соответствует описанию.",
+        "reviews_date": "2025-12-13",
+        "star_review": 4,
+        "text_len": 61,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Покупкой доволен! Качество на высоте, доставка оперативная.",
+        "reviews_date": "2025-12-14",
+        "star_review": 5,
+        "text_len": 65,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Ожидал лучшего качества за такую цену. Не рекомендую.",
+        "reviews_date": "2025-12-15",
+        "star_review": 2,
+        "text_len": 63,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Быстрая доставка, товар отличный! Все соответствует описанию.",
+        "reviews_date": "2025-12-16",
+        "star_review": 5,
+        "text_len": 70,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Товар не оправдал ожиданий, возврат невозможен.",
+        "reviews_date": "2025-12-17",
+        "star_review": 1,
+        "text_len": 57,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Доставка заняла больше времени, чем ожидалось. Но товар хороший.",
+        "reviews_date": "2025-12-18",
+        "star_review": 4,
+        "text_len": 68,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Отличное качество, рекомендую к покупке! Доволен полностью.",
+        "reviews_date": "2025-12-19",
+        "star_review": 5,
+        "text_len": 64,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Не рекомендую. Товар пришел с браком, возврат невозможен.",
+        "reviews_date": "2025-12-20",
+        "star_review": 1,
+        "text_len": 66,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Очень рад покупке! Товар превосходит ожидания, рекомендую!",
+        "reviews_date": "2025-12-21",
+        "star_review": 5,
+        "text_len": 66,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Качество оставляет желать лучшего, больше не куплю.",
+        "reviews_date": "2025-12-22",
+        "star_review": 2,
+        "text_len": 60,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Быстрая доставка, все отлично! В следующий раз закажу снова.",
+        "reviews_date": "2025-12-23",
+        "star_review": 5,
+        "text_len": 67,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Разочарован качеством. Дорого и не соответствует описанию.",
+        "reviews_date": "2025-12-24",
+        "star_review": 1,
+        "text_len": 68,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Товар хороший, но доставка затянулась дольше, чем обещали.",
+        "reviews_date": "2025-12-25",
+        "star_review": 4,
+        "text_len": 67,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Всё супер! Доставка быстрая, качество товара отличное!",
+        "reviews_date": "2025-12-26",
+        "star_review": 5,
+        "text_len": 63,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Не рекомендую. Товар пришел с дефектом, замена невозможна.",
+        "reviews_date": "2025-12-27",
+        "star_review": 1,
+        "text_len": 67,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Доставка была долгой, но товар качественный. Остался доволен.",
+        "reviews_date": "2025-12-28",
+        "star_review": 4,
+        "text_len": 68,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Покупка оправдала все ожидания! Буду заказывать ещё.",
+        "reviews_date": "2025-12-29",
+        "star_review": 5,
+        "text_len": 58,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Ужасное качество, товар не стоит своих денег. Разочарован.",
+        "reviews_date": "2025-12-30",
+        "star_review": 1,
+        "text_len": 63,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Прекрасный товар! Доставили вовремя, качество супер!",
+        "reviews_date": "2025-12-31",
+        "star_review": 5,
+        "text_len": 56,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Не советую! Товар не оправдал ожиданий, возврат сложный.",
+        "reviews_date": "2026-01-01",
+        "star_review": 2,
+        "text_len": 64,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Все как в описании. Быстрая доставка и качественный товар.",
+        "reviews_date": "2026-01-02",
+        "star_review": 5,
+        "text_len": 65,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Ожидал лучшего качества. Не оправдало заявленных характеристик.",
+        "reviews_date": "2026-01-03",
+        "star_review": 2,
+        "text_len": 69,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Доставка быстрая, товар работает как надо. Рекомендую!",
+        "reviews_date": "2026-01-04",
+        "star_review": 5,
+        "text_len": 64,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Не доволен покупкой. Качество товара низкое, возврат не помог.",
+        "reviews_date": "2026-01-05",
+        "star_review": 1,
+        "text_len": 69,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Отличный товар, доставили быстро и аккуратно. Спасибо!",
+        "reviews_date": "2026-01-06",
+        "star_review": 5,
+        "text_len": 58,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Доставка заняла больше времени, чем ожидалось. Товар нормальный.",
+        "reviews_date": "2026-01-07",
+        "star_review": 4,
+        "text_len": 70,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Продукт на высшем уровне! Буду рекомендовать друзьям.",
+        "reviews_date": "2026-01-08",
+        "star_review": 5,
+        "text_len": 58,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Отличный выбор! Товар полностью соответствует описанию.",
+        "reviews_date": "2026-01-09",
+        "star_review": 5,
+        "text_len": 58,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Разочарован покупкой. Доставка долгая, качество ниже среднего.",
+        "reviews_date": "2026-01-10",
+        "star_review": 2,
+        "text_len": 71,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Быстрая доставка и отличное качество! Рекомендую всем.",
+        "reviews_date": "2026-01-11",
+        "star_review": 5,
+        "text_len": 60,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Не оправдало ожиданий. Товар выглядит дешево и некачественно.",
+        "reviews_date": "2026-01-12",
+        "star_review": 1,
+        "text_len": 70,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Очень доволен покупкой, товар соответствует всем параметрам!",
+        "reviews_date": "2026-01-13",
+        "star_review": 5,
+        "text_len": 65,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Качество ниже среднего. Доставка вовремя, но товар разочаровал.",
+        "reviews_date": "2026-01-14",
+        "star_review": 2,
+        "text_len": 72,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Товар как в описании, никаких нареканий. Доволен покупкой.",
+        "reviews_date": "2026-01-15",
+        "star_review": 5,
+        "text_len": 65,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Плохой опыт. Качество товара ниже заявленного, не рекомендую.",
+        "reviews_date": "2026-01-16",
+        "star_review": 1,
+        "text_len": 69,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Доставка вовремя, товар отличный! Покупкой остался доволен.",
+        "reviews_date": "2026-01-17",
+        "star_review": 5,
+        "text_len": 66,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Некачественный товар. Пришлось оформлять возврат, не рекомендую.",
+        "reviews_date": "2026-01-18",
+        "star_review": 1,
+        "text_len": 72,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Товар супер, работает идеально! Закажу еще раз, рекомендую.",
+        "reviews_date": "2026-01-19",
+        "star_review": 5,
+        "text_len": 66,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Плохое качество. Товар не соответствует описанию и фото.",
+        "reviews_date": "2026-01-20",
+        "star_review": 1,
+        "text_len": 65,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Сервис на высшем уровне, качество товара отличное!",
+        "reviews_date": "2026-01-21",
+        "star_review": 5,
+        "text_len": 57,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Не советую покупать, товар не оправдал ожиданий. Потраченные деньги.",
+        "reviews_date": "2026-01-22",
+        "star_review": 1,
+        "text_len": 75,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Доставка молниеносная! Качество выше всех похвал!",
+        "reviews_date": "2026-01-23",
+        "star_review": 5,
+        "text_len": 58,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Очень разочарован качеством товара. Не рекомендую.",
+        "reviews_date": "2026-01-24",
+        "star_review": 1,
+        "text_len": 58,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Рад, что выбрал именно этот товар! Качество на высоте.",
+        "reviews_date": "2026-01-25",
+        "star_review": 5,
+        "text_len": 60,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "К сожалению, товар не оправдал ожиданий. Возврат оформили.",
+        "reviews_date": "2026-01-26",
+        "star_review": 2,
+        "text_len": 68,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Супер товар! Доставка была быстрой, качество отменное.",
+        "reviews_date": "2026-01-27",
+        "star_review": 5,
+        "text_len": 60,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Очень качественный товар! Доставка заняла меньше ожидаемого.",
+        "reviews_date": "2026-01-28",
+        "star_review": 5,
+        "text_len": 64,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Качество товара отвратительное, пришлось вернуть. Разочарован.",
+        "reviews_date": "2026-01-29",
+        "star_review": 1,
+        "text_len": 67,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Товар соответствует описанию, доставка быстрая. Рекомендую.",
+        "reviews_date": "2026-01-30",
+        "star_review": 5,
+        "text_len": 63,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Плохое качество. За такую цену ожидал лучшего результата.",
+        "reviews_date": "2026-01-31",
+        "star_review": 2,
+        "text_len": 67,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Сервис отличный! Доставка быстрая, товар работает идеально.",
+        "reviews_date": "2026-02-01",
+        "star_review": 5,
+        "text_len": 67,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Очень неудобный интерфейс и плохое качество товара.",
+        "reviews_date": "2026-02-02",
+        "star_review": 1,
+        "text_len": 61,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Классный товар! Работает без сбоев, рекомендую к покупке.",
+        "reviews_date": "2026-02-03",
+        "star_review": 5,
+        "text_len": 65,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Доставка долгая, качество среднее. В следующий раз подумаю.",
+        "reviews_date": "2026-02-04",
+        "star_review": 3,
+        "text_len": 66,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Очень доволен товаром. Все соответствует описанию и фото!",
+        "reviews_date": "2026-02-05",
+        "star_review": 5,
+        "text_len": 66,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Не стоит своих денег. Разочарован, ожидал лучшего качества.",
+        "reviews_date": "2026-02-06",
+        "star_review": 2,
+        "text_len": 68,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Покупкой доволен, доставка быстрая, товар на высоте!",
+        "reviews_date": "2026-02-07",
+        "star_review": 5,
+        "text_len": 57,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Не рекомендую. Качество оставляет желать лучшего.",
+        "reviews_date": "2026-02-08",
+        "star_review": 1,
+        "text_len": 57,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Все на высшем уровне! Доставка молниеносная, товар супер!",
+        "reviews_date": "2026-02-09",
+        "star_review": 5,
+        "text_len": 66,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Разочарован товаром, не соответствует заявленному качеству.",
+        "reviews_date": "2026-02-10",
+        "star_review": 1,
+        "text_len": 65,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Лучший товар за свои деньги! Буду заказывать снова!",
+        "reviews_date": "2026-02-11",
+        "star_review": 5,
+        "text_len": 58,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Проблемы с доставкой. Товар хороший, но очень долго ждал.",
+        "reviews_date": "2026-02-12",
+        "star_review": 3,
+        "text_len": 67,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Очень доволен покупкой, всё как в описании. Спасибо!",
+        "reviews_date": "2026-02-13",
+        "star_review": 5,
+        "text_len": 58,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Качество хуже, чем ожидал. Не рекомендую данный товар.",
+        "reviews_date": "2026-02-14",
+        "star_review": 2,
+        "text_len": 61,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Супер товар, все пришло вовремя! Качество отличное!",
+        "reviews_date": "2026-02-15",
+        "star_review": 5,
+        "text_len": 57,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Доставка быстрая, товар качественный. Буду заказывать еще!",
+        "reviews_date": "2026-02-16",
+        "star_review": 5,
+        "text_len": 63,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Качество не соответствует цене. Очень разочарован.",
+        "reviews_date": "2026-02-17",
+        "star_review": 2,
+        "text_len": 57,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Отличный товар! Пришел быстро и полностью соответствует описанию.",
+        "reviews_date": "2026-02-18",
+        "star_review": 5,
+        "text_len": 71,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Не рекомендую. Плохое качество и долгий срок доставки.",
+        "reviews_date": "2026-02-19",
+        "star_review": 1,
+        "text_len": 62,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Очень доволен покупкой! Товар оправдал все ожидания.",
+        "reviews_date": "2026-02-20",
+        "star_review": 5,
+        "text_len": 60,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Доставка задержалась, но товар нормальный. Могло быть лучше.",
+        "reviews_date": "2026-02-21",
+        "star_review": 3,
+        "text_len": 68,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Товар отличный, доставка быстрая. Всё как в описании!",
+        "reviews_date": "2026-02-22",
+        "star_review": 5,
+        "text_len": 58,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Очень плохое качество. Через неделю уже сломалось.",
+        "reviews_date": "2026-02-23",
+        "star_review": 1,
+        "text_len": 56,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Товар отличный, но упаковка была повреждена. Будьте внимательны.",
+        "reviews_date": "2026-02-24",
+        "star_review": 4,
+        "text_len": 72,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Покупкой остался доволен! Всё работает как нужно.",
+        "reviews_date": "2026-02-25",
+        "star_review": 5,
+        "text_len": 56,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Неплохо, но цена явно завышена. Ожидал лучшего.",
+        "reviews_date": "2026-02-26",
+        "star_review": 3,
+        "text_len": 56,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Понравилось всё! Товар, доставка, упаковка. Супер!",
+        "reviews_date": "2026-02-27",
+        "star_review": 5,
+        "text_len": 56,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Товар пришел с дефектом. Очень недоволен покупкой.",
+        "reviews_date": "2026-02-28",
+        "star_review": 1,
+        "text_len": 57,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Доставка заняла больше времени, чем ожидалось. Товар нормальный.",
+        "reviews_date": "2026-02-29",
+        "star_review": 3,
+        "text_len": 71,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Превосходное качество и быстрая доставка! Рекомендую.",
+        "reviews_date": "2026-03-01",
+        "star_review": 5,
+        "text_len": 61,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Не оправдал ожиданий. Качество намного хуже заявленного.",
+        "reviews_date": "2026-03-02",
+        "star_review": 2,
+        "text_len": 65,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Довольна покупкой. Всё отлично, претензий нет.",
+        "reviews_date": "2026-03-03",
+        "star_review": 5,
+        "text_len": 49,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Товар неплохой, но доставка оставляет желать лучшего.",
+        "reviews_date": "2026-03-04",
+        "star_review": 3,
+        "text_len": 61,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Отличное соотношение цены и качества! Рекомендую всем!",
+        "reviews_date": "2026-03-05",
+        "star_review": 5,
+        "text_len": 63,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Очень плохое качество. Не рекомендую к покупке.",
+        "reviews_date": "2026-03-06",
+        "star_review": 1,
+        "text_len": 55,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Все понравилось, доставка была быстрая и упаковка отличная.",
+        "reviews_date": "2026-03-07",
+        "star_review": 5,
+        "text_len": 67,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Качество товара на высоте, но цена немного завышена.",
+        "reviews_date": "2026-03-08",
+        "star_review": 4,
+        "text_len": 62,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Товар пришел с браком, не рекомендую. Очень разочарован.",
+        "reviews_date": "2026-03-09",
+        "star_review": 1,
+        "text_len": 63,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Очень доволен покупкой! Всё соответствует описанию.",
+        "reviews_date": "2026-03-10",
+        "star_review": 5,
+        "text_len": 55,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Доставка быстрая, но упаковка была повреждена. Не критично.",
+        "reviews_date": "2026-03-11",
+        "star_review": 4,
+        "text_len": 66,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Покупкой недоволен. Через несколько дней товар сломался.",
+        "reviews_date": "2026-03-12",
+        "star_review": 1,
+        "text_len": 63,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Отличный сервис и товар, доставка на высшем уровне!",
+        "reviews_date": "2026-03-13",
+        "star_review": 5,
+        "text_len": 61,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Товар пришел позже обещанного срока. Качество хорошее.",
+        "reviews_date": "2026-03-14",
+        "star_review": 3,
+        "text_len": 65,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Доставка очень долгая, качество ниже среднего.",
+        "reviews_date": "2026-03-15",
+        "star_review": 2,
+        "text_len": 57,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Товар на 5+. Рекомендую всем! Доставка была быстрая.",
+        "reviews_date": "2026-03-16",
+        "star_review": 5,
+        "text_len": 57,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Не советую заказывать. Очень плохое качество товара.",
+        "reviews_date": "2026-03-17",
+        "star_review": 1,
+        "text_len": 58,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Хорошее качество и приятная цена. Буду заказывать ещё.",
+        "reviews_date": "2026-03-18",
+        "star_review": 5,
+        "text_len": 60,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Неплохой товар, но ожидал немного лучшего качества.",
+        "reviews_date": "2026-03-19",
+        "star_review": 3,
+        "text_len": 60,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Очень долго ждал доставку, но качество товара отличное.",
+        "reviews_date": "2026-03-20",
+        "star_review": 4,
+        "text_len": 66,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Покупка разочаровала. Через неделю товар перестал работать.",
+        "reviews_date": "2026-03-21",
+        "star_review": 1,
+        "text_len": 69,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Довольна покупкой. Всё пришло вовремя и в отличном состоянии.",
+        "reviews_date": "2026-03-22",
+        "star_review": 5,
+        "text_len": 68,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Товар неплохой, но упаковка была повреждена.",
+        "reviews_date": "2026-03-23",
+        "star_review": 3,
+        "text_len": 51,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Прекрасное качество, быстрая доставка. Рекомендую!",
+        "reviews_date": "2026-03-24",
+        "star_review": 5,
+        "text_len": 55,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    {
+        "user_review": "Не рекомендую. Качество оставляет желать лучшего.",
+        "reviews_date": "2026-03-25",
+        "star_review": 2,
+        "text_len": 58,
+        "written_by_bot": 1,
+        "has_media": 0
+    },
+    {
+        "user_review": "Быстрая доставка, товар полностью соответствует описанию.",
+        "reviews_date": "2026-03-26",
+        "star_review": 5,
+        "text_len": 63,
+        "written_by_bot": 1,
+        "has_media": 1
+    },
+    
+
+
 
 
 ]
