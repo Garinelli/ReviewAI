@@ -1,0 +1,13 @@
+aiogram
+python-dotenv
+aio-pika
+numpy
+pandas 
+tensorflow
+matplotlib
+beautifulsoup4
+selenium
+selenium-stealth
+fasttext
+nltk
+pymorphy2
