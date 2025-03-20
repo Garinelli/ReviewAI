@@ -1,12 +1,10 @@
+from datetime import datetime
 from time import sleep
+from typing import List, Dict
 import asyncio
 import json
 
 import aio_pika
-
-from .producer import send_message_to_broker
-from src.bot.config import RABBITMQ_URL
-
 import pandas as pd
 from bs4 import BeautifulSoup
 from selenium import webdriver
@@ -15,21 +13,12 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium_stealth import stealth
-from selenium import webdriver
-from selenium.webdriver.remote.webdriver import WebDriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import NoSuchElementException, TimeoutException
-from selenium.webdriver.chrome.options import Options
-from typing import List, Dict
+from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.remote.webelement import WebElement
-import pandas as pd
-from time import sleep
-from pathlib import Path
-from bs4 import BeautifulSoup
-from typing import List, Dict
-from datetime import datetime
+
+from .producer import send_message_to_broker
+from src.bot.config import RABBITMQ_URL
 
 
 def init_webdriver():
@@ -39,8 +28,6 @@ def init_webdriver():
 
     driver = webdriver.Chrome(options=chrome_options)
 
-    # driver = webdriver.Chrome()
-
     stealth(driver,
             vendor='Google Inc.',
             platform='Win32',
@@ -48,6 +35,7 @@ def init_webdriver():
             renderer="Intel Iris OpenGL Engine")
     return driver
 
+driver = init_webdriver()
 
 def get_feedback_link(url_product: str) -> str:
     """Получаем ссылку на страницу с отзывами"""
@@ -247,7 +235,6 @@ async def process_message(message: aio_pika.IncomingMessage):
         body = message.body.decode()
         body = json.loads(body)
         print(f"Получено сообщение: {body}")
-        driver = init_webdriver()
         parser_feedbacks(body['link'], driver, body['task_id'])
         await send_message_to_broker(queue_name='preprocessing', user_telegram_id=body['user_telegram_id'],
                                              task_id=body['task_id'])
