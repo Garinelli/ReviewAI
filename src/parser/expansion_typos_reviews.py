@@ -1,4 +1,3 @@
-from random import randint
 import pandas as pd
 
 from reviews.reviews_with_typos import reviews
@@ -9,8 +8,6 @@ star_reviews = []
 text_len = []
 written_by_bot = []
 has_media = []
-has_answer = []
-
 def main():
     for review in reviews:
         user_reviews.append(review['user_review'])
@@ -19,7 +16,6 @@ def main():
         text_len.append(review['text_len'])
         written_by_bot.append(review['written_by_bot'])
         has_media.append(review['has_media'])
-        has_answer.append(randint(0, 1))
     fake_dataset = pd.DataFrame(
         {
             'User review': user_reviews,
@@ -27,7 +23,6 @@ def main():
             'Star review': star_reviews,
             'Text length': text_len,
             'Has media': has_media,
-            "Has answer": has_answer,
             'Written by bot': written_by_bot,
         }
     )
