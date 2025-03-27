@@ -32,6 +32,8 @@ def main():
         }
     )
 
+    fake_dataset['User review'] = fake_dataset['User review'].str.lower()
+    fake_dataset.drop_duplicates(subset=['User review'], keep='first', inplace=True)
     fake_dataset.to_csv('./dataframes/fake_reviews.csv')
 
 
