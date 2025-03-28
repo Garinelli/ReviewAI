@@ -195,11 +195,7 @@ def prepare_feedbacks(html_code: str) -> List[Dict]:
             text = "\n".join([span.text.strip() for span in text_spans])
         else:
             text = ""
-
-        # Ответ продавца
-        answer_tag = feedback.find("p", class_="feedback__sellers-reply-title")
-        has_answer = int(answer_tag is not None)
-
+            
         # Медиа (фото/видео)
         media_tag = feedback.find("ul", class_="feedback__photos")
         has_media = int(media_tag is not None)
@@ -210,9 +206,7 @@ def prepare_feedbacks(html_code: str) -> List[Dict]:
                 "User review": text.replace(":", ": ").replace("\n", "\\n"),
                 "Review date": date if date else "Unknown",
                 "Star review": rating,
-                "Text length": len(text),
                 "Has media": has_media,
-                "Has answer": has_answer,
             }
         )
 
