@@ -1,15 +1,13 @@
 import json
-import asyncio
-
 import aio_pika
 
 from src.bot.config import RABBITMQ_URL
 
 async def send_message_to_broker(**kwargs):
-    conn = await aio_pika.connect(RABBITMQ_URL)
+    connection = await aio_pika.connect_robust(RABBITMQ_URL)
 
-    async with conn:
-        channel = await conn.channel()
+    async with connection:
+        channel = await connection.channel()
         await channel.declare_queue(kwargs['queue_name'])
 
         body_ = json.dumps(kwargs)

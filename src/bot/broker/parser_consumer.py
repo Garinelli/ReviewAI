@@ -248,14 +248,19 @@ async def process_message(message: aio_pika.IncomingMessage):
 
 
 async def message_consumer():
-    connection = await aio_pika.connect(RABBITMQ_URL)
+    connection = await aio_pika.connect_robust(RABBITMQ_URL)
     async with connection:
         channel = await connection.channel()
+        await channel.set_qos(prefetch_count=5)
         queue = await channel.declare_queue("parser")
 
         await queue.consume(process_message)
 
-        await asyncio.Future()
+        try:
+            await asyncio.Future()
+        finally:
+            await connection.close()
+
 
 
 if __name__ == "__main__":
