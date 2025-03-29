@@ -1,0 +1,24 @@
+version: '3.9'
+
+services:
+  bot_app:
+    build: 
+      context: .
+    container_name: bot_application
+    command: bash start.sh
+    volumes:
+     - ./models/cc.ru.300.bin:/app/models/cc.ru.300.bin:ro
+    depends_on:
+      - rabbit
+
+  rabbit:
+    image: rabbitmq:latest
+    container_name: rabbit_mq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    restart: always
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+      RABBITMQ_DEFAULT_VHOST: /

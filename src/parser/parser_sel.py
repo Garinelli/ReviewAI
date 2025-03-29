@@ -1,41 +1,215 @@
 from selenium import webdriver
+from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import NoSuchElementException, TimeoutException
+from selenium.webdriver.chrome.options import Options
+from typing import List, Dict
+from selenium.webdriver.remote.webelement import WebElement
+import pandas as pd
+from time import sleep
+from pathlib import Path
+from bs4 import BeautifulSoup
+from typing import List, Dict
+from datetime import datetime
 
 
-def get_feedback_link(url):
-    driver = webdriver.Chrome()  # Используем Chrome, вы можете выбрать другой браузер
-    driver.get(url)
-
-    # Прокручиваем страницу вниз до тех пор, пока элемент не будет найден
-    while True:
-        try:
-            # Пытаемся найти элемент
-            feedback_button = WebDriverWait(driver, 10).until(
-                EC.presence_of_element_located(
-                    (By.CSS_SELECTOR, ".btn-base.comments__btn-all")
-                )
-            )
-
-            # Если элемент найден, выходим из цикла
-            print("НАШЕЛ!!!!!")
-            break
-        except Exception:
-            # Прокручиваем страницу вниз
-            print("НЕ НААШЕЛ!!!")
-            driver.execute_script("window.scrollTo(0, document.body.scrollHeight/3);")
-
-    # Получаем ссылку из элемента
-    feedback_link = feedback_button.get_attribute("href")
-
-    driver.quit()
-
+def get_feedback_link(url_product: str) -> str:
+    """Получаем ссылку на страницу с отзывами"""
+    feedback_link = url_product[: url_product.rfind("/")] + "/feedbacks"
     return feedback_link
 
 
-# Пример использования
-url = "https://www.wildberries.ru/catalog/243062249/detail.aspx"
-link = get_feedback_link(url)
-print(f"Ссылка на все отзывы: {link}")
+def get_feedbacks_raw(driver: WebDriver, url_feedbacks: str) -> List[WebElement]:
+    """Получаем все отзывы с текущей страницы"""
+
+    def press_this_product_btn():
+        """Поиск кнопки 'Этот вариант товара'"""
+        try:
+            # Ожидание появления кнопки с текстом "Этот вариант товара" в видимой части страницы
+            button = WebDriverWait(driver, 10).until(
+                EC.element_to_be_clickable(
+                    (By.XPATH, '//button[contains(text(), "Этот вариант товара")]')
+                )
+            )
+            # button = driver.find_elements(By.CLASS_NAME, "product-feedbacks__title")
+            # print(f"{len(button)=}", button[-1].get_attribute("outerHTML"))
+
+        except TimeoutException:
+            print("Ошибка при поиске кнопки: 'Этот вариант товара'")
+        else:
+            # Нажимаем на кнопку
+            button.click()
+            print("Кнопка успешно нажата!")
+
+    def scroll_down():
+        """Прокручиваем страницу вниз до тех пор, пока не достигнут конец страницы или контент не успел прогрузиться"""
+        # Получение начальной высоты страницы
+        last_height = driver.execute_script("return document.body.scrollHeight")
+
+        while True:
+            # Прокрутка страницы до конца
+            driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+
+            try:
+                # Ожидание загрузки нового контента
+                WebDriverWait(driver, 3).until(
+                    lambda d: d.execute_script("return document.body.scrollHeight")
+                    > last_height
+                )
+            except TimeoutException:
+                print("Конец страницы достигнут или контент не успел прогрузиться!")
+                break
+
+            # Получение новой высоты страницы | Обновление последней высоты страницы
+            last_height = driver.execute_script("return document.body.scrollHeight")
+
+    # Открытие сайта
+    driver.get(url_feedbacks)
+    sleep(3)
+    driver.get(url_feedbacks)
+
+    press_this_product_btn()
+    sleep(2)
+
+    scroll_down()
+    sleep(2)
+
+    html_code = driver.page_source
+
+    return html_code
+
+
+def conv_date(date_time: str):
+    """Преобразование даты в формат datetime"""
+    # Словарь для перевода месяцев с русского на английский
+    months = {
+        "января": "January",
+        "февраля": "February",
+        "марта": "March",
+        "апреля": "April",
+        "мая": "May",
+        "июня": "June",
+        "июля": "July",
+        "августа": "August",
+        "сентября": "September",
+        "октября": "October",
+        "ноября": "November",
+        "декабря": "December",
+    }
+
+    date_list = date_time.split(", ")[0].split()
+    if len(date_list) == 1:
+        now = datetime.now()
+        date_list = [
+            f"{now.day - int(date_list[0] == 'Вчера')}",
+            f"{now.month}",
+            f"{now.year}",
+        ]
+        # Преобразуем строку в объект datetime
+        date_obj = datetime.strptime(" ".join(date_list), r"%d %m %Y")
+    else:
+        date_list[1] = months[date_list[1]]
+        if len(date_list) == 2:
+            date_list.append(f"{datetime.now().year}")
+        # Преобразуем строку в объект datetime
+        date_obj = datetime.strptime(" ".join(date_list), r"%d %B %Y")
+
+    # Форматируем дату в нужный формат
+    formatted_date = date_obj.strftime(r"%Y-%m-%d")
+    return formatted_date
+
+
+def prepare_feedbacks(html_code: str) -> List[Dict]:
+    """Подготавливаем данные о отзывах в виде списка словарей"""
+
+    # Передаем html-код в конструктор BeautifulSoup
+    soup = BeautifulSoup(html_code, "html.parser")
+    # Разбиваем на список отзывов
+    feedbacks = soup.find_all(
+        "li", class_="comments__item feedback product-feedbacks__block-wrapper"
+    )
+    print(f"Количество отзывов: {len(feedbacks)}")
+
+    comments = []
+
+    for i, feedback in enumerate(feedbacks):
+        # # Сохраняем отзыв в текстовом виде для дальнейшего анализа
+        # with open(
+        #     f"{Path(__file__).parent}/soup.txt", "w", encoding="Windows-1251"
+        # ) as f:
+        #     f.write(feedback)
+
+        # Дата написания отзыва
+        date_time = feedback.find("div", class_="feedback__date").text  # 25 марта 2025
+        date = conv_date(date_time)  # 2025-03-25
+
+        # Выводим имена пользователей для визуализации обработки отзывов
+        if i % 10 == 0:
+            name = feedback.find("p", class_="feedback__header").text
+            print(i, name)
+
+        # Рейтинг отзыва
+        rating_tag = feedback.find("div", class_="feedback__rating-wrap")
+        rating = int(rating_tag.find("span")["class"][-1][-1]) if rating_tag else 0
+
+        # Текст отзыва
+        text_tag = feedback.find("div", class_="feedback__content")
+        if text_tag:
+            text_spans = text_tag.find_all("span")[::2]
+            text = "\n".join([span.text.strip() for span in text_spans])
+        else:
+            text = ""
+
+        # Ответ продавца
+        answer_tag = feedback.find("p", class_="feedback__sellers-reply-title")
+        has_answer = int(answer_tag is not None)
+
+        # Медиа (фото/видео)
+        media_tag = feedback.find("ul", class_="feedback__photos")
+        has_media = int(media_tag is not None)
+
+        # Добавляем отзыв в список
+        comments.append(
+            {
+                "User review": text.replace(":", ": ").replace("\n", "\\n"),
+                "Review date": date if date else "Unknown",
+                "Star review": rating,
+                "Text length": len(text),
+                "Has media": has_media,
+                "Has answer": has_answer,
+                "Written by bot": 0,
+            }
+        )
+
+    return comments
+
+
+def main(url_product: str, out_path: str) -> None:
+    """Основная функция, которая запускает парсинг отзывов и сохраняет результат в csv-файл"""
+
+    # options = Options()
+    # options.add_argument("--headless")  # Запуск в фоновом режиме
+    # options.add_argument("--disable-gpu")  # Отключение GPU для headless-режима
+    # options.add_argument("--window-size=1920,1080")  # Установка размера окна
+
+    # driver = webdriver.Chrome(options=options)  # Запускаем драйвер - !Обязательно!
+    driver = webdriver.Chrome()  # Запускаем драйвер - !Обязательно!
+
+    # Пример использования
+    feedbacks = prepare_feedbacks(
+        get_feedbacks_raw(driver, get_feedback_link(url_product))
+    )
+
+    driver.quit()  # Закрываем драйвер - !Обязательно!
+
+    # Сохранение отзывов в csv-файле
+    pd.DataFrame(feedbacks).to_csv(out_path, index=False)
+
+
+if __name__ == "__main__":
+    url = "https://www.wildberries.ru/catalog/196491327/detail.aspx"
+    # url = "https://www.wildberries.ru/catalog/259046906/detail.aspx"
+
+    main(url, "feedbacks_wb.csv")
