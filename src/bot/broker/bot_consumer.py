@@ -7,7 +7,7 @@ from src.bot.config import RABBITMQ_URL
 from src.bot.bot import send_request_status
 
 
-async def process_message(message: aio_pika.IncomingMessage):
+async def process_message(message: aio_pika.abc.AbstractIncomingMessage):
     async with message.process():
         body = message.body.decode()
         body = json.loads(body)
@@ -22,15 +22,18 @@ async def process_message(message: aio_pika.IncomingMessage):
 
 
 async def message_consumer():
-    connection = await aio_pika.connect(RABBITMQ_URL)
+    connection = await aio_pika.connect_robust(RABBITMQ_URL)
     async with connection:
         channel = await connection.channel()
+        await channel.set_qos(prefetch_count=5)
         queue = await channel.declare_queue("bot")
 
         await queue.consume(process_message)
 
-        await asyncio.Future()
-
+        try:
+            await asyncio.Future()
+        finally:
+            await connection.close()
 
 if __name__ == "__main__":
     asyncio.run(message_consumer())
