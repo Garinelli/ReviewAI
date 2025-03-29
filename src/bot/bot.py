@@ -1,4 +1,5 @@
-import os 
+import os
+import re 
 import asyncio
 import random
 
@@ -17,17 +18,12 @@ bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher()
 
 semaphore = asyncio.Semaphore(5)
-
+LINK_PATTERN = r'^https://www\.wildverries\.ru/catalog/\d+/detail\.aspx$'
 
 def check_link(link: str) -> bool:
     # Проверяем ссылку на WB
     logging.info(f"Начинаем обрабатывать ссылку на товар {link=}...")
-    if ("wildberries.ru" in link) and ("detail.aspx" in link):
-        logging.info(f"Ссылка {link} распознана WB ✅\n")
-        return True
-    logging.info(f"Строка {link} не распознана как ссылка на товар ❌")
-    return False
-
+    return re.fullmatch(LINK_PATTERN, link) is not None
 
 def generate_task_id() -> str:
     logging.info("Генерируется id для таски...")
