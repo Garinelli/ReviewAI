@@ -2,7 +2,7 @@ import logging
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram.filters import Command
 from aiogram import Bot, Dispatcher, F
-from src.bot.constants import WELCOME_MESSAGE, START_MESSAGE
+from ..constants import WELCOME_MESSAGE, START_MESSAGE
 
 # from typing import TYPE_CHECKING
 # if TYPE_CHECKING:
