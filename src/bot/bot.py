@@ -1,7 +1,5 @@
-import os
-import re 
+import os 
 import asyncio
-import random
 
 from aiogram import Bot, Dispatcher, F
 from aiogram.filters import Command
@@ -10,29 +8,13 @@ from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 from src.bot.broker import send_message_to_broker
 from src.bot.config import BOT_TOKEN
-from src.bot.constants import TASK_ID_LETTERS, WELCOME_MESSAGE, START_MESSAGE
 from src.bot.log_conf import logging, timing_decorator
-
+from src.bot.constants import WELCOME_MESSAGE, START_MESSAGE    
+from src.bot.utils import check_link, generate_task_id
 
 bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher()
-
 semaphore = asyncio.Semaphore(5)
-LINK_PATTERN = r'^https://www\.wildberries\.ru/catalog/\d+/detail\.aspx$'
-
-def check_link(link: str) -> bool:
-    # Проверяем ссылку на WB
-    logging.info(f"Начинаем обрабатывать ссылку на товар {link=}...")
-    return re.fullmatch(LINK_PATTERN, link) is not None
-
-def generate_task_id() -> str:
-    logging.info("Генерируется id для таски...")
-    task_id = ""
-    for _ in range(8):
-        task_id += random.choice(TASK_ID_LETTERS)
-    logging.info(f"ID для таски сгенерирован успешно: {task_id=}")
-    return task_id
-
 
 async def send_request_status(
     user_telegram_id: int, message: str, task_id=None
@@ -40,13 +22,12 @@ async def send_request_status(
     logging.info("Отправляем пользователю ответ по статусу...")
     await bot.send_message(chat_id=user_telegram_id, text=message)
     if not task_id is None:
-        logging.info("Пытааемся отправить фотку")
+        logging.info("Пытаемся отправить фотку")
         await bot.send_photo(
             chat_id=user_telegram_id, photo=FSInputFile(f"{task_id}.png")
         )
         os.remove(f"{task_id}.png")
     logging.info("Сообщения успешно отправлены ✅\n")
-
 
 @dp.message(Command("start"))
 async def start(message: Message):
@@ -61,7 +42,6 @@ async def start(message: Message):
     )
     logging.info("Сообщение WELCOME_MESSAGE успешно отправлено ✅\n")
 
-
 # Обработчик нажатия на inline-кнопку
 @dp.callback_query(F.data == "start_button")
 async def process_callback_button(callback_query: CallbackQuery):
@@ -70,7 +50,6 @@ async def process_callback_button(callback_query: CallbackQuery):
     await bot.answer_callback_query(callback_query.id)
     await bot.send_message(callback_query.from_user.id, START_MESSAGE)
     logging.info("Сообщение START_MESSAGE успешно отправлено ✅\n")
-
 
 @dp.message(F.text)
 async def link(message: Message):
@@ -103,10 +82,8 @@ async def link(message: Message):
                 task_id=generate_task_id(),
             )
 
-
 async def main():
     await dp.start_polling(bot)
-
 
 if __name__ == "__main__":
     asyncio.run(main())

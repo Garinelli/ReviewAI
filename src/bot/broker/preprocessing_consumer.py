@@ -12,9 +12,8 @@ from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 
 from src.bot.config import RABBITMQ_URL
-from src.bot.bot_utils.status_sender import send_request_status
-from src.bot.main import bot
-from src.bot.broker.producer import send_message_to_broker
+from src.bot.bot import send_request_status
+from .producer import send_message_to_broker
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent
 
@@ -98,14 +97,12 @@ async def dataframe_preprocessing(task_id):
 
 
 async def process_message(message: aio_pika.IncomingMessage):
-    print(f'[INFO] START PREPROCESSING')
     async with message.process():
         body = message.body.decode()
         body = json.loads(body)
         print(f"Получено сообщение: {body}")
 
         await send_request_status(
-            bot,
             body['user_telegram_id'],
             '💬Обрабатываем естественный язык...'
         )
@@ -116,19 +113,14 @@ async def process_message(message: aio_pika.IncomingMessage):
 
 
 async def message_consumer():
-    connection = await aio_pika.connect_robust(RABBITMQ_URL)
+    connection = await aio_pika.connect(RABBITMQ_URL)
     async with connection:
         channel = await connection.channel()
-        await channel.set_qos(prefetch_count=5)
         queue = await channel.declare_queue("preprocessing")
 
         await queue.consume(process_message)
 
-        try:
-            await asyncio.Future()
-        finally:
-            await connection.close()
-
+        await asyncio.Future()
 
 
 if __name__ == "__main__":
