@@ -1,4 +1,4 @@
-import os 
+import os
 import asyncio
 import random
 
@@ -7,10 +7,10 @@ from aiogram.filters import Command
 from aiogram.types import Message, CallbackQuery, FSInputFile
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
-from .broker import send_message_to_broker
-from .config import BOT_TOKEN
-from .constants import TASK_ID_LETTERS, WELCOME_MESSAGE, START_MESSAGE
-from .log_conf import logging, timing_decorator
+from src.bot.broker import send_message_to_broker
+from src.bot.config import BOT_TOKEN
+from src.bot.constants import TASK_ID_LETTERS, WELCOME_MESSAGE, START_MESSAGE
+from src.bot.log_conf import logging, timing_decorator
 
 
 bot = Bot(token=BOT_TOKEN)

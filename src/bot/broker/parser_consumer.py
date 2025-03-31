@@ -17,7 +17,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.remote.webelement import WebElement
 
-from .producer import send_message_to_broker
+from src.bot.broker.producer import send_message_to_broker
 from src.bot.config import RABBITMQ_URL
 
 

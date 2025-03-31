@@ -1,1 +1,1 @@
-from .producer import send_message_to_broker
+from src.bot.broker.producer import send_message_to_broker
