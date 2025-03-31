@@ -222,13 +222,12 @@ def parser_feedbacks(url_product, driver, task_id) -> None:
     # Сохранение отзывов в csv-файле
     pd.DataFrame(feedbacks).to_csv(f'{task_id}.csv')
 
-
-
-async def process_message(message: aio_pika.IncomingMessage):
+async def process_message(message: aio_pika.abc.AbstractIncomingMessage):
     async with message.process():
         body = message.body.decode()
         body = json.loads(body)
         print(f"Получено сообщение: {body}")
+        driver = init_webdriver()
         parser_feedbacks(body['link'], driver, body['task_id'])
         await send_message_to_broker(queue_name='preprocessing', user_telegram_id=body['user_telegram_id'],
                                              task_id=body['task_id'])

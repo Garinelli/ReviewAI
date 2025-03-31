@@ -31,12 +31,10 @@ async def nn_predict(task_id):
     for index, row in df.iterrows():
         review = row["User review"]
         star_review = row["Star review"]
-        text_len = row["Text length"]
         has_media = row["Has media"]
-        has_answer = row["Has answer"]
 
         tensor_vector = tf.convert_to_tensor([review], dtype=tf.float32)
-        second_tensor = np.array([[star_review, text_len, has_media, has_answer]])
+        second_tensor = np.array([[star_review, has_media]])
         second_tensor = tf.convert_to_tensor(second_tensor, dtype=tf.float32)
 
         prediction = model.predict([tensor_vector, second_tensor])
@@ -62,7 +60,7 @@ async def create_review_star_graphic(star_reviews: list[int], task_id: str):
     plt.close()
 
 
-async def process_message(message: aio_pika.IncomingMessage):
+async def process_message(message: aio_pika.abc.AbstractIncomingMessage):
     async with message.process():
         body = message.body.decode()
         body = json.loads(body)
@@ -100,14 +98,18 @@ async def process_message(message: aio_pika.IncomingMessage):
 
 
 async def message_consumer():
-    connection = await aio_pika.connect(RABBITMQ_URL)
+    connection = await aio_pika.connect_robust(RABBITMQ_URL)
     async with connection:
         channel = await connection.channel()
+        await channel.set_qos(prefetch_count=5)
         queue = await channel.declare_queue("NN")
 
         await queue.consume(process_message)
 
-        await asyncio.Future()
+        try:
+            await asyncio.Future()
+        finally:
+            await connection.close()
 
 
 if __name__ == "__main__":
