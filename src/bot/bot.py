@@ -18,7 +18,7 @@ bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher()
 
 semaphore = asyncio.Semaphore(5)
-LINK_PATTERN = r'^https://www\.wildverries\.ru/catalog/\d+/detail\.aspx$'
+LINK_PATTERN = r'^https://www\.wildberries\.ru/catalog/\d+/detail\.aspx$'
 
 def check_link(link: str) -> bool:
     # Проверяем ссылку на WB
