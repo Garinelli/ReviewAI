@@ -12,8 +12,9 @@ from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 
 from src.bot.config import RABBITMQ_URL
-from src.bot.bot import send_request_status
-from .producer import send_message_to_broker
+from src.bot.bot_utils.status_sender import send_request_status
+from src.bot.main import bot
+from src.bot.broker.producer import send_message_to_broker
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent
 
@@ -104,6 +105,7 @@ async def process_message(message: aio_pika.IncomingMessage):
         print(f"Получено сообщение: {body}")
 
         await send_request_status(
+            bot,
             body['user_telegram_id'],
             '💬Обрабатываем естественный язык...'
         )
