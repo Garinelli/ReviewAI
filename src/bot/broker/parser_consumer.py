@@ -183,11 +183,7 @@ def prepare_feedbacks(html_code: str) -> List[Dict]:
             text = "\n".join([span.text.strip() for span in text_spans])
         else:
             text = ""
-
-        # Ответ продавца
-        answer_tag = feedback.find("p", class_="feedback__sellers-reply-title")
-        has_answer = int(answer_tag is not None)
-
+            
         # Медиа (фото/видео)
         media_tag = feedback.find("ul", class_="feedback__photos")
         has_media = int(media_tag is not None)
@@ -198,9 +194,7 @@ def prepare_feedbacks(html_code: str) -> List[Dict]:
                 "User review": text.replace(":", ": ").replace("\n", "\\n"),
                 "Review date": date if date else "Unknown",
                 "Star review": rating,
-                "Text length": len(text),
                 "Has media": has_media,
-                "Has answer": has_answer,
             }
         )
 
@@ -241,14 +235,19 @@ async def process_message(message: aio_pika.IncomingMessage):
 
 
 async def message_consumer():
-    connection = await aio_pika.connect(RABBITMQ_URL)
+    connection = await aio_pika.connect_robust(RABBITMQ_URL)
     async with connection:
         channel = await connection.channel()
+        await channel.set_qos(prefetch_count=5)
         queue = await channel.declare_queue("parser")
 
         await queue.consume(process_message)
 
-        await asyncio.Future()
+        try:
+            await asyncio.Future()
+        finally:
+            await connection.close()
+
 
 
 if __name__ == "__main__":
