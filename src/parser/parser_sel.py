@@ -174,7 +174,7 @@ def prepare_feedbacks(html_code: str) -> List[Dict]:
         # Добавляем отзыв в список
         comments.append(
             {
-                "User review": text.replace(":", ": ").replace("\n", "\\n"),
+                "User review": text.replace(":", ": ").replace("\n", " "),
                 "Review date": date if date else "Unknown",
                 "Star review": rating,
                 "Text length": len(text),
