@@ -12,7 +12,7 @@ from time import sleep
 from pathlib import Path
 from bs4 import BeautifulSoup
 from typing import List, Dict
-from datetime import datetime
+from datetime import datetime, timedelta
 
 
 def get_feedback_link(url_product: str) -> str:
@@ -102,10 +102,11 @@ def conv_date(date_time: str):
     date_list = date_time.split(", ")[0].split()
     if len(date_list) == 1:
         now = datetime.now()
+        new_date = now - timedelta(days=int(date_list[0] == "Вчера"))
         date_list = [
-            f"{now.day - int(date_list[0] == 'Вчера')}",
-            f"{now.month}",
-            f"{now.year}",
+            f"{new_date.day}",
+            f"{new_date.month}",
+            f"{new_date.year}",
         ]
         # Преобразуем строку в объект datetime
         date_obj = datetime.strptime(" ".join(date_list), r"%d %m %Y")
