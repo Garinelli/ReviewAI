@@ -247,7 +247,5 @@ async def message_consumer():
         finally:
             await connection.close()
 
-
-
 if __name__ == "__main__":
     asyncio.run(message_consumer())
