@@ -1,18 +1,15 @@
+from datetime import datetime, timedelta
+from time import sleep
+from typing import List, Dict
+import pandas as pd
 from selenium import webdriver
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import NoSuchElementException, TimeoutException
-from selenium.webdriver.chrome.options import Options
-from typing import List, Dict
+from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.remote.webelement import WebElement
-import pandas as pd
-from time import sleep
-from pathlib import Path
 from bs4 import BeautifulSoup
-from typing import List, Dict
-from datetime import datetime, timedelta
 
 
 def get_feedback_link(url_product: str) -> str:
@@ -27,29 +24,23 @@ def get_feedbacks_raw(driver: WebDriver, url_feedbacks: str) -> List[WebElement]
     def press_this_product_btn():
         """Поиск кнопки 'Этот вариант товара'"""
         try:
-            # Ожидание появления кнопки с текстом "Этот вариант товара" в видимой части страницы
             button = WebDriverWait(driver, 10).until(
                 EC.element_to_be_clickable(
                     (By.XPATH, '//button[contains(text(), "Этот вариант товара")]')
                 )
             )
-            # button = driver.find_elements(By.CLASS_NAME, "product-feedbacks__title")
-            # print(f"{len(button)=}", button[-1].get_attribute("outerHTML"))
 
         except TimeoutException:
             print("Ошибка при поиске кнопки: 'Этот вариант товара'")
         else:
-            # Нажимаем на кнопку
             button.click()
             print("Кнопка успешно нажата!")
 
     def scroll_down():
         """Прокручиваем страницу вниз до тех пор, пока не достигнут конец страницы или контент не успел прогрузиться"""
-        # Получение начальной высоты страницы
         last_height = driver.execute_script("return document.body.scrollHeight")
 
         while True:
-            # Прокрутка страницы до конца
             driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 
             try:
@@ -125,9 +116,7 @@ def conv_date(date_time: str):
 def prepare_feedbacks(html_code: str) -> List[Dict]:
     """Подготавливаем данные о отзывах в виде списка словарей"""
 
-    # Передаем html-код в конструктор BeautifulSoup
     soup = BeautifulSoup(html_code, "html.parser")
-    # Разбиваем на список отзывов
     feedbacks = soup.find_all(
         "li", class_="comments__item feedback product-feedbacks__block-wrapper"
     )
@@ -136,12 +125,6 @@ def prepare_feedbacks(html_code: str) -> List[Dict]:
     comments = []
 
     for i, feedback in enumerate(feedbacks):
-        # # Сохраняем отзыв в текстовом виде для дальнейшего анализа
-        # with open(
-        #     f"{Path(__file__).parent}/soup.txt", "w", encoding="Windows-1251"
-        # ) as f:
-        #     f.write(feedback)
-
         # Дата написания отзыва
         date_time = feedback.find("div", class_="feedback__date").text  # 25 марта 2025
         date = conv_date(date_time)  # 2025-03-25
@@ -190,12 +173,6 @@ def prepare_feedbacks(html_code: str) -> List[Dict]:
 def main(url_product: str, out_path: str) -> None:
     """Основная функция, которая запускает парсинг отзывов и сохраняет результат в csv-файл"""
 
-    # options = Options()
-    # options.add_argument("--headless")  # Запуск в фоновом режиме
-    # options.add_argument("--disable-gpu")  # Отключение GPU для headless-режима
-    # options.add_argument("--window-size=1920,1080")  # Установка размера окна
-
-    # driver = webdriver.Chrome(options=options)  # Запускаем драйвер - !Обязательно!
     driver = webdriver.Chrome()  # Запускаем драйвер - !Обязательно!
 
     # Пример использования
