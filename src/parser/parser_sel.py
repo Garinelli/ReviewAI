@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta
+from functools import reduce
 from time import sleep
 from typing import List, Dict
 import pandas as pd
@@ -142,9 +143,12 @@ def prepare_feedbacks(html_code: str) -> List[Dict]:
         text_tag = feedback.find("div", class_="feedback__content")
         if text_tag:
             text_spans = text_tag.find_all("span")[::2]
-            text = "\n".join([span.text.strip() for span in text_spans])
+            text = " ".join([span.text.strip() for span in text_spans])
         else:
             text = ""
+        keywords = ["Достоинства:", "Недостатки:", "Комментарий:"]
+        text = reduce(lambda t, word: t.replace(word, ""), keywords, text)
+
 
         # Ответ продавца
         answer_tag = feedback.find("p", class_="feedback__sellers-reply-title")
@@ -157,7 +161,7 @@ def prepare_feedbacks(html_code: str) -> List[Dict]:
         # Добавляем отзыв в список
         comments.append(
             {
-                "User review": text.replace(":", ": ").replace("\n", " "),
+                "User review": text.replace("\n", " "),
                 "Review date": date if date else "Unknown",
                 "Star review": rating,
                 "Text length": len(text),
