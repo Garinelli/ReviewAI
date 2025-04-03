@@ -1,4 +1,5 @@
-from datetime import datetime
+from functools import reduce
+from datetime import datetime, timedelta
 from time import sleep
 from typing import List, Dict
 import asyncio
@@ -20,7 +21,6 @@ from selenium.webdriver.remote.webelement import WebElement
 from src.bot.broker.producer import send_message_to_broker
 from src.bot.config import RABBITMQ_URL
 
-
 def init_webdriver():
     chrome_options = Options()
     chrome_options.add_argument('--headless')
@@ -36,12 +36,27 @@ def init_webdriver():
     return driver
 
 driver = init_webdriver()
+# Словарь для перевода месяцев с русского на английский
+MONTHS = {
+    "января": "January",
+    "февраля": "February",
+    "марта": "March",
+    "апреля": "April",
+    "мая": "May",
+    "июня": "June",
+    "июля": "July",
+    "августа": "August",
+    "сентября": "September",
+    "октября": "October",
+    "ноября": "November",
+    "декабря": "December",
+}
+
 
 def get_feedback_link(url_product: str) -> str:
     """Получаем ссылку на страницу с отзывами"""
     feedback_link = url_product[: url_product.rfind("/")] + "/feedbacks"
     return feedback_link
-
 
 def get_feedbacks_raw(driver: WebDriver, url_feedbacks: str) -> List[WebElement]:
     """Получаем все отзывы с текущей страницы"""
@@ -49,34 +64,28 @@ def get_feedbacks_raw(driver: WebDriver, url_feedbacks: str) -> List[WebElement]
     def press_this_product_btn():
         """Поиск кнопки 'Этот вариант товара'"""
         try:
-            # Ожидание появления кнопки с текстом "Этот вариант товара" в видимой части страницы
             button = WebDriverWait(driver, 10).until(
                 EC.element_to_be_clickable(
                     (By.XPATH, '//button[contains(text(), "Этот вариант товара")]')
                 )
             )
-            # button = driver.find_elements(By.CLASS_NAME, "product-feedbacks__title")
-            # print(f"{len(button)=}", button[-1].get_attribute("outerHTML"))
 
         except TimeoutException:
             print("Ошибка при поиске кнопки: 'Этот вариант товара'")
         else:
-            # Нажимаем на кнопку
             button.click()
             print("Кнопка успешно нажата!")
 
     def scroll_down():
         """Прокручиваем страницу вниз до тех пор, пока не достигнут конец страницы или контент не успел прогрузиться"""
-        # Получение начальной высоты страницы
         last_height = driver.execute_script("return document.body.scrollHeight")
 
         while True:
-            # Прокрутка страницы до конца
             driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 
             try:
                 # Ожидание загрузки нового контента
-                WebDriverWait(driver, 3).until(
+                WebDriverWait(driver, 10).until(
                     lambda d: d.execute_script("return document.body.scrollHeight")
                     > last_height
                 )
@@ -102,37 +111,21 @@ def get_feedbacks_raw(driver: WebDriver, url_feedbacks: str) -> List[WebElement]
 
     return html_code
 
-
 def conv_date(date_time: str):
     """Преобразование даты в формат datetime"""
-    # Словарь для перевода месяцев с русского на английский
-    months = {
-        "января": "January",
-        "февраля": "February",
-        "марта": "March",
-        "апреля": "April",
-        "мая": "May",
-        "июня": "June",
-        "июля": "July",
-        "августа": "August",
-        "сентября": "September",
-        "октября": "October",
-        "ноября": "November",
-        "декабря": "December",
-    }
-
     date_list = date_time.split(", ")[0].split()
     if len(date_list) == 1:
         now = datetime.now()
+        new_date = now - timedelta(days=int(date_list[0] == "Вчера"))
         date_list = [
-            f"{now.day - int(date_list[0] == 'Вчера')}",
-            f"{now.month}",
-            f"{now.year}",
+            f"{new_date.day}",
+            f"{new_date.month}",
+            f"{new_date.year}",
         ]
         # Преобразуем строку в объект datetime
         date_obj = datetime.strptime(" ".join(date_list), r"%d %m %Y")
     else:
-        date_list[1] = months[date_list[1]]
+        date_list[1] = MONTHS[date_list[1]]
         if len(date_list) == 2:
             date_list.append(f"{datetime.now().year}")
         # Преобразуем строку в объект datetime
@@ -142,13 +135,10 @@ def conv_date(date_time: str):
     formatted_date = date_obj.strftime(r"%Y-%m-%d")
     return formatted_date
 
-
 def prepare_feedbacks(html_code: str) -> List[Dict]:
     """Подготавливаем данные о отзывах в виде списка словарей"""
 
-    # Передаем html-код в конструктор BeautifulSoup
     soup = BeautifulSoup(html_code, "html.parser")
-    # Разбиваем на список отзывов
     feedbacks = soup.find_all(
         "li", class_="comments__item feedback product-feedbacks__block-wrapper"
     )
@@ -157,12 +147,6 @@ def prepare_feedbacks(html_code: str) -> List[Dict]:
     comments = []
 
     for i, feedback in enumerate(feedbacks):
-        # # Сохраняем отзыв в текстовом виде для дальнейшего анализа
-        # with open(
-        #     f"{Path(__file__).parent}/soup.txt", "w", encoding="Windows-1251"
-        # ) as f:
-        #     f.write(feedback)
-
         # Дата написания отзыва
         date_time = feedback.find("div", class_="feedback__date").text  # 25 марта 2025
         date = conv_date(date_time)  # 2025-03-25
@@ -180,9 +164,12 @@ def prepare_feedbacks(html_code: str) -> List[Dict]:
         text_tag = feedback.find("div", class_="feedback__content")
         if text_tag:
             text_spans = text_tag.find_all("span")[::2]
-            text = "\n".join([span.text.strip() for span in text_spans])
+            text = " ".join([span.text.strip() for span in text_spans])
         else:
             text = ""
+        keywords = ["Достоинства:", "Недостатки:", "Комментарий:"]
+        text = reduce(lambda t, word: t.replace(word, ""), keywords, text)
+
 
         # Ответ продавца
         answer_tag = feedback.find("p", class_="feedback__sellers-reply-title")
@@ -195,17 +182,17 @@ def prepare_feedbacks(html_code: str) -> List[Dict]:
         # Добавляем отзыв в список
         comments.append(
             {
-                "User review": text.replace(":", ": ").replace("\n", "\\n"),
+                "User review": text.replace("\n", " "),
                 "Review date": date if date else "Unknown",
                 "Star review": rating,
                 "Text length": len(text),
                 "Has media": has_media,
                 "Has answer": has_answer,
+                "Written by bot": 0,
             }
         )
 
     return comments
-
 
 def parser_feedbacks(url_product, driver, task_id) -> None:
     """Основная функция, которая запускает парсинг отзывов и сохраняет результат в csv-файл"""
@@ -228,8 +215,6 @@ def parser_feedbacks(url_product, driver, task_id) -> None:
     # Сохранение отзывов в csv-файле
     pd.DataFrame(feedbacks).to_csv(f'{task_id}.csv')
 
-
-
 async def process_message(message: aio_pika.IncomingMessage):
     async with message.process():
         body = message.body.decode()
@@ -239,16 +224,19 @@ async def process_message(message: aio_pika.IncomingMessage):
         await send_message_to_broker(queue_name='preprocessing', user_telegram_id=body['user_telegram_id'],
                                              task_id=body['task_id'])
 
-
 async def message_consumer():
-    connection = await aio_pika.connect(RABBITMQ_URL)
+    connection = await aio_pika.connect_robust(RABBITMQ_URL)
     async with connection:
         channel = await connection.channel()
+        await channel.set_qos(prefetch_count=5)
         queue = await channel.declare_queue("parser")
 
         await queue.consume(process_message)
 
-        await asyncio.Future()
+        try:
+            await asyncio.Future()
+        finally:
+            await connection.close()
 
 
 if __name__ == "__main__":
