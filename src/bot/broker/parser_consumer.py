@@ -1,4 +1,4 @@
-from functools import reduce
+from functools import partial, reduce
 from datetime import datetime, timedelta
 from time import sleep
 from typing import List, Dict
@@ -13,50 +13,38 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.remote.webdriver import WebDriver
-from selenium_stealth import stealth
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.remote.webelement import WebElement
+from selenium_stealth import stealth
 
 from src.bot.broker.producer import send_message_to_broker
 from src.bot.config import RABBITMQ_URL
+from src.bot.constants import MONTHS
+
 
 def init_webdriver():
     chrome_options = Options()
-    chrome_options.add_argument('--headless')
-    chrome_options.add_argument('--disable-gpu')
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--disable-gpu")
 
     driver = webdriver.Chrome(options=chrome_options)
 
-    stealth(driver,
-            vendor='Google Inc.',
-            platform='Win32',
-            webgl_vendor="Intel Inc.",
-            renderer="Intel Iris OpenGL Engine")
+    stealth(
+        driver,
+        vendor="Google Inc.",
+        platform="Win32",
+        webgl_vendor="Intel Inc.",
+        renderer="Intel Iris OpenGL Engine",
+    )
     return driver
-
-driver = init_webdriver()
-# Словарь для перевода месяцев с русского на английский
-MONTHS = {
-    "января": "January",
-    "февраля": "February",
-    "марта": "March",
-    "апреля": "April",
-    "мая": "May",
-    "июня": "June",
-    "июля": "July",
-    "августа": "August",
-    "сентября": "September",
-    "октября": "October",
-    "ноября": "November",
-    "декабря": "December",
-}
 
 
 def get_feedback_link(url_product: str) -> str:
     """Получаем ссылку на страницу с отзывами"""
     feedback_link = url_product[: url_product.rfind("/")] + "/feedbacks"
     return feedback_link
+
 
 def get_feedbacks_raw(driver: WebDriver, url_feedbacks: str) -> List[WebElement]:
     """Получаем все отзывы с текущей страницы"""
@@ -111,17 +99,14 @@ def get_feedbacks_raw(driver: WebDriver, url_feedbacks: str) -> List[WebElement]
 
     return html_code
 
+
 def conv_date(date_time: str):
     """Преобразование даты в формат datetime"""
     date_list = date_time.split(", ")[0].split()
     if len(date_list) == 1:
         now = datetime.now()
         new_date = now - timedelta(days=int(date_list[0] == "Вчера"))
-        date_list = [
-            f"{new_date.day}",
-            f"{new_date.month}",
-            f"{new_date.year}",
-        ]
+        date_list = [f"{new_date.day}", f"{new_date.month}", f"{new_date.year}"]
         # Преобразуем строку в объект datetime
         date_obj = datetime.strptime(" ".join(date_list), r"%d %m %Y")
     else:
@@ -134,6 +119,7 @@ def conv_date(date_time: str):
     # Форматируем дату в нужный формат
     formatted_date = date_obj.strftime(r"%Y-%m-%d")
     return formatted_date
+
 
 def prepare_feedbacks(html_code: str) -> List[Dict]:
     """Подготавливаем данные о отзывах в виде списка словарей"""
@@ -148,8 +134,8 @@ def prepare_feedbacks(html_code: str) -> List[Dict]:
 
     for i, feedback in enumerate(feedbacks):
         # Дата написания отзыва
-        date_time = feedback.find("div", class_="feedback__date").text  # 25 марта 2025
-        date = conv_date(date_time)  # 2025-03-25
+        date_time = feedback.find("div", class_="feedback__date").text
+        date = conv_date(date_time)
 
         # Выводим имена пользователей для визуализации обработки отзывов
         if i % 10 == 0:
@@ -169,7 +155,6 @@ def prepare_feedbacks(html_code: str) -> List[Dict]:
             text = ""
         keywords = ["Достоинства:", "Недостатки:", "Комментарий:"]
         text = reduce(lambda t, word: t.replace(word, ""), keywords, text)
-
 
         # Ответ продавца
         answer_tag = feedback.find("p", class_="feedback__sellers-reply-title")
@@ -194,16 +179,9 @@ def prepare_feedbacks(html_code: str) -> List[Dict]:
 
     return comments
 
+
 def parser_feedbacks(url_product, driver, task_id) -> None:
     """Основная функция, которая запускает парсинг отзывов и сохраняет результат в csv-файл"""
-
-    # options = Options()
-    # options.add_argument("--headless")  # Запуск в фоновом режиме
-    # options.add_argument("--disable-gpu")  # Отключение GPU для headless-режима
-    # options.add_argument("--window-size=1920,1080")  # Установка размера окна
-
-    # driver = webdriver.Chrome(options=options)  # Запускаем драйвер - !Обязательно!
-    # driver = webdriver.Chrome()  # Запускаем драйвер - !Обязательно!
 
     # Пример использования
     feedbacks = prepare_feedbacks(
@@ -213,25 +191,30 @@ def parser_feedbacks(url_product, driver, task_id) -> None:
     driver.quit()  # Закрываем драйвер - !Обязательно!
 
     # Сохранение отзывов в csv-файле
-    pd.DataFrame(feedbacks).to_csv(f'{task_id}.csv')
+    pd.DataFrame(feedbacks).to_csv(f"{task_id}.csv")
 
-async def process_message(message: aio_pika.IncomingMessage):
+
+async def process_message(message: aio_pika.IncomingMessage, driver: WebDriver):
     async with message.process():
         body = message.body.decode()
         body = json.loads(body)
         print(f"Получено сообщение: {body}")
-        parser_feedbacks(body['link'], driver, body['task_id'])
-        await send_message_to_broker(queue_name='preprocessing', user_telegram_id=body['user_telegram_id'],
-                                             task_id=body['task_id'])
+        parser_feedbacks(body["link"], driver, body["task_id"])
+        await send_message_to_broker(
+            queue_name="preprocessing",
+            user_telegram_id=body["user_telegram_id"],
+            task_id=body["task_id"],
+        )
 
-async def message_consumer():
+
+async def message_consumer(driver: WebDriver):
     connection = await aio_pika.connect_robust(RABBITMQ_URL)
     async with connection:
         channel = await connection.channel()
         await channel.set_qos(prefetch_count=5)
         queue = await channel.declare_queue("parser")
 
-        await queue.consume(process_message)
+        await queue.consume(partial(process_message, driver=driver))
 
         try:
             await asyncio.Future()
@@ -240,4 +223,5 @@ async def message_consumer():
 
 
 if __name__ == "__main__":
-    asyncio.run(message_consumer())
+    DRIVER = init_webdriver()
+    asyncio.run(message_consumer(DRIVER))
