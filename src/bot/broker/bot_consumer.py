@@ -14,12 +14,12 @@ async def process_message(message: aio_pika.IncomingMessage):
         body = json.loads(body)
         result_message = body["result"]
         await send_request_status(
-            bot,
-            body['user_telegram_id'],
-            '✅Результат получен...'
+            bot, body["user_telegram_id"], "✅Результат получен..."
         )
         await asyncio.sleep(3)
-        await send_request_status(body['user_telegram_id'], result_message, body['task_id'])
+        await send_request_status(
+            bot, body["user_telegram_id"], result_message, body["task_id"]
+        )
         print(f"Получено сообщение: {body}")
 
 
