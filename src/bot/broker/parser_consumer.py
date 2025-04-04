@@ -20,7 +20,8 @@ from selenium_stealth import stealth
 
 from src.bot.broker.producer import send_message_to_broker
 from src.bot.config import RABBITMQ_URL
-from src.bot.constants import MONTHS, KEYWORDS
+from src.bot.constants import MONTHS, KEYWORDS, CLASS_NAME
+
 
 def init_webdriver():
     chrome_options = Options()
@@ -38,13 +39,16 @@ def init_webdriver():
     )
     return driver
 
+
 def get_feedback_link(url_product: str) -> str:
     """Получаем ссылку на страницу с отзывами"""
     feedback_link = url_product[: url_product.rfind("/")] + "/feedbacks"
     return feedback_link
 
+
 def get_feedbacks_raw(driver: WebDriver, url_feedbacks: str) -> List[WebElement]:
     """Получаем все отзывы с текущей страницы"""
+
     def press_this_product_btn():
         """Поиск кнопки 'Этот вариант товара'"""
         try:
@@ -92,6 +96,7 @@ def get_feedbacks_raw(driver: WebDriver, url_feedbacks: str) -> List[WebElement]
 
     return html_code
 
+
 def conv_date(date_time: str):
     """Преобразование даты в формат datetime"""
     date_list = date_time.split(", ")[0].split()
@@ -111,6 +116,7 @@ def conv_date(date_time: str):
     # Форматируем дату в нужный формат
     formatted_date = date_obj.strftime(r"%Y-%m-%d")
     return formatted_date
+
 
 def prepare_feedbacks(html_code: str) -> List[Dict]:
     """Подготавливаем данные о отзывах в виде списка словарей"""
@@ -137,25 +143,31 @@ def prepare_feedbacks(html_code: str) -> List[Dict]:
         rating = int(rating_tag.find("span")["class"][-1][-1]) if rating_tag else 0
 
         # Текст отзыва
-        review_dignity = feedback.find('span', class_='feedback__text--item feedback__text--item-pro')
-        review_flaws = feedback.find('span', class_='feedback__text--item feedback__text--item-con')
-        review = feedback.find('span', class_='feedback__text--item')
-        text = ""
+        review_pros = feedback.find("span", class_=f"{CLASS_NAME} {CLASS_NAME}-pro")
+        review_cons = feedback.find("span", class_=f"{CLASS_NAME} {CLASS_NAME}-con")
+        review_comments = feedback.select_one(f'span[class="{CLASS_NAME}"]')
+
+        review = (review_pros, review_cons, review_comments)
 
         # Случай, когда у отзыва нет текста
-        if not all((review_dignity, review_flaws, review)):
+        if not any(review):
             continue
-        
-        if review_dignity is not None:
-            text += review_dignity.text.strip()
-        
-        if review_flaws is not None:
-            text += review_flaws.text.strip()
-        
-        if review is not None:
-            text += review.text.strip()
 
-        text = reduce(lambda t, word: t.replace(word, ""), KEYWORDS, text)
+        text = " ".join(
+            [
+                str(item.text).strip().removeprefix(word)
+                for item, word in zip(review, KEYWORDS)
+                if item
+            ]
+        )
+        # Это вариант может быть быстрее, но менее читаем
+        # text = " ".join(
+        #     [
+        #         item.find_all(string=True, recursive=False)[-1].strip()
+        #         for item in review
+        #         if item
+        #     ]
+        # )
 
         # Медиа (фото/видео)
         media_tag = feedback.find("ul", class_="feedback__photos")
@@ -167,10 +179,11 @@ def prepare_feedbacks(html_code: str) -> List[Dict]:
                 "User review": text.replace("\n", " "),
                 "Review date": date if date else "Unknown",
                 "Star review": rating,
-                "Has media": has_media
+                "Has media": has_media,
             }
         )
     return comments
+
 
 def parser_feedbacks(url_product, driver, task_id) -> None:
     """Основная функция, которая запускает парсинг отзывов и сохраняет результат в csv-файл"""
@@ -184,6 +197,7 @@ def parser_feedbacks(url_product, driver, task_id) -> None:
     # Сохранение отзывов в csv-файле
     pd.DataFrame(feedbacks).to_csv(f"{task_id}.csv")
 
+
 async def process_message(message: aio_pika.IncomingMessage, driver: WebDriver):
     async with message.process():
         body = message.body.decode()
@@ -195,6 +209,7 @@ async def process_message(message: aio_pika.IncomingMessage, driver: WebDriver):
             user_telegram_id=body["user_telegram_id"],
             task_id=body["task_id"],
         )
+
 
 async def message_consumer(driver: WebDriver):
     connection = await aio_pika.connect_robust(RABBITMQ_URL)
@@ -209,6 +224,7 @@ async def message_consumer(driver: WebDriver):
             await asyncio.Future()
         finally:
             await connection.close()
+
 
 if __name__ == "__main__":
     DRIVER = init_webdriver()

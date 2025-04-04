@@ -28,3 +28,5 @@ MONTHS = {
 }
 
 KEYWORDS = ["Достоинства:", "Недостатки:", "Комментарий:"]
+
+CLASS_NAME = "feedback__text--item"
