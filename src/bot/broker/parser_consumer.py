@@ -20,8 +20,7 @@ from selenium_stealth import stealth
 
 from src.bot.broker.producer import send_message_to_broker
 from src.bot.config import RABBITMQ_URL
-from src.bot.constants import MONTHS
-
+from src.bot.constants import MONTHS, KEYWORDS
 
 def init_webdriver():
     chrome_options = Options()
@@ -147,14 +146,34 @@ def prepare_feedbacks(html_code: str) -> List[Dict]:
         rating = int(rating_tag.find("span")["class"][-1][-1]) if rating_tag else 0
 
         # Текст отзыва
-        text_tag = feedback.find("div", class_="feedback__content")
-        if text_tag:
-            text_spans = text_tag.find_all("span")[::2]
-            text = " ".join([span.text.strip() for span in text_spans])
-        else:
-            text = ""
-        keywords = ["Достоинства:", "Недостатки:", "Комментарий:"]
-        text = reduce(lambda t, word: t.replace(word, ""), keywords, text)
+        review_dignity = feedback.find('span', class_='feedback__text--item feedback__text--item-pro')
+        review_flaws = feedback.find('span', class_='feedback__text--item feedback__text--item-con')
+        review = feedback.find('span', class_='feedback__text--item')
+        text = ""
+
+        # Случай, когда у отзыва нет текста
+        if not all((review_dignity, review_flaws, review)):
+            continue
+        
+        if review_dignity is not None:
+            text += review_dignity.text.strip()
+        
+        if review_flaws is not None:
+            text += review_flaws.text.strip()
+        
+        if review is not None:
+            text += review.text.strip()
+
+        text = reduce(lambda t, word: t.replace(word, ""), KEYWORDS, text)
+        
+        # text_tag = feedback.find("div", class_="feedback__content")
+        # if text_tag:
+        #     text_spans = text_tag.find_all("span")[::2]
+        #     text = " ".join([span.text.strip() for span in text_spans])
+        # else:
+        #     text = ""
+        # keywords = ["Достоинства:", "Недостатки:", "Комментарий:"]
+        # text = reduce(lambda t, word: t.replace(word, ""), keywords, text)
 
         # Медиа (фото/видео)
         media_tag = feedback.find("ul", class_="feedback__photos")
