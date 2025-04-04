@@ -7,7 +7,6 @@ from src.bot.config import RABBITMQ_URL
 from src.bot.bot_utils.status_sender import send_request_status
 from src.bot.main import bot
 
-
 async def process_message(message: aio_pika.IncomingMessage):
     async with message.process():
         body = message.body.decode()
@@ -22,7 +21,6 @@ async def process_message(message: aio_pika.IncomingMessage):
         )
         print(f"Получено сообщение: {body}")
 
-
 async def message_consumer():
     connection = await aio_pika.connect_robust(RABBITMQ_URL)
     async with connection:
@@ -36,7 +34,6 @@ async def message_consumer():
             await asyncio.Future()
         finally:
             await connection.close()
-
 
 if __name__ == "__main__":
     asyncio.run(message_consumer())

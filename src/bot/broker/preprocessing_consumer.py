@@ -18,7 +18,6 @@ from src.bot.broker.producer import send_message_to_broker
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent
 
-
 nltk.download('omw-1.4')
 nltk.download('punkt_tab')
 nltk.download('punkt')
@@ -43,11 +42,9 @@ stop_words = set(stopwords.words('russian'))
 
 morph = pymorphy2.MorphAnalyzer()
     
-
 def tokens_to_vector(tokens, model):
     sentence = ' '.join(tokens)
     return model.get_sentence_vector(sentence)
-
 
 def get_tokens(reviews):
     for index, review in enumerate(reviews):
@@ -62,20 +59,17 @@ def remove_stop_words(reviews):
             if token in stop_words and token not in exceptions:
                 tokens.remove(token)
     
-
 def lemma_preporation(reviews):
     for tokens in reviews:
         for index, token in enumerate(tokens):
             lemma = morph.parse(token)[0].normal_form
             tokens[index] = lemma
 
-
 def remove_punctuation(reviews):    
     for tokens in reviews:
         for token in tokens:
             if token in string.punctuation and token not in exceptions_punctuation:
                 tokens.remove(token)
-
 
 async def dataframe_preprocessing(task_id):
     df = pd.read_csv(f'{task_id}.csv').drop(columns=['Unnamed: 0'])
@@ -86,16 +80,13 @@ async def dataframe_preprocessing(task_id):
     for index, review in enumerate(reviews):
         reviews[index] = review.lower()
 
-
     reviews = get_tokens(reviews)
     remove_stop_words(reviews)
     lemma_preporation(reviews)
     remove_punctuation(reviews)
 
-
     df['User review'] = df['User review'].apply(lambda x: tokens_to_vector(x, model))
     df.to_pickle(f'{task_id}.pickle')
-
 
 async def process_message(message: aio_pika.IncomingMessage):
     async with message.process():
@@ -113,7 +104,6 @@ async def process_message(message: aio_pika.IncomingMessage):
         await send_message_to_broker(queue_name='NN', task_id=body['task_id'],
                                   user_telegram_id=body['user_telegram_id'])
 
-
 async def message_consumer():
     connection = await aio_pika.connect_robust(RABBITMQ_URL)
     async with connection:
@@ -127,7 +117,6 @@ async def message_consumer():
             await asyncio.Future()
         finally:
             await connection.close()
-
 
 if __name__ == "__main__":
     asyncio.run(message_consumer())

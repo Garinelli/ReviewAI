@@ -38,16 +38,13 @@ def init_webdriver():
     )
     return driver
 
-
 def get_feedback_link(url_product: str) -> str:
     """Получаем ссылку на страницу с отзывами"""
     feedback_link = url_product[: url_product.rfind("/")] + "/feedbacks"
     return feedback_link
 
-
 def get_feedbacks_raw(driver: WebDriver, url_feedbacks: str) -> List[WebElement]:
     """Получаем все отзывы с текущей страницы"""
-
     def press_this_product_btn():
         """Поиск кнопки 'Этот вариант товара'"""
         try:
@@ -56,7 +53,6 @@ def get_feedbacks_raw(driver: WebDriver, url_feedbacks: str) -> List[WebElement]
                     (By.XPATH, '//button[contains(text(), "Этот вариант товара")]')
                 )
             )
-
         except TimeoutException:
             print("Ошибка при поиске кнопки: 'Этот вариант товара'")
         else:
@@ -69,7 +65,6 @@ def get_feedbacks_raw(driver: WebDriver, url_feedbacks: str) -> List[WebElement]
 
         while True:
             driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-
             try:
                 # Ожидание загрузки нового контента
                 WebDriverWait(driver, 10).until(
@@ -79,7 +74,6 @@ def get_feedbacks_raw(driver: WebDriver, url_feedbacks: str) -> List[WebElement]
             except TimeoutException:
                 print("Конец страницы достигнут или контент не успел прогрузиться!")
                 break
-
             # Получение новой высоты страницы | Обновление последней высоты страницы
             last_height = driver.execute_script("return document.body.scrollHeight")
 
@@ -97,7 +91,6 @@ def get_feedbacks_raw(driver: WebDriver, url_feedbacks: str) -> List[WebElement]
     html_code = driver.page_source
 
     return html_code
-
 
 def conv_date(date_time: str):
     """Преобразование даты в формат datetime"""
@@ -119,10 +112,8 @@ def conv_date(date_time: str):
     formatted_date = date_obj.strftime(r"%Y-%m-%d")
     return formatted_date
 
-
 def prepare_feedbacks(html_code: str) -> List[Dict]:
     """Подготавливаем данные о отзывах в виде списка словарей"""
-
     soup = BeautifulSoup(html_code, "html.parser")
     feedbacks = soup.find_all(
         "li", class_="comments__item feedback product-feedbacks__block-wrapper"
@@ -165,15 +156,6 @@ def prepare_feedbacks(html_code: str) -> List[Dict]:
             text += review.text.strip()
 
         text = reduce(lambda t, word: t.replace(word, ""), KEYWORDS, text)
-        
-        # text_tag = feedback.find("div", class_="feedback__content")
-        # if text_tag:
-        #     text_spans = text_tag.find_all("span")[::2]
-        #     text = " ".join([span.text.strip() for span in text_spans])
-        # else:
-        #     text = ""
-        # keywords = ["Достоинства:", "Недостатки:", "Комментарий:"]
-        # text = reduce(lambda t, word: t.replace(word, ""), keywords, text)
 
         # Медиа (фото/видео)
         media_tag = feedback.find("ul", class_="feedback__photos")
@@ -188,13 +170,10 @@ def prepare_feedbacks(html_code: str) -> List[Dict]:
                 "Has media": has_media
             }
         )
-
     return comments
-
 
 def parser_feedbacks(url_product, driver, task_id) -> None:
     """Основная функция, которая запускает парсинг отзывов и сохраняет результат в csv-файл"""
-
     # Пример использования
     feedbacks = prepare_feedbacks(
         get_feedbacks_raw(driver, get_feedback_link(url_product))
@@ -204,7 +183,6 @@ def parser_feedbacks(url_product, driver, task_id) -> None:
 
     # Сохранение отзывов в csv-файле
     pd.DataFrame(feedbacks).to_csv(f"{task_id}.csv")
-
 
 async def process_message(message: aio_pika.IncomingMessage, driver: WebDriver):
     async with message.process():
@@ -217,7 +195,6 @@ async def process_message(message: aio_pika.IncomingMessage, driver: WebDriver):
             user_telegram_id=body["user_telegram_id"],
             task_id=body["task_id"],
         )
-
 
 async def message_consumer(driver: WebDriver):
     connection = await aio_pika.connect_robust(RABBITMQ_URL)
@@ -232,7 +209,6 @@ async def message_consumer(driver: WebDriver):
             await asyncio.Future()
         finally:
             await connection.close()
-
 
 if __name__ == "__main__":
     DRIVER = init_webdriver()

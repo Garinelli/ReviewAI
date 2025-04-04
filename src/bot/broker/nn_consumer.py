@@ -19,14 +19,10 @@ from src.bot.broker.producer import send_message_to_broker
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 model = tf.keras.models.load_model(BASE_DIR / 'ml/Models/fasttext_model_gru.h5')
 
-
 async def nn_predict(task_id):
     df = pd.read_pickle(f'{task_id}.pickle')
-
     all_reviews_count = len(df)
-
     written_by_bot = 0
-
     fake_reviews_id = []
 
     for index, row in df.iterrows():
@@ -39,7 +35,6 @@ async def nn_predict(task_id):
         second_tensor = tf.convert_to_tensor(second_tensor, dtype=tf.float32)
 
         prediction = model.predict([tensor_vector, second_tensor])
-
         if prediction[0][0] < prediction[0][1]:
             written_by_bot += 1
             fake_reviews_id.append(index)
@@ -47,7 +42,6 @@ async def nn_predict(task_id):
     percent_result = round((written_by_bot / all_reviews_count) * 100, 1)
 
     return all_reviews_count, written_by_bot, percent_result, fake_reviews_id 
-
 
 async def create_review_star_graphic(star_reviews: list[int], task_id: str):
     plt.plot(star_reviews, linestyle='-', color='b', label='Оценки')
@@ -59,7 +53,6 @@ async def create_review_star_graphic(star_reviews: list[int], task_id: str):
     plt.legend()
     plt.savefig(f'{task_id}.png', dpi=300, bbox_inches='tight')
     plt.close()
-
 
 async def process_message(message: aio_pika.IncomingMessage):
     async with message.process():
@@ -98,7 +91,6 @@ async def process_message(message: aio_pika.IncomingMessage):
                                      result=result_message, user_telegram_id=body['user_telegram_id'],
                                      task_id=body['task_id'])
 
-
 async def message_consumer():
     connection = await aio_pika.connect_robust(RABBITMQ_URL)
     async with connection:
@@ -112,7 +104,6 @@ async def message_consumer():
             await asyncio.Future()
         finally:
             await connection.close()
-
 
 if __name__ == "__main__":
     asyncio.run(message_consumer())
