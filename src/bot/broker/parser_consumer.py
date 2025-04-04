@@ -156,10 +156,6 @@ def prepare_feedbacks(html_code: str) -> List[Dict]:
         keywords = ["Достоинства:", "Недостатки:", "Комментарий:"]
         text = reduce(lambda t, word: t.replace(word, ""), keywords, text)
 
-        # Ответ продавца
-        answer_tag = feedback.find("p", class_="feedback__sellers-reply-title")
-        has_answer = int(answer_tag is not None)
-
         # Медиа (фото/видео)
         media_tag = feedback.find("ul", class_="feedback__photos")
         has_media = int(media_tag is not None)
@@ -170,10 +166,7 @@ def prepare_feedbacks(html_code: str) -> List[Dict]:
                 "User review": text.replace("\n", " "),
                 "Review date": date if date else "Unknown",
                 "Star review": rating,
-                "Text length": len(text),
-                "Has media": has_media,
-                "Has answer": has_answer,
-                "Written by bot": 0,
+                "Has media": has_media
             }
         )
 

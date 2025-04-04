@@ -191,7 +191,7 @@ def main(url_product: str, out_path: str) -> None:
 
 
 if __name__ == "__main__":
-    url = "https://www.wildberries.ru/catalog/196491327/detail.aspx"
+    url = "https://www.wildberries.ru/catalog/188086817/detail.aspx"
     # url = "https://www.wildberries.ru/catalog/259046906/detail.aspx"
 
     main(url, "feedbacks_wb.csv")

@@ -32,12 +32,10 @@ async def nn_predict(task_id):
     for index, row in df.iterrows():
         review = row["User review"]
         star_review = row["Star review"]
-        text_len = row["Text length"]
         has_media = row["Has media"]
-        has_answer = row["Has answer"]
 
         tensor_vector = tf.convert_to_tensor([review], dtype=tf.float32)
-        second_tensor = np.array([[star_review, text_len, has_media, has_answer]])
+        second_tensor = np.array([[star_review, has_media]])
         second_tensor = tf.convert_to_tensor(second_tensor, dtype=tf.float32)
 
         prediction = model.predict([tensor_vector, second_tensor])

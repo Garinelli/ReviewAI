@@ -1,6 +1,4 @@
 import json
-import asyncio
-
 import aio_pika
 
 from src.bot.config import RABBITMQ_URL
