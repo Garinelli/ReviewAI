@@ -22,7 +22,6 @@ from src.bot.broker.producer import send_message_to_broker
 from src.bot.config import RABBITMQ_URL
 from src.bot.constants import MONTHS, KEYWORDS, CLASS_NAME
 
-
 def init_webdriver():
     chrome_options = Options()
     chrome_options.add_argument("--headless")
@@ -39,12 +38,10 @@ def init_webdriver():
     )
     return driver
 
-
 def get_feedback_link(url_product: str) -> str:
     """Получаем ссылку на страницу с отзывами"""
     feedback_link = url_product[: url_product.rfind("/")] + "/feedbacks"
     return feedback_link
-
 
 def get_feedbacks_raw(driver: WebDriver, url_feedbacks: str) -> List[WebElement]:
     """Получаем все отзывы с текущей страницы"""
@@ -96,7 +93,6 @@ def get_feedbacks_raw(driver: WebDriver, url_feedbacks: str) -> List[WebElement]
 
     return html_code
 
-
 def conv_date(date_time: str):
     """Преобразование даты в формат datetime"""
     date_list = date_time.split(", ")[0].split()
@@ -117,16 +113,8 @@ def conv_date(date_time: str):
     formatted_date = date_obj.strftime(r"%Y-%m-%d")
     return formatted_date
 
-
-def prepare_feedbacks(html_code: str) -> List[Dict]:
-    """Подготавливаем данные о отзывах в виде списка словарей"""
-    soup = BeautifulSoup(html_code, "html.parser")
-    feedbacks = soup.find_all(
-        "li", class_="comments__item feedback product-feedbacks__block-wrapper"
-    )
-    print(f"Количество отзывов: {len(feedbacks)}")
-
-    comments = []
+def parse_reviews(feedbacks) -> list:
+    reviews = []
 
     for i, feedback in enumerate(feedbacks):
         # Дата написания отзыва
@@ -160,6 +148,7 @@ def prepare_feedbacks(html_code: str) -> List[Dict]:
                 if item
             ]
         )
+        print(f'{text = }\n')
         # Это вариант может быть быстрее, но менее читаем
         # text = " ".join(
         #     [
@@ -174,16 +163,27 @@ def prepare_feedbacks(html_code: str) -> List[Dict]:
         has_media = int(media_tag is not None)
 
         # Добавляем отзыв в список
-        comments.append(
+        reviews.append(
             {
                 "User review": text.replace("\n", " "),
-                "Review date": date if date else "Unknown",
+                "Review date": date,
                 "Star review": rating,
                 "Has media": has_media,
             }
-        )
-    return comments
+        ) 
+    return reviews
 
+def prepare_feedbacks(html_code: str) -> List[Dict]:
+    """Подготавливаем данные о отзывах в виде списка словарей"""
+    soup = BeautifulSoup(html_code, "html.parser")
+    feedbacks = soup.find_all(
+        "li", class_="comments__item feedback product-feedbacks__block-wrapper"
+    )
+    print(f"Количество отзывов: {len(feedbacks)}")
+
+    reviews = parse_reviews(feedbacks)
+    
+    return reviews
 
 def parser_feedbacks(url_product, driver, task_id) -> None:
     """Основная функция, которая запускает парсинг отзывов и сохраняет результат в csv-файл"""
@@ -197,7 +197,6 @@ def parser_feedbacks(url_product, driver, task_id) -> None:
     # Сохранение отзывов в csv-файле
     pd.DataFrame(feedbacks).to_csv(f"{task_id}.csv")
 
-
 async def process_message(message: aio_pika.IncomingMessage, driver: WebDriver):
     async with message.process():
         body = message.body.decode()
@@ -209,7 +208,6 @@ async def process_message(message: aio_pika.IncomingMessage, driver: WebDriver):
             user_telegram_id=body["user_telegram_id"],
             task_id=body["task_id"],
         )
-
 
 async def message_consumer(driver: WebDriver):
     connection = await aio_pika.connect_robust(RABBITMQ_URL)
@@ -224,7 +222,6 @@ async def message_consumer(driver: WebDriver):
             await asyncio.Future()
         finally:
             await connection.close()
-
 
 if __name__ == "__main__":
     DRIVER = init_webdriver()
