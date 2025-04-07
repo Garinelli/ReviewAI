@@ -6,6 +6,7 @@ import aio_pika
 from src.bot.config import RABBITMQ_URL
 from src.bot.bot_utils.status_sender import send_request_status
 from src.bot.main import bot
+from src.bot.log_conf import logging
 
 async def process_message(message: aio_pika.IncomingMessage):
     async with message.process():
@@ -19,6 +20,7 @@ async def process_message(message: aio_pika.IncomingMessage):
         await send_request_status(
             bot, body["user_telegram_id"], result_message, body["task_id"]
         )
+        logging.info(f"Получено сообщение: {body}. queue_name = {body['queue_name']}")
         print(f"Получено сообщение: {body}")
 
 async def message_consumer():
