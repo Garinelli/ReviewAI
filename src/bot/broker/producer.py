@@ -27,7 +27,8 @@ async def send_message_to_broker(**kwargs):
                 routing_key=kwargs["queue_name"],
             )
 
-        logging.info(f"[INFO] MESSAGE HAS BEEN PUBLISHED TO {kwargs['queue_name']} QUEUE. task_id = {kwargs['task_id']}")
-            print(f"[INFO] Message published to {kwargs['queue_name']}")
+            logging.info(
+                f"[INFO] MESSAGE HAS BEEN PUBLISHED TO {kwargs['queue_name']} QUEUE. task_id = {kwargs['task_id']}"
+            )
     except Exception as e:
         print(f"[ERROR] Failed to send message: {e}")
