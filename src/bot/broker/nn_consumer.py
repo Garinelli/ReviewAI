@@ -14,7 +14,7 @@ from src.bot.bot_utils.status_sender import send_request_status
 from src.bot.main import bot
 from src.bot.constants import RESULT_MESSAGE
 from src.bot.broker.producer import send_message_to_broker
-
+from src.bot.log_conf import logging
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 model = tf.keras.models.load_model(BASE_DIR / "ml/Models/fasttext_model_gru.h5")  # pylint: disable=E1101:no-member
@@ -62,7 +62,9 @@ async def process_message(message: aio_pika.IncomingMessage):
         body = message.body.decode()
         body = json.loads(body)
 
+        logging.info(f"Получено сообщение: {body}. queue_name = {body['queue_name']}")
         print(f"Получено сообщение: {body}")
+        
         await send_request_status(
             bot,
             body["user_telegram_id"],

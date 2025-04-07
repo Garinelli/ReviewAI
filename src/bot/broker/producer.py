@@ -2,6 +2,7 @@ import json
 import aio_pika
 from aio_pika.pool import Pool
 from src.bot.config import RABBITMQ_URL
+from src.bot.log_conf import logging
 
 # Пул соединений
 connection_pool = Pool(
@@ -26,6 +27,7 @@ async def send_message_to_broker(**kwargs):
                 routing_key=kwargs["queue_name"],
             )
 
+        logging.info(f"[INFO] MESSAGE HAS BEEN PUBLISHED TO {kwargs['queue_name']} QUEUE. task_id = {kwargs['task_id']}")
             print(f"[INFO] Message published to {kwargs['queue_name']}")
     except Exception as e:
         print(f"[ERROR] Failed to send message: {e}")

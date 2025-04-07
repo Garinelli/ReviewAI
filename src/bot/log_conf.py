@@ -10,7 +10,6 @@ logging.basicConfig(
     format="%(asctime)s %(levelname)s %(message)s",
 )
 
-
 def timing_decorator(func):
     """Декоратор для замера времени выполнения функции"""
 

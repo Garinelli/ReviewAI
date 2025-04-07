@@ -21,7 +21,7 @@ from selenium_stealth import stealth
 from src.bot.broker.producer import send_message_to_broker
 from src.bot.config import RABBITMQ_URL
 from src.bot.constants import MONTHS, KEYWORDS, CLASS_NAME
-
+from src.bot.log_conf import logging
 
 def init_webdriver():
     chrome_options = Options()
@@ -194,7 +194,10 @@ async def process_message(message: aio_pika.IncomingMessage, driver: WebDriver):
     async with message.process():
         body = message.body.decode()
         body = json.loads(body)
+
+        logging.info(f"Получено сообщение: {body}. queue_name = {body['queue_name']}")
         print(f"Получено сообщение: {body}")
+        
         parser_feedbacks(body["link"], driver, body["task_id"])
         await send_message_to_broker(
             queue_name="preprocessing",
