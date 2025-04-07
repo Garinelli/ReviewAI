@@ -23,6 +23,7 @@ from src.bot.config import RABBITMQ_URL
 from src.bot.constants import MONTHS, KEYWORDS, CLASS_NAME
 from src.bot.log_conf import logging
 
+
 def init_webdriver():
     chrome_options = Options()
     chrome_options.add_argument("--headless")
@@ -128,8 +129,10 @@ def parse_reviews(feedbacks) -> list:
             print(i, name)
 
         # Дата написания отзыва
-        date_time = feedback.find("div", class_="feedback__date").text
-        date = conv_date(date_time)
+        date_time = feedback.find("div", class_="feedback__date")
+        if date_time is None:
+            continue  # Пропускаем, потому что он нам еще встретится
+        date = conv_date(date_time.text)
 
         # Рейтинг отзыва
         rating_tag = feedback.find("div", class_="feedback__rating-wrap")
@@ -197,7 +200,7 @@ async def process_message(message: aio_pika.IncomingMessage, driver: WebDriver):
 
         logging.info(f"Получено сообщение: {body}. queue_name = {body['queue_name']}")
         print(f"Получено сообщение: {body}")
-        
+
         parser_feedbacks(body["link"], driver, body["task_id"])
         await send_message_to_broker(
             queue_name="preprocessing",
