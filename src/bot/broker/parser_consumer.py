@@ -1,13 +1,12 @@
 from functools import partial
 from datetime import datetime, timedelta
 from time import sleep
-from typing import List, Dict
 import asyncio
 import json
 
 import aio_pika
 import pandas as pd
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, ResultSet, Tag
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
@@ -15,7 +14,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
-from selenium.webdriver.remote.webelement import WebElement
 from selenium_stealth import stealth
 
 from src.bot.broker.producer import send_message_to_broker
@@ -24,7 +22,8 @@ from src.bot.constants import MONTHS, KEYWORDS, CLASS_NAME
 from src.bot.log_conf import logging
 
 
-def init_webdriver():
+def init_webdriver() -> WebDriver:
+    """Инициализируем webdriver"""
     chrome_options = Options()
     chrome_options.add_argument("--headless")
     chrome_options.add_argument("--disable-gpu")
@@ -47,10 +46,10 @@ def get_feedback_link(url_product: str) -> str:
     return feedback_link
 
 
-def get_feedbacks_raw(driver: WebDriver, url_feedbacks: str) -> List[WebElement]:
+def get_feedbacks_raw(driver: WebDriver, url_feedbacks: str) -> str:
     """Получаем все отзывы с текущей страницы"""
 
-    def press_this_product_btn():
+    def press_this_product_btn() -> None:
         """Поиск кнопки 'Этот вариант товара'"""
         try:
             button = WebDriverWait(driver, 10).until(
@@ -64,7 +63,7 @@ def get_feedbacks_raw(driver: WebDriver, url_feedbacks: str) -> List[WebElement]
             button.click()
             print("Кнопка успешно нажата!")
 
-    def scroll_down():
+    def scroll_down() -> None:
         """Прокручиваем страницу вниз до тех пор, пока не достигнут конец страницы или контент не успел прогрузиться"""
         last_height = driver.execute_script("return document.body.scrollHeight")
 
@@ -98,7 +97,7 @@ def get_feedbacks_raw(driver: WebDriver, url_feedbacks: str) -> List[WebElement]
     return html_code
 
 
-def conv_date(date_time: str):
+def conv_date(date_time: str) -> str:
     """Преобразование даты в формат datetime"""
     date_list = date_time.split(", ")[0].split()
     if len(date_list) == 1:
@@ -119,7 +118,8 @@ def conv_date(date_time: str):
     return formatted_date
 
 
-def parse_reviews(feedbacks) -> list:
+def parse_reviews(feedbacks: ResultSet[Tag]) -> list[dict]:
+    """Парсим данные с WB"""
     reviews = []
 
     for i, feedback in enumerate(feedbacks):
@@ -172,7 +172,7 @@ def parse_reviews(feedbacks) -> list:
     return reviews
 
 
-def prepare_feedbacks(html_code: str) -> List[Dict]:
+def prepare_feedbacks(html_code: str) -> list[dict]:
     """Подготавливаем данные о отзывах в виде списка словарей"""
     soup = BeautifulSoup(html_code, "html.parser")
     feedbacks = soup.find_all(
@@ -180,12 +180,10 @@ def prepare_feedbacks(html_code: str) -> List[Dict]:
     )
     print(f"Количество отзывов: {len(feedbacks)}")
 
-    reviews = parse_reviews(feedbacks)
-
-    return reviews
+    return parse_reviews(feedbacks)
 
 
-def parser_feedbacks(url_product, driver, task_id) -> None:
+def parser_feedbacks(driver: WebDriver, url_product: str, task_id: str) -> None:
     """Основная функция, которая запускает парсинг отзывов и сохраняет результат в csv-файл"""
     feedbacks = prepare_feedbacks(
         get_feedbacks_raw(driver, get_feedback_link(url_product))
@@ -193,7 +191,7 @@ def parser_feedbacks(url_product, driver, task_id) -> None:
     pd.DataFrame(feedbacks).to_csv(f"{task_id}.csv")
 
 
-async def process_message(message: aio_pika.IncomingMessage, driver: WebDriver):
+async def process_message(message: aio_pika.IncomingMessage, driver: WebDriver) -> None:
     async with message.process():
         body = message.body.decode()
         body = json.loads(body)
@@ -201,7 +199,7 @@ async def process_message(message: aio_pika.IncomingMessage, driver: WebDriver):
         logging.info(f"Получено сообщение: {body}. queue_name = {body['queue_name']}")
         print(f"Получено сообщение: {body}")
 
-        parser_feedbacks(body["link"], driver, body["task_id"])
+        parser_feedbacks(driver, body["link"], body["task_id"])
         await send_message_to_broker(
             queue_name="preprocessing",
             user_telegram_id=body["user_telegram_id"],
@@ -209,7 +207,7 @@ async def process_message(message: aio_pika.IncomingMessage, driver: WebDriver):
         )
 
 
-async def message_consumer(driver: WebDriver):
+async def message_consumer(driver: WebDriver) -> None:
     connection = await aio_pika.connect_robust(RABBITMQ_URL)
     async with connection:
         channel = await connection.channel()
