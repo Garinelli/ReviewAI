@@ -1,21 +1,31 @@
 import json
 import aio_pika
-
+from aio_pika.pool import Pool
 from src.bot.config import RABBITMQ_URL
 
+# Пул соединений
+connection_pool = Pool(
+    lambda: aio_pika.connect(RABBITMQ_URL, heartbeat=60, timeout=10), max_size=10
+)
+
+
 async def send_message_to_broker(**kwargs):
-    conn = await aio_pika.connect(RABBITMQ_URL)
+    try:
+        async with connection_pool.acquire() as connection:
+            channel = await connection.channel()
 
-    async with conn:
-        channel = await conn.channel()
-        await channel.declare_queue(kwargs['queue_name'])
+            await channel.declare_queue(
+                kwargs["queue_name"], durable=True, exclusive=False
+            )
 
-        body_ = json.dumps(kwargs)
+            await channel.default_exchange.publish(
+                aio_pika.Message(
+                    body=json.dumps(kwargs).encode("utf-8"),
+                    delivery_mode=aio_pika.DeliveryMode.PERSISTENT,
+                ),
+                routing_key=kwargs["queue_name"],
+            )
 
-        await channel.default_exchange.publish(
-            aio_pika.Message(body=body_.encode("utf-8")),
-            routing_key=kwargs['queue_name']
-        )
-
-        print(f"[INFO] MESSAGE HAS BEEN PUBLISHED TO {kwargs['queue_name']} QUEUE")
-
+            print(f"[INFO] Message published to {kwargs['queue_name']}")
+    except Exception as e:
+        print(f"[ERROR] Failed to send message: {e}")

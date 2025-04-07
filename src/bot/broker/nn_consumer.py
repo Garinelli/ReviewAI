@@ -1,4 +1,4 @@
-import os 
+import os
 import asyncio
 import json
 from pathlib import Path
@@ -17,10 +17,11 @@ from src.bot.broker.producer import send_message_to_broker
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
-model = tf.keras.models.load_model(BASE_DIR / 'ml/Models/fasttext_model_gru.h5')
+model = tf.keras.models.load_model(BASE_DIR / "ml/Models/fasttext_model_gru.h5")  # pylint: disable=E1101:no-member
+
 
 async def nn_predict(task_id):
-    df = pd.read_pickle(f'{task_id}.pickle')
+    df = pd.read_pickle(f"{task_id}.pickle")
     all_reviews_count = len(df)
     written_by_bot = 0
     fake_reviews_id = []
@@ -41,18 +42,20 @@ async def nn_predict(task_id):
 
     percent_result = round((written_by_bot / all_reviews_count) * 100, 1)
 
-    return all_reviews_count, written_by_bot, percent_result, fake_reviews_id 
+    return all_reviews_count, written_by_bot, percent_result, fake_reviews_id
+
 
 async def create_review_star_graphic(star_reviews: list[int], task_id: str):
-    plt.plot(star_reviews, linestyle='-', color='b', label='Оценки')
-    plt.xlabel('Номер отзыва')
-    plt.ylabel('Оценка')
-    plt.title('Динамика отзывов')
+    plt.plot(star_reviews, linestyle="-", color="b", label="Оценки")
+    plt.xlabel("Номер отзыва")
+    plt.ylabel("Оценка")
+    plt.title("Динамика отзывов")
     plt.yticks([1, 2, 3, 4, 5])
-    plt.grid(True, linestyle='--', alpha=0.6)
+    plt.grid(True, linestyle="--", alpha=0.6)
     plt.legend()
-    plt.savefig(f'{task_id}.png', dpi=300, bbox_inches='tight')
+    plt.savefig(f"{task_id}.png", dpi=300, bbox_inches="tight")
     plt.close()
+
 
 async def process_message(message: aio_pika.IncomingMessage):
     async with message.process():
@@ -62,41 +65,47 @@ async def process_message(message: aio_pika.IncomingMessage):
         print(f"Получено сообщение: {body}")
         await send_request_status(
             bot,
-            body['user_telegram_id'],
-            '🎯Искусственный интеллект предсказывает результат...'
+            body["user_telegram_id"],
+            "🎯Искусственный интеллект предсказывает результат...",
         )
 
-        df = pd.read_csv(f'{body["task_id"]}.csv')
+        df = pd.read_csv(f"{body['task_id']}.csv")
 
-        result_predict = await nn_predict(body['task_id'])
-        result_message = RESULT_MESSAGE.format(result_predict[0], result_predict[1], result_predict[2])
+        result_predict = await nn_predict(body["task_id"])
+        result_message = RESULT_MESSAGE.format(
+            result_predict[0], result_predict[1], result_predict[2]
+        )
 
         fake_reviews_id = result_predict[3]
         fake_reviews = ""
 
-        for index, id in enumerate(fake_reviews_id):
+        for index, review_id in enumerate(fake_reviews_id):
             if index >= 5:
                 break
-            fake_reviews += f"{index + 1}. {df.loc[df['Unnamed: 0'] == id, 'User review'].values[0]}\n"
+            fake_reviews += f"{index + 1}. {df.loc[df['Unnamed: 0'] == review_id, 'User review'].values[0]}\n"
 
         result_message += fake_reviews
 
-        star_reviews = list(df['Star review'].values)
-        await create_review_star_graphic(star_reviews, body['task_id'])
+        star_reviews = list(df["Star review"].values)
+        await create_review_star_graphic(star_reviews, body["task_id"])
 
-        os.remove(f'{body["task_id"]}.csv')
-        os.remove(f'{body["task_id"]}.pickle')
+        os.remove(f"{body['task_id']}.csv")
+        os.remove(f"{body['task_id']}.pickle")
 
-        await send_message_to_broker(queue_name='bot',
-                                     result=result_message, user_telegram_id=body['user_telegram_id'],
-                                     task_id=body['task_id'])
+        await send_message_to_broker(
+            queue_name="bot",
+            result=result_message,
+            user_telegram_id=body["user_telegram_id"],
+            task_id=body["task_id"],
+        )
+
 
 async def message_consumer():
     connection = await aio_pika.connect_robust(RABBITMQ_URL)
     async with connection:
         channel = await connection.channel()
         await channel.set_qos(prefetch_count=5)
-        queue = await channel.declare_queue("NN")
+        queue = await channel.declare_queue("NN", durable=True)
 
         await queue.consume(process_message)
 
@@ -104,6 +113,7 @@ async def message_consumer():
             await asyncio.Future()
         finally:
             await connection.close()
+
 
 if __name__ == "__main__":
     asyncio.run(message_consumer())

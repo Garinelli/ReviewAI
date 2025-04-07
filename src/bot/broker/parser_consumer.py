@@ -208,7 +208,7 @@ async def message_consumer(driver: WebDriver):
     async with connection:
         channel = await connection.channel()
         await channel.set_qos(prefetch_count=5)
-        queue = await channel.declare_queue("parser")  # durable=True
+        queue = await channel.declare_queue("parser", durable=True)  # durable=True
 
         await queue.consume(partial(process_message, driver=driver))
 

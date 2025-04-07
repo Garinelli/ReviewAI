@@ -109,7 +109,7 @@ async def message_consumer():
     async with connection:
         channel = await connection.channel()
         await channel.set_qos(prefetch_count=5)
-        queue = await channel.declare_queue("preprocessing")
+        queue = await channel.declare_queue("preprocessing", durable=True)
 
         await queue.consume(process_message)
 
