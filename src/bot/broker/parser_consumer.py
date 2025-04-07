@@ -192,8 +192,6 @@ def parser_feedbacks(url_product, driver, task_id) -> None:
         get_feedbacks_raw(driver, get_feedback_link(url_product))
     )
 
-    driver.quit()  # Закрываем драйвер - !Обязательно!
-
     # Сохранение отзывов в csv-файле
     pd.DataFrame(feedbacks).to_csv(f"{task_id}.csv")
 
@@ -224,5 +222,8 @@ async def message_consumer(driver: WebDriver):
             await connection.close()
 
 if __name__ == "__main__":
-    DRIVER = init_webdriver()
-    asyncio.run(message_consumer(DRIVER))
+    try:
+        DRIVER = init_webdriver()
+        asyncio.run(message_consumer(DRIVER))
+    finally:
+        DRIVER.quit()
