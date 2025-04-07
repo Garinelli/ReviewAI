@@ -1,4 +1,4 @@
-from functools import partial, reduce
+from functools import partial
 from datetime import datetime, timedelta
 from time import sleep
 from typing import List, Dict
@@ -22,6 +22,7 @@ from src.bot.broker.producer import send_message_to_broker
 from src.bot.config import RABBITMQ_URL
 from src.bot.constants import MONTHS, KEYWORDS, CLASS_NAME
 
+
 def init_webdriver():
     chrome_options = Options()
     chrome_options.add_argument("--headless")
@@ -38,10 +39,12 @@ def init_webdriver():
     )
     return driver
 
+
 def get_feedback_link(url_product: str) -> str:
     """Получаем ссылку на страницу с отзывами"""
     feedback_link = url_product[: url_product.rfind("/")] + "/feedbacks"
     return feedback_link
+
 
 def get_feedbacks_raw(driver: WebDriver, url_feedbacks: str) -> List[WebElement]:
     """Получаем все отзывы с текущей страницы"""
@@ -93,6 +96,7 @@ def get_feedbacks_raw(driver: WebDriver, url_feedbacks: str) -> List[WebElement]
 
     return html_code
 
+
 def conv_date(date_time: str):
     """Преобразование даты в формат datetime"""
     date_list = date_time.split(", ")[0].split()
@@ -113,18 +117,19 @@ def conv_date(date_time: str):
     formatted_date = date_obj.strftime(r"%Y-%m-%d")
     return formatted_date
 
+
 def parse_reviews(feedbacks) -> list:
     reviews = []
 
     for i, feedback in enumerate(feedbacks):
-        # Дата написания отзыва
-        date_time = feedback.find("div", class_="feedback__date").text
-        date = conv_date(date_time)
-
         # Выводим имена пользователей для визуализации обработки отзывов
         if i % 10 == 0:
             name = feedback.find("p", class_="feedback__header").text
             print(i, name)
+
+        # Дата написания отзыва
+        date_time = feedback.find("div", class_="feedback__date").text
+        date = conv_date(date_time)
 
         # Рейтинг отзыва
         rating_tag = feedback.find("div", class_="feedback__rating-wrap")
@@ -137,7 +142,6 @@ def parse_reviews(feedbacks) -> list:
 
         review = (review_pros, review_cons, review_comments)
 
-        # Случай, когда у отзыва нет текста
         if not any(review):
             continue
 
@@ -148,15 +152,6 @@ def parse_reviews(feedbacks) -> list:
                 if item
             ]
         )
-        print(f'{text = }\n')
-        # Это вариант может быть быстрее, но менее читаем
-        # text = " ".join(
-        #     [
-        #         item.find_all(string=True, recursive=False)[-1].strip()
-        #         for item in review
-        #         if item
-        #     ]
-        # )
 
         # Медиа (фото/видео)
         media_tag = feedback.find("ul", class_="feedback__photos")
@@ -170,8 +165,9 @@ def parse_reviews(feedbacks) -> list:
                 "Star review": rating,
                 "Has media": has_media,
             }
-        ) 
+        )
     return reviews
+
 
 def prepare_feedbacks(html_code: str) -> List[Dict]:
     """Подготавливаем данные о отзывах в виде списка словарей"""
@@ -182,18 +178,17 @@ def prepare_feedbacks(html_code: str) -> List[Dict]:
     print(f"Количество отзывов: {len(feedbacks)}")
 
     reviews = parse_reviews(feedbacks)
-    
+
     return reviews
+
 
 def parser_feedbacks(url_product, driver, task_id) -> None:
     """Основная функция, которая запускает парсинг отзывов и сохраняет результат в csv-файл"""
-    # Пример использования
     feedbacks = prepare_feedbacks(
         get_feedbacks_raw(driver, get_feedback_link(url_product))
     )
-
-    # Сохранение отзывов в csv-файле
     pd.DataFrame(feedbacks).to_csv(f"{task_id}.csv")
+
 
 async def process_message(message: aio_pika.IncomingMessage, driver: WebDriver):
     async with message.process():
@@ -207,12 +202,13 @@ async def process_message(message: aio_pika.IncomingMessage, driver: WebDriver):
             task_id=body["task_id"],
         )
 
+
 async def message_consumer(driver: WebDriver):
     connection = await aio_pika.connect_robust(RABBITMQ_URL)
     async with connection:
         channel = await connection.channel()
         await channel.set_qos(prefetch_count=5)
-        queue = await channel.declare_queue("parser")
+        queue = await channel.declare_queue("parser")  # durable=True
 
         await queue.consume(partial(process_message, driver=driver))
 
@@ -220,6 +216,7 @@ async def message_consumer(driver: WebDriver):
             await asyncio.Future()
         finally:
             await connection.close()
+
 
 if __name__ == "__main__":
     try:
