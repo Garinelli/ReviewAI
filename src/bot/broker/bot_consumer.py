@@ -4,8 +4,7 @@ import json
 import aio_pika
 
 from src.bot.config import RABBITMQ_URL
-from src.bot.bot_utils.status_sender import send_request_status
-from src.bot.main import bot
+from src.bot.bot import send_request_status
 from src.bot.log_conf import logging
 
 async def process_message(message: aio_pika.IncomingMessage):
@@ -14,11 +13,11 @@ async def process_message(message: aio_pika.IncomingMessage):
         body = json.loads(body)
         result_message = body["result"]
         await send_request_status(
-            bot, body["user_telegram_id"], "✅Результат получен..."
+            body["user_telegram_id"], "✅Результат получен..."
         )
         await asyncio.sleep(3)
         await send_request_status(
-            bot, body["user_telegram_id"], result_message, body["task_id"]
+            body["user_telegram_id"], result_message, body["task_id"]
         )
         logging.info(f"Получено сообщение: {body}. queue_name = {body['queue_name']}")
         print(f"Получено сообщение: {body}")

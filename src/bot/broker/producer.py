@@ -9,7 +9,6 @@ connection_pool = Pool(
     lambda: aio_pika.connect(RABBITMQ_URL, heartbeat=60, timeout=10), max_size=10
 )
 
-
 async def send_message_to_broker(**kwargs):
     try:
         async with connection_pool.acquire() as connection:

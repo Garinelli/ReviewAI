@@ -9,33 +9,14 @@ from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 from src.bot.broker import send_message_to_broker
 from src.bot.config import BOT_TOKEN
-from src.bot.constants import TASK_ID_LETTERS, WELCOME_MESSAGE, START_MESSAGE
+from src.bot.constants import WELCOME_MESSAGE, START_MESSAGE
 from src.bot.log_conf import logging, timing_decorator
-
+from src.bot.utils import link_validation, generate_task_id
 
 bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher()
 
 semaphore = asyncio.Semaphore(5)
-
-
-def check_link(link: str) -> bool:
-    # Проверяем ссылку на WB
-    logging.info(f"Начинаем обрабатывать ссылку на товар {link=}...")
-    if ("wildberries.ru" in link) and ("detail.aspx" in link):
-        logging.info(f"Ссылка {link} распознана WB ✅\n")
-        return True
-    logging.info(f"Строка {link} не распознана как ссылка на товар ❌")
-    return False
-
-
-def generate_task_id() -> str:
-    logging.info("Генерируется id для таски...")
-    task_id = ""
-    for _ in range(8):
-        task_id += random.choice(TASK_ID_LETTERS)
-    logging.info(f"ID для таски сгенерирован успешно: {task_id=}")
-    return task_id
 
 
 async def send_request_status(
@@ -82,7 +63,7 @@ async def link(message: Message):
         f"Пользователь {message.from_user.id=} отправил сообщение {message.text=}"
     )
     logging.info("Запускаем проверку на ссылку...")
-    if check_link(message.text) is False:
+    if link_validation(message.text) is False:
         await message.reply(
             "Это не совсем то, что мне нужно(\nОтправьте ссылку на главную страницу товара!"
         )
