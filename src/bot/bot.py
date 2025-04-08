@@ -1,6 +1,5 @@
 import os
 import asyncio
-import random
 
 from aiogram import Bot, Dispatcher, F
 from aiogram.filters import Command
@@ -15,8 +14,6 @@ from src.bot.utils import link_validation, generate_task_id
 
 bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher()
-
-semaphore = asyncio.Semaphore(5)
 
 
 async def send_request_status(
@@ -63,6 +60,7 @@ async def link(message: Message):
         f"Пользователь {message.from_user.id=} отправил сообщение {message.text=}"
     )
     logging.info("Запускаем проверку на ссылку...")
+
     if link_validation(message.text) is False:
         await message.reply(
             "Это не совсем то, что мне нужно(\nОтправьте ссылку на главную страницу товара!"
@@ -70,23 +68,24 @@ async def link(message: Message):
         logging.info(
             f"Отправлено сообщение о том, что ссылка не распознана {message.from_user.id=}\n"
         )
+
     else:
-        async with semaphore:
-            await message.answer(
-                "Благодарим вас за использование нашего AI бота.\nВаша задача отправлена в очередь!"
-            )
-            await asyncio.sleep(2)
-            logging.info(
-                "Ссылка распознана, отправляем сообщение о начале сбора отзывов..."
-            )
-            await message.answer("📝Производим сбор отзывов...")
-            # Применяем декоратор к функции
-            await (timing_decorator(send_message_to_broker))(
-                queue_name="parser",
-                link=message.text,
-                user_telegram_id=message.from_user.id,
-                task_id=generate_task_id(),
-            )
+        task_id = generate_task_id()
+        await message.answer(
+            f"Благодарим вас за использование нашего AI бота.\nВаша задача отправлена в очередь!\nИдентификатор запроса: {task_id}"
+        )
+        await asyncio.sleep(1)
+        logging.info(
+            "Ссылка распознана, отправляем сообщение о начале сбора отзывов..."
+        )
+        await message.answer("📝Производим сбор отзывов...")
+        # Применяем декоратор к функции
+        await (timing_decorator(send_message_to_broker))(
+            queue_name="parser",
+            link=message.text,
+            user_telegram_id=message.from_user.id,
+            task_id=task_id,
+        )
 
 
 async def main():
