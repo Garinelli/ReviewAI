@@ -13,24 +13,19 @@ connection_pool: Pool[Connection] = Pool(
 
 
 async def send_message_to_broker(**kwargs) -> None:
-    try:
-        async with connection_pool.acquire() as connection:
-            channel = await connection.channel()
+    async with connection_pool.acquire() as connection:
+        channel = await connection.channel()
 
-            await channel.declare_queue(
-                kwargs["queue_name"], durable=True, exclusive=False
-            )
+        await channel.declare_queue(kwargs["queue_name"], durable=True, exclusive=False)
 
-            await channel.default_exchange.publish(
-                aio_pika.Message(
-                    body=json.dumps(kwargs).encode("utf-8"),
-                    delivery_mode=aio_pika.DeliveryMode.PERSISTENT,
-                ),
-                routing_key=kwargs["queue_name"],
-            )
+        await channel.default_exchange.publish(
+            aio_pika.Message(
+                body=json.dumps(kwargs).encode("utf-8"),
+                delivery_mode=aio_pika.DeliveryMode.PERSISTENT,
+            ),
+            routing_key=kwargs["queue_name"],
+        )
 
-            logging.info(
-                f"[INFO] MESSAGE HAS BEEN PUBLISHED TO {kwargs['queue_name']} QUEUE. task_id = {kwargs['task_id']}"
-            )
-    except Exception as e:
-        logging.error(f"[ERROR] Failed to send message: {e}", exc_info=True)
+        logging.info(
+            f"[INFO] MESSAGE HAS BEEN PUBLISHED TO {kwargs['queue_name']} QUEUE. task_id = {kwargs['task_id']}"
+        )
