@@ -16,17 +16,22 @@ bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher()
 
 
+async def send_review_graph(user_telegram_id: int, task_id: str) -> None:
+    logging.info("Пытааемся отправить фотку")
+    await bot.send_photo(
+            chat_id=user_telegram_id, photo=FSInputFile(f"{task_id}.png")
+        )
+    os.remove(f"{task_id}.png")
+
+
 async def send_request_status(
-    user_telegram_id: int, message: str, task_id=None
+    user_telegram_id: int, message: str, task_id: str=None
 ) -> None:
     logging.info("Отправляем пользователю ответ по статусу...")
     await bot.send_message(chat_id=user_telegram_id, text=message)
-    if not task_id is None:
-        logging.info("Пытааемся отправить фотку")
-        await bot.send_photo(
-            chat_id=user_telegram_id, photo=FSInputFile(f"{task_id}.png")
-        )
-        os.remove(f"{task_id}.png")
+
+    if task_id is not None:
+        await send_review_graph(user_telegram_id, task_id)
     logging.info("Сообщения успешно отправлены ✅\n")
 
 
