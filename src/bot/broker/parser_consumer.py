@@ -40,6 +40,27 @@ def init_webdriver() -> WebDriver:
     return driver
 
 
+def conv_date(date_time: str) -> str:
+    """Преобразование даты в формат datetime"""
+    date_list = date_time.split(", ")[0].split()
+    if len(date_list) == 1:
+        now = datetime.now()
+        new_date = now - timedelta(days=int(date_list[0] == "Вчера"))
+        date_list = [f"{new_date.day}", f"{new_date.month}", f"{new_date.year}"]
+        # Преобразуем строку в объект datetime
+        date_obj = datetime.strptime(" ".join(date_list), r"%d %m %Y")
+    else:
+        date_list[1] = MONTHS[date_list[1]]
+        if len(date_list) == 2:
+            date_list.append(f"{datetime.now().year}")
+        # Преобразуем строку в объект datetime
+        date_obj = datetime.strptime(" ".join(date_list), r"%d %B %Y")
+
+    # Форматируем дату в нужный формат
+    formatted_date = date_obj.strftime(r"%Y-%m-%d")
+    return formatted_date
+
+
 def get_feedback_link(url_product: str) -> str:
     """Получаем ссылку на страницу с отзывами"""
     feedback_link = url_product[: url_product.rfind("/")] + "/feedbacks"
@@ -97,28 +118,11 @@ def get_feedbacks_raw(driver: WebDriver, url_feedbacks: str) -> str:
     return html_code
 
 
-def conv_date(date_time: str) -> str:
-    """Преобразование даты в формат datetime"""
-    date_list = date_time.split(", ")[0].split()
-    if len(date_list) == 1:
-        now = datetime.now()
-        new_date = now - timedelta(days=int(date_list[0] == "Вчера"))
-        date_list = [f"{new_date.day}", f"{new_date.month}", f"{new_date.year}"]
-        # Преобразуем строку в объект datetime
-        date_obj = datetime.strptime(" ".join(date_list), r"%d %m %Y")
-    else:
-        date_list[1] = MONTHS[date_list[1]]
-        if len(date_list) == 2:
-            date_list.append(f"{datetime.now().year}")
-        # Преобразуем строку в объект datetime
-        date_obj = datetime.strptime(" ".join(date_list), r"%d %B %Y")
-
-    # Форматируем дату в нужный формат
-    formatted_date = date_obj.strftime(r"%Y-%m-%d")
-    return formatted_date
-
-
-def parse_reviews(feedbacks: ResultSet[Tag]) -> list[dict]:
+def parse_reviews(html_code) -> list[dict]:
+    soup = BeautifulSoup(html_code, "html.parser")
+    feedbacks = soup.find_all(
+        "li", class_="comments__item feedback product-feedbacks__block-wrapper"
+    )
     """Парсим данные с WB"""
     reviews = []
 
@@ -172,22 +176,11 @@ def parse_reviews(feedbacks: ResultSet[Tag]) -> list[dict]:
     return reviews
 
 
-def prepare_feedbacks(html_code: str) -> list[dict]:
-    """Подготавливаем данные о отзывах в виде списка словарей"""
-    soup = BeautifulSoup(html_code, "html.parser")
-    feedbacks = soup.find_all(
-        "li", class_="comments__item feedback product-feedbacks__block-wrapper"
-    )
-    print(f"Количество отзывов: {len(feedbacks)}")
-
-    return parse_reviews(feedbacks)
-
-
 def parser_feedbacks(driver: WebDriver, url_product: str, task_id: str) -> None:
     """Основная функция, которая запускает парсинг отзывов и сохраняет результат в csv-файл"""
-    feedbacks = prepare_feedbacks(
-        get_feedbacks_raw(driver, get_feedback_link(url_product))
-    )
+    feedback_link = get_feedback_link(url_product)
+    feedbacks = get_feedbacks_raw(driver, feedback_link)
+    feedbacks = parse_reviews(feedbacks)
     pd.DataFrame(feedbacks).to_csv(f"{task_id}.csv")
 
 
