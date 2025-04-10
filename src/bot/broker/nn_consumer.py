@@ -19,7 +19,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 model = tf.keras.models.load_model(BASE_DIR / "ml/Models/fasttext_model_gru.h5")  # pylint: disable=E1101:no-member
 
 
-async def nn_predict(task_id):
+def nn_predict(task_id):
     df = pd.read_pickle(f"{task_id}.pickle")
     all_reviews_count = len(df)
     written_by_bot = 0
@@ -44,7 +44,7 @@ async def nn_predict(task_id):
     return all_reviews_count, written_by_bot, percent_result, fake_reviews_id
 
 
-async def create_review_star_graphic(star_reviews: list[int], task_id: str):
+def create_review_star_graphic(star_reviews: list[int], task_id: str):
     plt.plot(star_reviews, linestyle="-", color="b", label="Оценки")
     plt.xlabel("Номер отзыва")
     plt.ylabel("Оценка")
@@ -71,7 +71,8 @@ async def process_message(message: aio_pika.IncomingMessage):
 
         df = pd.read_csv(f"{body['task_id']}.csv")
 
-        result_predict = await nn_predict(body["task_id"])
+        result_predict = await asyncio.to_thread(nn_predict, body["task_id"])
+        
         result_message = RESULT_MESSAGE.format(
             result_predict[0], result_predict[1], result_predict[2]
         )
@@ -87,7 +88,7 @@ async def process_message(message: aio_pika.IncomingMessage):
         result_message += fake_reviews
 
         star_reviews = list(df["Star review"].values)
-        await create_review_star_graphic(star_reviews, body["task_id"])
+        create_review_star_graphic(star_reviews, body["task_id"])
 
         os.remove(f"{body['task_id']}.csv")
         os.remove(f"{body['task_id']}.pickle")

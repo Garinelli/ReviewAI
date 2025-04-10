@@ -71,7 +71,7 @@ def remove_punctuation(reviews):
             if token in string.punctuation and token not in exceptions_punctuation:
                 tokens.remove(token)
 
-async def dataframe_preprocessing(task_id):
+def dataframe_preprocessing(task_id):
     df = pd.read_csv(f'{task_id}.csv').drop(columns=['Unnamed: 0'])
     df = df.copy()
 
@@ -100,7 +100,7 @@ async def process_message(message: aio_pika.IncomingMessage):
             body['user_telegram_id'],
             '💬Обрабатываем естественный язык...'
         )
-        await dataframe_preprocessing(body['task_id'])
+        dataframe_preprocessing(body['task_id'])
 
         await send_message_to_broker(queue_name='NN', task_id=body['task_id'],
                                   user_telegram_id=body['user_telegram_id'])
