@@ -45,13 +45,11 @@ def nn_predict(task_id):
 
 
 def create_review_star_graphic(star_reviews: list[int], task_id: str):
-    plt.plot(star_reviews, linestyle="-", color="b", label="Оценки")
-    plt.xlabel("Номер отзыва")
+    plt.plot(star_reviews, color="#A344FA", label="Оценки")
     plt.ylabel("Оценка")
     plt.title("Динамика отзывов")
     plt.yticks([1, 2, 3, 4, 5])
-    plt.grid(True, linestyle="--", alpha=0.6)
-    plt.legend()
+    plt.gca().set_xticks([]) 
     plt.savefig(f"{task_id}.png", dpi=300, bbox_inches="tight")
     plt.close()
 
