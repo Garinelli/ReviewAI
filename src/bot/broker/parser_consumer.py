@@ -191,8 +191,7 @@ async def process_message(message: aio_pika.IncomingMessage, driver: WebDriver) 
 
         logging.info(f"Получено сообщение: {body}. queue_name = {body['queue_name']}")
         print(f"Получено сообщение: {body}")
-
-        parser_feedbacks(driver, body["link"], body["task_id"])
+        await asyncio.to_thread(parser_feedbacks, driver, body["link"], body["task_id"]) 
         await send_message_to_broker(
             queue_name="preprocessing",
             user_telegram_id=body["user_telegram_id"],
