@@ -30,11 +30,11 @@ def nn_predict(task_id):
         star_review = row["Star review"]
         has_media = row["Has media"]
 
-        tensor_vector = tf.convert_to_tensor([review], dtype=tf.float32)
-        second_tensor = np.array([[star_review, has_media]])
-        second_tensor = tf.convert_to_tensor(second_tensor, dtype=tf.float32)
+        review_vector = tf.convert_to_tensor([review], dtype=tf.float32)
+        num_tensor = np.array([[star_review, has_media]])
+        num_tensor = tf.convert_to_tensor(num_tensor, dtype=tf.float32)
 
-        prediction = model.predict([tensor_vector, second_tensor])
+        prediction = model.predict([review_vector, num_tensor])
         if prediction[0][0] < prediction[0][1]:
             written_by_bot += 1
             fake_reviews_id.append(index)
@@ -56,6 +56,29 @@ def create_review_star_graphic(star_reviews: list[int], task_id: str):
     plt.close()
 
 
+def get_result_message(result_predict: tuple, task_id: str) -> str:
+    df = pd.read_csv(f"{task_id}.csv")
+    result_message = RESULT_MESSAGE.format(
+        result_predict[0], result_predict[1], result_predict[2]
+    )
+
+    fake_reviews_id = result_predict[3]
+
+    if fake_reviews_id:
+        fake_reviews = "Выявленные отзывы:\n"
+        for index, review_id in enumerate(fake_reviews_id):
+            if index >= 5:
+                break
+            fake_reviews += f"{index + 1}. {df.loc[df['Unnamed: 0'] == review_id, 'User review'].values[0]}\n"
+
+        result_message += fake_reviews
+    
+    star_reviews = list(df["Star review"].values)
+    create_review_star_graphic(star_reviews, task_id)
+
+    return result_message
+
+
 async def process_message(message: aio_pika.IncomingMessage):
     async with message.process():
         body = message.body.decode()
@@ -69,26 +92,8 @@ async def process_message(message: aio_pika.IncomingMessage):
             "🎯Искусственный интеллект предсказывает результат...",
         )
 
-        df = pd.read_csv(f"{body['task_id']}.csv")
-
         result_predict = await asyncio.to_thread(nn_predict, body["task_id"])
-        
-        result_message = RESULT_MESSAGE.format(
-            result_predict[0], result_predict[1], result_predict[2]
-        )
-
-        fake_reviews_id = result_predict[3]
-        fake_reviews = ""
-
-        for index, review_id in enumerate(fake_reviews_id):
-            if index >= 5:
-                break
-            fake_reviews += f"{index + 1}. {df.loc[df['Unnamed: 0'] == review_id, 'User review'].values[0]}\n"
-
-        result_message += fake_reviews
-
-        star_reviews = list(df["Star review"].values)
-        create_review_star_graphic(star_reviews, body["task_id"])
+        result_message = get_result_message(result_predict, body['task_id'])
 
         os.remove(f"{body['task_id']}.csv")
         os.remove(f"{body['task_id']}.pickle")
