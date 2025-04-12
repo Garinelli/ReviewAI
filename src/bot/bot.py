@@ -8,7 +8,7 @@ from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 from src.bot.broker import send_message_to_broker
 from src.bot.config import BOT_TOKEN
-from src.bot.constants import WELCOME_MESSAGE, START_MESSAGE
+from src.bot.constants import WELCOME_MESSAGE, START_MESSAGE, SUBMITTING_TASK_MESSAGE
 from src.bot.log_conf import logging, timing_decorator
 from src.bot.utils import link_validation, generate_task_id
 
@@ -76,14 +76,11 @@ async def link(message: Message):
 
     else:
         task_id = generate_task_id()
-        await message.answer(
-            f"Благодарим вас за использование нашего AI бота.\nВаша задача отправлена в очередь!\nИдентификатор запроса: {task_id}"
-        )
+        await message.answer(SUBMITTING_TASK_MESSAGE.format(task_id))
         await asyncio.sleep(1)
         logging.info(
             "Ссылка распознана, отправляем сообщение о начале сбора отзывов..."
         )
-        await message.answer("📝Производим сбор отзывов...")
         # Применяем декоратор к функции
         await (timing_decorator(send_message_to_broker))(
             queue_name="parser",

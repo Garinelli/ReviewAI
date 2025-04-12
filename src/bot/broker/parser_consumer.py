@@ -6,7 +6,7 @@ import json
 
 import aio_pika
 import pandas as pd
-from bs4 import BeautifulSoup, ResultSet, Tag
+from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
@@ -20,6 +20,7 @@ from src.bot.broker.producer import send_message_to_broker
 from src.bot.config import RABBITMQ_URL
 from src.bot.constants import MONTHS, KEYWORDS, CLASS_NAME
 from src.bot.log_conf import logging
+from src.bot.bot import send_request_status
 
 
 def init_webdriver() -> WebDriver:
@@ -191,6 +192,7 @@ async def process_message(message: aio_pika.IncomingMessage, driver: WebDriver) 
 
         logging.info(f"Получено сообщение: {body}. queue_name = {body['queue_name']}")
         print(f"Получено сообщение: {body}")
+        await send_request_status(body["user_telegram_id"], "📝Производим сбор отзывов...")
         await asyncio.to_thread(parser_feedbacks, driver, body["link"], body["task_id"]) 
         await send_message_to_broker(
             queue_name="preprocessing",
