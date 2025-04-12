@@ -15,7 +15,7 @@ async def process_message(message: aio_pika.IncomingMessage):
         await send_request_status(
             body["user_telegram_id"], "✅Результат получен..."
         )
-        await asyncio.sleep(3)
+        await asyncio.sleep(1)
         await send_request_status(
             body["user_telegram_id"], result_message, body["task_id"]
         )

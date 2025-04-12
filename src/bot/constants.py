@@ -35,3 +35,6 @@ LINK_PATTERN = r'^https://www\.wildberries\.ru/catalog/\d+/detail\.aspx$'
 
 SUBMITTING_TASK_MESSAGE = "Благодарим вас за использование нашего AI бота.\nВаша задача отправлена в очередь!\n" \
 "Мы обязательно сообщим вам, когда задача будет взята в работу.\nИдентификатор запроса: {}"
+
+BAD_LINK_MESSAGE = "Это не совсем то, что мне нужно(\nОтправьте ссылку на главную страницу товара!\n" \
+"Пример ссылки: https://www.wildberries.ru/catalog/артикул/detail.aspx"

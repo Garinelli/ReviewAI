@@ -8,7 +8,8 @@ from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 from src.bot.broker import send_message_to_broker
 from src.bot.config import BOT_TOKEN
-from src.bot.constants import WELCOME_MESSAGE, START_MESSAGE, SUBMITTING_TASK_MESSAGE
+from src.bot.constants import (WELCOME_MESSAGE, START_MESSAGE, SUBMITTING_TASK_MESSAGE, 
+                               BAD_LINK_MESSAGE)
 from src.bot.log_conf import logging, timing_decorator
 from src.bot.utils import link_validation, generate_task_id
 
@@ -67,9 +68,7 @@ async def link(message: Message):
     logging.info("Запускаем проверку на ссылку...")
 
     if link_validation(message.text) is False:
-        await message.reply(
-            "Это не совсем то, что мне нужно(\nОтправьте ссылку на главную страницу товара!"
-        )
+        await message.reply(BAD_LINK_MESSAGE)
         logging.info(
             f"Отправлено сообщение о том, что ссылка не распознана {message.from_user.id=}\n"
         )
