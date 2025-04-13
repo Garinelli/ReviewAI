@@ -5,16 +5,23 @@ from aiogram import Bot, Dispatcher, F
 from aiogram.filters import Command
 from aiogram.types import Message, CallbackQuery, FSInputFile
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+from aiogram.fsm.state import State, StatesGroup
+from aiogram.fsm.context import FSMContext
 
 from src.bot.broker import send_message_to_broker
 from src.bot.config import BOT_TOKEN
 from src.bot.constants import (WELCOME_MESSAGE, START_MESSAGE, SUBMITTING_TASK_MESSAGE, 
-                               BAD_LINK_MESSAGE)
+                               BAD_LINK_MESSAGE, FEEDBACK_ENTER_MESSAGE, FEEDBACK_THANK_YOU_MESSAGE)
 from src.bot.log_conf import logging, timing_decorator
 from src.bot.utils import link_validation, generate_task_id
+from src.bot.db import insert_feedback, create_tables, delete_tables
+
 
 bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher()
+
+class CreateFeedback(StatesGroup):
+    command_entered = State() 
 
 
 async def send_review_graph(user_telegram_id: int, task_id: str) -> None:
@@ -60,6 +67,19 @@ async def process_callback_button(callback_query: CallbackQuery):
     logging.info("Сообщение START_MESSAGE успешно отправлено ✅\n")
 
 
+@dp.message(Command("feedback"))
+async def start_feedback(message: Message, state: FSMContext):
+    await message.answer(FEEDBACK_ENTER_MESSAGE)
+    await state.set_state(CreateFeedback.command_entered)
+
+
+@dp.message(CreateFeedback.command_entered, F.text)
+async def upload_feedback(message: Message, state: FSMContext):
+    insert_feedback(message.text)
+    await message.answer(FEEDBACK_THANK_YOU_MESSAGE)
+    await state.clear()
+
+
 @dp.message(F.text)
 async def link(message: Message):
     logging.info(
@@ -90,6 +110,8 @@ async def link(message: Message):
 
 
 async def main():
+    # delete_tables()
+    # create_tables()
     await dp.start_polling(bot)
 
 
