@@ -11,14 +11,16 @@ from aiogram.fsm.context import FSMContext
 from src.bot.broker import send_message_to_broker
 from src.bot.config import BOT_TOKEN
 from src.bot.constants import (WELCOME_MESSAGE, START_MESSAGE, SUBMITTING_TASK_MESSAGE, 
-                               BAD_LINK_MESSAGE, FEEDBACK_ENTER_MESSAGE, FEEDBACK_THANK_YOU_MESSAGE)
+                               BAD_LINK_MESSAGE, FEEDBACK_ENTER_MESSAGE, FEEDBACK_THANK_YOU_MESSAGE,
+                               PRODUCT_LINK)
 from src.bot.log_conf import logging, timing_decorator
-from src.bot.utils import link_validation, generate_task_id
+from src.bot.utils import link_validation, generate_task_id, is_article
 from src.bot.db import insert_feedback, create_tables, delete_tables
 
 
 bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher()
+
 
 class CreateFeedback(StatesGroup):
     command_entered = State() 
@@ -87,26 +89,30 @@ async def link(message: Message):
     )
     logging.info("Запускаем проверку на ссылку...")
 
-    if link_validation(message.text) is False:
+    if link_validation(message.text) is not False:
+        link = message.text
+    elif is_article(message.text) is not False:
+        link = PRODUCT_LINK.format(message.text)
+    else:   
         await message.reply(BAD_LINK_MESSAGE)
         logging.info(
             f"Отправлено сообщение о том, что ссылка не распознана {message.from_user.id=}\n"
         )
-
-    else:
-        task_id = generate_task_id()
-        await message.answer(SUBMITTING_TASK_MESSAGE.format(task_id))
-        await asyncio.sleep(1)
-        logging.info(
-            "Ссылка распознана, отправляем сообщение о начале сбора отзывов..."
-        )
-        # Применяем декоратор к функции
-        await (timing_decorator(send_message_to_broker))(
-            queue_name="parser",
-            link=message.text,
-            user_telegram_id=message.from_user.id,
-            task_id=task_id,
-        )
+        return 
+    
+    task_id = generate_task_id()
+    await message.answer(SUBMITTING_TASK_MESSAGE.format(task_id))
+    await asyncio.sleep(1)
+    logging.info(
+        "Ссылка распознана, отправляем сообщение о начале сбора отзывов..."
+    )
+    # Применяем декоратор к функции
+    await (timing_decorator(send_message_to_broker))(
+        queue_name="parser",
+        link=link,
+        user_telegram_id=message.from_user.id,
+        task_id=task_id,
+    )
 
 
 async def main():

@@ -56,6 +56,8 @@ def create_review_star_graphic(star_reviews: list[int], task_id: str):
 
 def get_result_message(result_predict: tuple, task_id: str) -> str:
     df = pd.read_csv(f"{task_id}.csv")
+    # Дифференцирование временного ряда
+    df["Star review"] = df["Star review"].diff()
     result_message = RESULT_MESSAGE.format(
         result_predict[0], result_predict[1], result_predict[2]
     )
